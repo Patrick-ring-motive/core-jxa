@@ -1,0 +1,25 @@
+{
+  "name": "core-jxa",
+  "version": "1.0.0",
+  "description": "Run core-js under macOS JavaScript for Automation",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/core-js-jxa.js --bundle --platform=browser --format=iife --target=safari13 --outfile=dist/core-js-jxa.js",
+    "start": "npm run build && osascript -l JavaScript dist/core-js-jxa.js",
+    "test": "node scripts/build-tests.js && node scripts/run-tests.js"
+  },
+  "keywords": [
+    "core-js",
+    "jxa"
+  ],
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "core-js": "^3.50.0"
+  },
+  "devDependencies": {
+    "core-js-pure": "^3.50.0",
+    "esbuild": "^0.28.2",
+    "qunit": "^2.26.0"
+  }
+}
