@@ -27,5 +27,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run extended polyfill build
+        run: npm run start:polyfills
+
       - name: Run JXA tests
         run: npm test
