@@ -28,6 +28,23 @@ osascript -l JavaScript dist/core-js-jxa.js
 
 `src/jxa-compat.js` loads the complete `core-js` build. It also replaces `Error.isError` because JavaScriptCore's native implementation does not recognize every error class supplied by `core-js`, including `AggregateError` and `SuppressedError`.
 
+## Extended polyfill build
+
+```sh
+npm run start:polyfills
+```
+
+This separate build produces `dist/polyfills-jxa.js`. It currently includes:
+
+- `core-js`
+- [`web-streams-polyfill`](https://www.npmjs.com/package/web-streams-polyfill) 4.3.0
+- [`@web-std/blob`](https://www.npmjs.com/package/@web-std/blob) 3.0.5
+- `TextEncoder` and `TextDecoder` from `@zxing/text-encoding`, required by Blob
+
+`web-streams-polyfill/polyfill` installs `ReadableStream`, `WritableStream`, `TransformStream`, their readers and writers, and queuing strategies on `globalThis`. `@web-std/blob` supplies a Web API-compatible global `Blob` backed by `Uint8Array` and Web Streams. The entry point verifies stream constructors and Blob's `size`, `type`, `slice()`, `arrayBuffer()`, `stream()`, and `text()` APIs.
+
+Use `npm run build:polyfills` to build without executing the bundle.
+
 ## Tests
 
 ```sh

@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "build": "esbuild src/core-js-jxa.js --bundle --platform=browser --format=iife --target=safari13 --outfile=dist/core-js-jxa.js",
+    "build:polyfills": "esbuild src/polyfills-jxa.js --bundle --platform=browser --format=iife --target=esnext --outfile=dist/polyfills-jxa.js",
     "start": "npm run build && osascript -l JavaScript dist/core-js-jxa.js",
+    "start:polyfills": "npm run build:polyfills && osascript -l JavaScript dist/polyfills-jxa.js",
     "test": "node scripts/build-tests.js && node scripts/run-tests.js"
   },
   "keywords": [
@@ -15,7 +17,10 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
-    "core-js": "^3.50.0"
+    "@web-std/blob": "^3.0.5",
+    "@zxing/text-encoding": "^0.9.0",
+    "core-js": "^3.50.0",
+    "web-streams-polyfill": "^4.3.0"
   },
   "devDependencies": {
     "core-js-pure": "^3.50.0",
