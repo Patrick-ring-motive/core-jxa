@@ -7,7 +7,9 @@
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __commonJS = (cb, mod) => function __require() {
     try {
-      return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+      return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = {
+        exports: {}
+      }).exports, mod), mod.exports;
     } catch (e) {
       throw mod = 0, e;
     }
@@ -16,7 +18,10 @@
     if (from && typeof from === "object" || typeof from === "function") {
       for (let key of __getOwnPropNames(from))
         if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+          __defProp(to, key, {
+            get: () => from[key],
+            enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+          });
     }
     return to;
   };
@@ -25,7 +30,10 @@
     // file that has been converted to a CommonJS file using a Babel-
     // compatible transform (i.e. "__esModule" has not been set), then set
     // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+      value: mod,
+      enumerable: true
+    }) : target,
     mod
   ));
 
@@ -37,11 +45,12 @@
         return it && it.Math === Math && it;
       };
       module.exports = // eslint-disable-next-line es/no-global-this -- safe
-      check(typeof globalThis == "object" && globalThis) || check(typeof window == "object" && window) || // eslint-disable-next-line no-restricted-globals -- safe
-      check(typeof self == "object" && self) || check(typeof global == "object" && global) || check(typeof exports == "object" && exports) || // eslint-disable-next-line no-new-func -- fallback
-      /* @__PURE__ */ (function() {
-        return this;
-      })() || Function("return this")();
+        check(typeof globalThis == "object" && globalThis) || check(typeof window == "object" && window) || // eslint-disable-next-line no-restricted-globals -- safe
+        check(typeof self == "object" && self) || check(typeof global == "object" && global) || check(typeof exports == "object" && exports) || // eslint-disable-next-line no-new-func -- fallback
+        /* @__PURE__ */
+        (function() {
+          return this;
+        })() || Function("return this")();
     }
   });
 
@@ -65,9 +74,11 @@
       "use strict";
       var fails = require_fails();
       module.exports = !fails(function() {
-        return Object.defineProperty({}, 1, { get: function() {
-          return 7;
-        } })[1] !== 7;
+        return Object.defineProperty({}, 1, {
+          get: function() {
+            return 7;
+          }
+        })[1] !== 7;
       });
     }
   });
@@ -78,8 +89,7 @@
       "use strict";
       var fails = require_fails();
       module.exports = !fails(function() {
-        var test = (function() {
-        }).bind();
+        var test = (function() {}).bind();
         return typeof test != "function" || test.hasOwnProperty("prototype");
       });
     }
@@ -103,7 +113,9 @@
       "use strict";
       var $propertyIsEnumerable = {}.propertyIsEnumerable;
       var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-      var NASHORN_BUG = getOwnPropertyDescriptor && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+      var NASHORN_BUG = getOwnPropertyDescriptor && !$propertyIsEnumerable.call({
+        1: 2
+      }, 1);
       exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
         var descriptor = getOwnPropertyDescriptor(this, V);
         return !!descriptor && descriptor.enumerable;
@@ -304,7 +316,7 @@
       module.exports = !!Object.getOwnPropertySymbols && !fails(function() {
         var symbol = /* @__PURE__ */ Symbol("symbol detection");
         return !$String(symbol) || !(Object(symbol) instanceof Symbol) || // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
-        !Symbol.sham && V8_VERSION && V8_VERSION < 41;
+          !Symbol.sham && V8_VERSION && V8_VERSION < 41;
       });
     }
   });
@@ -412,7 +424,11 @@
       var defineProperty = Object.defineProperty;
       module.exports = function(key, value) {
         try {
-          defineProperty(globalThis2, key, { value, configurable: true, writable: true });
+          defineProperty(globalThis2, key, {
+            value,
+            configurable: true,
+            writable: true
+          });
         } catch (error) {
           globalThis2[key] = value;
         }
@@ -603,8 +619,7 @@
         P = toPropertyKey(P);
         if (IE8_DOM_DEFINE) try {
           return $getOwnPropertyDescriptor(O, P);
-        } catch (error) {
-        }
+        } catch (error) {}
         if (hasOwn(O, P)) return createPropertyDescriptor(!call(propertyIsEnumerableModule.f, O, P), O[P]);
       };
     }
@@ -617,8 +632,7 @@
       var DESCRIPTORS = require_descriptors();
       var fails = require_fails();
       module.exports = DESCRIPTORS && fails(function() {
-        return Object.defineProperty(function() {
-        }, "prototype", {
+        return Object.defineProperty(function() {}, "prototype", {
           value: 42,
           writable: false
         }).prototype !== 42;
@@ -677,8 +691,7 @@
         anObject(Attributes);
         if (IE8_DOM_DEFINE) try {
           return $defineProperty(O, P, Attributes);
-        } catch (error) {
-        }
+        } catch (error) {}
         if ("get" in Attributes || "set" in Attributes) throw new $TypeError("Accessors not supported");
         if ("value" in Attributes) O[P] = Attributes.value;
         return O;
@@ -711,8 +724,7 @@
       var FunctionPrototype = Function.prototype;
       var getDescriptor = DESCRIPTORS && Object.getOwnPropertyDescriptor;
       var EXISTS = hasOwn(FunctionPrototype, "name");
-      var PROPER = EXISTS && (function something() {
-      }).name === "something";
+      var PROPER = EXISTS && (function something() {}).name === "something";
       var CONFIGURABLE = EXISTS && (!DESCRIPTORS || DESCRIPTORS && getDescriptor(FunctionPrototype, "name").configurable);
       module.exports = {
         EXISTS,
@@ -866,8 +878,9 @@
       var replace = uncurryThis("".replace);
       var join = uncurryThis([].join);
       var CONFIGURABLE_LENGTH = DESCRIPTORS && !fails(function() {
-        return defineProperty(function() {
-        }, "length", { value: 8 }).length !== 8;
+        return defineProperty(function() {}, "length", {
+          value: 8
+        }).length !== 8;
       });
       var TEMPLATE = String(String).split("String");
       var makeBuiltIn = module.exports = function(value, name, options) {
@@ -877,18 +890,24 @@
         if (options && options.getter) name = "get " + name;
         if (options && options.setter) name = "set " + name;
         if (!hasOwn(value, "name") || CONFIGURABLE_FUNCTION_NAME && value.name !== name) {
-          if (DESCRIPTORS) defineProperty(value, "name", { value: name, configurable: true });
+          if (DESCRIPTORS) defineProperty(value, "name", {
+            value: name,
+            configurable: true
+          });
           else value.name = name;
         }
         if (CONFIGURABLE_LENGTH && options && hasOwn(options, "arity") && value.length !== options.arity) {
-          defineProperty(value, "length", { value: options.arity });
+          defineProperty(value, "length", {
+            value: options.arity
+          });
         }
         try {
           if (options && hasOwn(options, "constructor") && options.constructor) {
-            if (DESCRIPTORS) defineProperty(value, "prototype", { writable: false });
+            if (DESCRIPTORS) defineProperty(value, "prototype", {
+              writable: false
+            });
           } else if (value.prototype) value.prototype = void 0;
-        } catch (error) {
-        }
+        } catch (error) {}
         var state = enforceInternalState(value);
         if (!hasOwn(state, "source")) {
           state.source = join(TEMPLATE, typeof name == "string" ? name : "");
@@ -921,8 +940,7 @@
           try {
             if (!options.unsafe) delete O[key];
             else if (O[key]) simple = true;
-          } catch (error) {
-          }
+          } catch (error) {}
           if (simple) O[key] = value;
           else definePropertyModule.f(O, key, {
             value,
@@ -1013,13 +1031,15 @@
           if (length === 0) return !IS_INCLUDES && -1;
           var index = toAbsoluteIndex(fromIndex, length);
           var value;
-          if (IS_INCLUDES && el !== el) while (length > index) {
-            value = O[index++];
-            if (value !== value) return true;
-          }
-          else for (; length > index; index++) {
-            if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
-          }
+          if (IS_INCLUDES && el !== el)
+            while (length > index) {
+              value = O[index++];
+              if (value !== value) return true;
+            }
+          else
+            for (; length > index; index++) {
+              if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
+            }
           return !IS_INCLUDES && -1;
         };
       };
@@ -1050,9 +1070,10 @@
         var result = [];
         var key;
         for (key in O) !hasOwn(hiddenKeys, key) && hasOwn(O, key) && push(result, key);
-        while (names.length > i) if (hasOwn(O, key = names[i++])) {
-          ~indexOf(result, key) || push(result, key);
-        }
+        while (names.length > i)
+          if (hasOwn(O, key = names[i++])) {
+            ~indexOf(result, key) || push(result, key);
+          }
         return result;
       };
     }
@@ -1179,22 +1200,23 @@
         } else {
           target = globalThis2[TARGET] && globalThis2[TARGET].prototype;
         }
-        if (target) for (key in source) {
-          sourceProperty = source[key];
-          if (options.dontCallGetSet) {
-            descriptor = getOwnPropertyDescriptor(target, key);
-            targetProperty = descriptor && descriptor.value;
-          } else targetProperty = target[key];
-          FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? "." : "#") + key, options.forced);
-          if (!FORCED && targetProperty !== void 0) {
-            if (typeof sourceProperty == typeof targetProperty) continue;
-            copyConstructorProperties(sourceProperty, targetProperty);
+        if (target)
+          for (key in source) {
+            sourceProperty = source[key];
+            if (options.dontCallGetSet) {
+              descriptor = getOwnPropertyDescriptor(target, key);
+              targetProperty = descriptor && descriptor.value;
+            } else targetProperty = target[key];
+            FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? "." : "#") + key, options.forced);
+            if (!FORCED && targetProperty !== void 0) {
+              if (typeof sourceProperty == typeof targetProperty) continue;
+              copyConstructorProperties(sourceProperty, targetProperty);
+            }
+            if (options.sham || targetProperty && targetProperty.sham) {
+              createNonEnumerableProperty(sourceProperty, "sham", true);
+            }
+            defineBuiltIn(target, key, sourceProperty, options);
           }
-          if (options.sham || targetProperty && targetProperty.sham) {
-            createNonEnumerableProperty(sourceProperty, "sham", true);
-          }
-          defineBuiltIn(target, key, sourceProperty, options);
-        }
       };
     }
   });
@@ -1221,18 +1243,17 @@
       var wellKnownSymbol = require_well_known_symbol();
       var TO_STRING_TAG = wellKnownSymbol("toStringTag");
       var $Object = Object;
-      var CORRECT_ARGUMENTS = classofRaw(/* @__PURE__ */ (function() {
+      var CORRECT_ARGUMENTS = classofRaw( /* @__PURE__ */ (function() {
         return arguments;
       })()) === "Arguments";
       var tryGet = function(it, key) {
         try {
           return it[key];
-        } catch (error) {
-        }
+        } catch (error) {}
       };
       module.exports = TO_STRING_TAG_SUPPORT ? classofRaw : function(it) {
         var O, tag, result;
-        return it === void 0 ? "Undefined" : it === null ? "Null" : typeof (tag = tryGet(O = $Object(it), TO_STRING_TAG)) == "string" ? tag : CORRECT_ARGUMENTS ? classofRaw(O) : (result = classofRaw(O)) === "Object" && isCallable(O.callee) ? "Arguments" : result;
+        return it === void 0 ? "Undefined" : it === null ? "Null" : typeof(tag = tryGet(O = $Object(it), TO_STRING_TAG)) == "string" ? tag : CORRECT_ARGUMENTS ? classofRaw(O) : (result = classofRaw(O)) === "Object" && isCallable(O.callee) ? "Arguments" : result;
       };
     }
   });
@@ -1310,8 +1331,7 @@
       var PROTOTYPE = "prototype";
       var SCRIPT = "script";
       var IE_PROTO = sharedKey("IE_PROTO");
-      var EmptyConstructor = function() {
-      };
+      var EmptyConstructor = function() {};
       var scriptTag = function(content) {
         return LT + SCRIPT + GT + content + LT + "/" + SCRIPT + GT;
       };
@@ -1339,8 +1359,7 @@
       var NullProtoObject = function() {
         try {
           activeXDocument = new ActiveXObject("htmlfile");
-        } catch (error) {
-        }
+        } catch (error) {}
         NullProtoObject = typeof document != "undefined" ? document.domain && activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame() : NullProtoObjectViaActiveX(activeXDocument);
         var length = enumBugKeys.length;
         while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
@@ -1398,8 +1417,12 @@
       var makeBuiltIn = require_make_built_in();
       var defineProperty = require_object_define_property();
       module.exports = function(target, name, descriptor) {
-        if (descriptor.get) makeBuiltIn(descriptor.get, name, { getter: true });
-        if (descriptor.set) makeBuiltIn(descriptor.set, name, { setter: true });
+        if (descriptor.get) makeBuiltIn(descriptor.get, name, {
+          getter: true
+        });
+        if (descriptor.set) makeBuiltIn(descriptor.set, name, {
+          setter: true
+        });
         return defineProperty.f(target, name, descriptor);
       };
     }
@@ -1456,7 +1479,9 @@
         if (SymbolPrototype && !SymbolPrototype[TO_PRIMITIVE]) {
           defineBuiltIn(SymbolPrototype, TO_PRIMITIVE, function(hint) {
             return call(valueOf, this);
-          }, { arity: 1 });
+          }, {
+            arity: 1
+          });
         }
       };
     }
@@ -1473,7 +1498,10 @@
       module.exports = function(target, TAG, STATIC) {
         if (target && !STATIC) target = target.prototype;
         if (target && !hasOwn(target, TO_STRING_TAG)) {
-          defineProperty(target, TO_STRING_TAG, { configurable: true, value: TAG });
+          defineProperty(target, TO_STRING_TAG, {
+            configurable: true,
+            value: TAG
+          });
         }
       };
     }
@@ -1529,8 +1557,7 @@
       var classof = require_classof();
       var getBuiltIn = require_get_built_in();
       var inspectSource = require_inspect_source();
-      var noop = function() {
-      };
+      var noop = function() {};
       var construct = getBuiltIn("Reflect", "construct");
       var constructorRegExp = /^\s*(?:class|function)\b/;
       var exec = uncurryThis(constructorRegExp.exec);
@@ -1599,7 +1626,7 @@
       "use strict";
       var arraySpeciesConstructor = require_array_species_constructor();
       module.exports = function(originalArray, length) {
-        return new (arraySpeciesConstructor(originalArray))(length === 0 ? 0 : length);
+        return new(arraySpeciesConstructor(originalArray))(length === 0 ? 0 : length);
       };
     }
   });
@@ -1645,33 +1672,34 @@
           var resIndex = 0;
           var target = IS_MAP ? arraySpeciesCreate($this, length) : IS_FILTER || IS_FILTER_REJECT ? arraySpeciesCreate($this, 0) : void 0;
           var value, result;
-          for (; length > index; index++) if (NO_HOLES || index in self2) {
-            value = self2[index];
-            result = boundFunction(value, index, O);
-            if (TYPE) {
-              if (IS_MAP) createProperty(target, index, result);
-              else if (result) switch (TYPE) {
-                case 3:
-                  return true;
-                // some
-                case 5:
-                  return value;
-                // find
-                case 6:
-                  return index;
-                // findIndex
-                case 2:
-                  createProperty(target, resIndex++, value);
-              }
-              else switch (TYPE) {
-                case 4:
-                  return false;
-                // every
-                case 7:
-                  createProperty(target, resIndex++, value);
+          for (; length > index; index++)
+            if (NO_HOLES || index in self2) {
+              value = self2[index];
+              result = boundFunction(value, index, O);
+              if (TYPE) {
+                if (IS_MAP) createProperty(target, index, result);
+                else if (result) switch (TYPE) {
+                  case 3:
+                    return true;
+                    // some
+                  case 5:
+                    return value;
+                    // find
+                  case 6:
+                    return index;
+                    // findIndex
+                  case 2:
+                    createProperty(target, resIndex++, value);
+                }
+                else switch (TYPE) {
+                  case 4:
+                    return false;
+                    // every
+                  case 7:
+                    createProperty(target, resIndex++, value);
+                }
               }
             }
-          }
           return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
         };
       };
@@ -1777,7 +1805,9 @@
       var setSymbolDescriptor = DESCRIPTORS && fails(function() {
         return nativeObjectCreate(nativeDefineProperty({}, "a", {
           get: function() {
-            return nativeDefineProperty(this, "a", { value: 7 }).a;
+            return nativeDefineProperty(this, "a", {
+              value: 7
+            }).a;
           }
         })).a !== 7;
       }) ? fallbackDefineProperty : nativeDefineProperty;
@@ -1802,7 +1832,9 @@
             O[HIDDEN][key] = true;
           } else {
             if (hasOwn(O, HIDDEN) && O[HIDDEN][key]) O[HIDDEN][key] = false;
-            Attributes = nativeObjectCreate(Attributes, { enumerable: createPropertyDescriptor(0, false) });
+            Attributes = nativeObjectCreate(Attributes, {
+              enumerable: createPropertyDescriptor(0, false)
+            });
           }
           return setSymbolDescriptor(O, key, Attributes);
         }
@@ -1872,7 +1904,10 @@
               fallbackDefineProperty($this, tag, descriptor);
             }
           };
-          if (DESCRIPTORS && USE_SETTER) setSymbolDescriptor(ObjectPrototype, tag, { configurable: true, set: setter });
+          if (DESCRIPTORS && USE_SETTER) setSymbolDescriptor(ObjectPrototype, tag, {
+            configurable: true,
+            set: setter
+          });
           return wrap(tag, description);
         };
         SymbolPrototype = $Symbol[PROTOTYPE];
@@ -1899,17 +1934,29 @@
             }
           });
           if (!IS_PURE) {
-            defineBuiltIn(ObjectPrototype, "propertyIsEnumerable", $propertyIsEnumerable, { unsafe: true });
+            defineBuiltIn(ObjectPrototype, "propertyIsEnumerable", $propertyIsEnumerable, {
+              unsafe: true
+            });
           }
         }
       }
-      $({ global: true, constructor: true, wrap: true, forced: !NATIVE_SYMBOL, sham: !NATIVE_SYMBOL }, {
+      $({
+        global: true,
+        constructor: true,
+        wrap: true,
+        forced: !NATIVE_SYMBOL,
+        sham: !NATIVE_SYMBOL
+      }, {
         Symbol: $Symbol
       });
       $forEach(objectKeys(WellKnownSymbolsStore), function(name) {
         defineWellKnownSymbol(name);
       });
-      $({ target: SYMBOL, stat: true, forced: !NATIVE_SYMBOL }, {
+      $({
+        target: SYMBOL,
+        stat: true,
+        forced: !NATIVE_SYMBOL
+      }, {
         useSetter: function() {
           USE_SETTER = true;
         },
@@ -1917,7 +1964,12 @@
           USE_SETTER = false;
         }
       });
-      $({ target: "Object", stat: true, forced: !NATIVE_SYMBOL, sham: !DESCRIPTORS }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: !NATIVE_SYMBOL,
+        sham: !DESCRIPTORS
+      }, {
         // `Object.create` method
         // https://tc39.es/ecma262/#sec-object.create
         create: $create,
@@ -1931,7 +1983,11 @@
         // https://tc39.es/ecma262/#sec-object.getownpropertydescriptors
         getOwnPropertyDescriptor: $getOwnPropertyDescriptor
       });
-      $({ target: "Object", stat: true, forced: !NATIVE_SYMBOL }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: !NATIVE_SYMBOL
+      }, {
         // `Object.getOwnPropertyNames` method
         // https://tc39.es/ecma262/#sec-object.getownpropertynames
         getOwnPropertyNames: $getOwnPropertyNames
@@ -1963,7 +2019,11 @@
       var NATIVE_SYMBOL_REGISTRY = require_symbol_registry_detection();
       var StringToSymbolRegistry = shared("string-to-symbol-registry");
       var SymbolToStringRegistry = shared("symbol-to-string-registry");
-      $({ target: "Symbol", stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
+      $({
+        target: "Symbol",
+        stat: true,
+        forced: !NATIVE_SYMBOL_REGISTRY
+      }, {
         "for": function(key) {
           var string = toString(key);
           if (hasOwn(StringToSymbolRegistry, string)) return StringToSymbolRegistry[string];
@@ -1987,7 +2047,11 @@
       var shared = require_shared();
       var NATIVE_SYMBOL_REGISTRY = require_symbol_registry_detection();
       var SymbolToStringRegistry = shared("symbol-to-string-registry");
-      $({ target: "Symbol", stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
+      $({
+        target: "Symbol",
+        stat: true,
+        forced: !NATIVE_SYMBOL_REGISTRY
+      }, {
         keyFor: function keyFor(sym) {
           if (!isSymbol(sym)) throw new TypeError(tryToString(sym) + " is not a symbol");
           if (hasOwn(SymbolToStringRegistry, sym)) return SymbolToStringRegistry[sym];
@@ -2071,7 +2135,10 @@
           }
         }
         if (unterminated) throw new $SyntaxError("Unterminated string at: " + i);
-        return { value, end: i };
+        return {
+          value,
+          end: i
+        };
       };
     }
   });
@@ -2139,7 +2206,9 @@
       var KEY_MARK_LENGTH = KEY_MARK.length;
       var WRONG_SYMBOLS_CONVERSION = !NATIVE_SYMBOL || fails(function() {
         var symbol = getBuiltIn("Symbol")("stringify detection");
-        return $stringify([symbol]) !== "[null]" || $stringify({ a: symbol }) !== "{}" || $stringify(Object(symbol)) !== "{}";
+        return $stringify([symbol]) !== "[null]" || $stringify({
+          a: symbol
+        }) !== "{}" || $stringify(Object(symbol)) !== "{}";
       });
       var ILL_FORMED_UNICODE = fails(function() {
         return $stringify("\uDF06\uD834") !== '"\\udf06\\ud834"' || $stringify("\uDEAD") !== '"\\udead"';
@@ -2224,7 +2293,12 @@
         ordered[END_MARK] = null;
         return ordered;
       };
-      if ($stringify) $({ target: "JSON", stat: true, arity: 3, forced: WRONG_SYMBOLS_CONVERSION || ILL_FORMED_UNICODE || !NATIVE_RAW_JSON }, {
+      if ($stringify) $({
+        target: "JSON",
+        stat: true,
+        arity: 3,
+        forced: WRONG_SYMBOLS_CONVERSION || ILL_FORMED_UNICODE || !NATIVE_RAW_JSON
+      }, {
         stringify: function stringify(text, replacer, space) {
           var replacerFunction = isCallable(replacer) ? replacer : void 0;
           var propertyList = replacerFunction ? void 0 : getPropertyList(replacer);
@@ -2296,7 +2370,11 @@
       var FORCED = !NATIVE_SYMBOL || fails(function() {
         getOwnPropertySymbolsModule.f(1);
       });
-      $({ target: "Object", stat: true, forced: FORCED }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FORCED
+      }, {
         getOwnPropertySymbols: function getOwnPropertySymbols(it) {
           var $getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
           return $getOwnPropertySymbols ? $getOwnPropertySymbols(toObject(it)) : [];
@@ -2335,7 +2413,7 @@
       var NativeSymbol = globalThis2.Symbol;
       var SymbolPrototype = NativeSymbol && NativeSymbol.prototype;
       if (DESCRIPTORS && isCallable(NativeSymbol) && (!("description" in SymbolPrototype) || // Safari 12 bug
-      NativeSymbol().description !== void 0)) {
+          NativeSymbol().description !== void 0)) {
         EmptyStringDescriptionStore = {};
         SymbolWrapper = function Symbol2() {
           var description = arguments.length < 1 || arguments[0] === void 0 ? void 0 : toString(arguments[0]);
@@ -2345,12 +2423,14 @@
         };
         copyConstructorProperties(SymbolWrapper, NativeSymbol);
         nativeFor = SymbolWrapper["for"];
-        SymbolWrapper["for"] = { "for": function(key) {
-          var stringKey = toString(key);
-          var symbol = call(nativeFor, this, stringKey);
-          if (stringKey === "") EmptyStringDescriptionStore[symbol] = true;
-          return symbol;
-        } }["for"];
+        SymbolWrapper["for"] = {
+          "for": function(key) {
+            var stringKey = toString(key);
+            var symbol = call(nativeFor, this, stringKey);
+            if (stringKey === "") EmptyStringDescriptionStore[symbol] = true;
+            return symbol;
+          }
+        } ["for"];
         SymbolWrapper.prototype = SymbolPrototype;
         SymbolPrototype.constructor = SymbolWrapper;
         NATIVE_SYMBOL = String(NativeSymbol("description detection")) === "Symbol(description detection)";
@@ -2369,7 +2449,11 @@
             return desc === "" ? void 0 : desc;
           }
         });
-        $({ global: true, constructor: true, forced: true }, {
+        $({
+          global: true,
+          constructor: true,
+          forced: true
+        }, {
           Symbol: SymbolWrapper
         });
       }
@@ -2398,7 +2482,12 @@
       if (Symbol2) {
         descriptor = getOwnPropertyDescriptor(Symbol2, "asyncDispose");
         if (descriptor.enumerable && descriptor.configurable && descriptor.writable) {
-          defineProperty(Symbol2, "asyncDispose", { value: descriptor.value, enumerable: false, configurable: false, writable: false });
+          defineProperty(Symbol2, "asyncDispose", {
+            value: descriptor.value,
+            enumerable: false,
+            configurable: false,
+            writable: false
+          });
         }
       }
       var descriptor;
@@ -2427,7 +2516,12 @@
       if (Symbol2) {
         descriptor = getOwnPropertyDescriptor(Symbol2, "dispose");
         if (descriptor.enumerable && descriptor.configurable && descriptor.writable) {
-          defineProperty(Symbol2, "dispose", { value: descriptor.value, enumerable: false, configurable: false, writable: false });
+          defineProperty(Symbol2, "dispose", {
+            value: descriptor.value,
+            enumerable: false,
+            configurable: false,
+            writable: false
+          });
         }
       }
       var descriptor;
@@ -2570,8 +2664,7 @@
       module.exports = function(object, key, method) {
         try {
           return uncurryThis(aCallable(Object.getOwnPropertyDescriptor(object, key)[method]));
-        } catch (error) {
-        }
+        } catch (error) {}
       };
     }
   });
@@ -2617,8 +2710,7 @@
           setter = uncurryThisAccessor(Object.prototype, "__proto__", "set");
           setter(test, []);
           CORRECT_SETTER = test instanceof Array;
-        } catch (error) {
-        }
+        } catch (error) {}
         return function setPrototypeOf(O, proto) {
           requireObjectCoercible(O);
           aPossiblePrototype(proto);
@@ -2787,7 +2879,9 @@
         WrappedError.prototype = OriginalErrorPrototype;
         if (ERROR_NAME !== "Error") {
           if (setPrototypeOf) setPrototypeOf(WrappedError, BaseError);
-          else copyConstructorProperties(WrappedError, BaseError, { name: true });
+          else copyConstructorProperties(WrappedError, BaseError, {
+            name: true
+          });
         } else if (DESCRIPTORS && STACK_TRACE_LIMIT in OriginalError) {
           proxyAccessor(WrappedError, OriginalError, STACK_TRACE_LIMIT);
           proxyAccessor(WrappedError, OriginalError, "prepareStackTrace");
@@ -2798,8 +2892,7 @@
             createNonEnumerableProperty(OriginalErrorPrototype, "name", ERROR_NAME);
           }
           OriginalErrorPrototype.constructor = WrappedError;
-        } catch (error) {
-        }
+        } catch (error) {}
         return WrappedError;
       };
     }
@@ -2815,17 +2908,30 @@
       var wrapErrorConstructorWithCause = require_wrap_error_constructor_with_cause();
       var WEB_ASSEMBLY = "WebAssembly";
       var WebAssembly = globalThis2[WEB_ASSEMBLY];
-      var FORCED = new Error("e", { cause: 7 }).cause !== 7;
+      var FORCED = new Error("e", {
+        cause: 7
+      }).cause !== 7;
       var exportGlobalErrorCauseWrapper = function(ERROR_NAME, wrapper) {
         var O = {};
         O[ERROR_NAME] = wrapErrorConstructorWithCause(ERROR_NAME, wrapper, FORCED);
-        $({ global: true, constructor: true, arity: 1, forced: FORCED }, O);
+        $({
+          global: true,
+          constructor: true,
+          arity: 1,
+          forced: FORCED
+        }, O);
       };
       var exportWebAssemblyErrorCauseWrapper = function(ERROR_NAME, wrapper) {
         if (WebAssembly && WebAssembly[ERROR_NAME]) {
           var O = {};
           O[ERROR_NAME] = wrapErrorConstructorWithCause(WEB_ASSEMBLY + "." + ERROR_NAME, wrapper, FORCED);
-          $({ target: WEB_ASSEMBLY, stat: true, constructor: true, arity: 1, forced: FORCED }, O);
+          $({
+            target: WEB_ASSEMBLY,
+            stat: true,
+            constructor: true,
+            arity: 1,
+            forced: FORCED
+          }, O);
         }
       };
       exportGlobalErrorCauseWrapper("Error", function(init) {
@@ -2898,12 +3004,18 @@
       var $isError = $Error.isError;
       var FORCED = !$isError || !PROTOTYPE_SETTING_AVAILABLE || fails(function() {
         return DOMException && !$isError(new DOMException(DOM_EXCEPTION)) || // structuredClone-based implementations
-        // eslint-disable-next-line es/no-error-cause -- detection
-        !$isError(new $Error(ERROR, { cause: function() {
-        } })) || // instanceof-based and FF Error#stack-based implementations
-        $isError(getBuiltIn("Object", "create")($Error.prototype));
+          // eslint-disable-next-line es/no-error-cause -- detection
+          !$isError(new $Error(ERROR, {
+            cause: function() {}
+          })) || // instanceof-based and FF Error#stack-based implementations
+          $isError(getBuiltIn("Object", "create")($Error.prototype));
       });
-      $({ target: "Error", stat: true, sham: true, forced: FORCED }, {
+      $({
+        target: "Error",
+        stat: true,
+        sham: true,
+        forced: FORCED
+      }, {
         isError: function isError(arg) {
           if (!isObject(arg)) return false;
           var tag = classof(arg);
@@ -2924,12 +3036,17 @@
       var nativeErrorToString = Error.prototype.toString;
       var INCORRECT_TO_STRING = fails(function() {
         if (DESCRIPTORS) {
-          var object = Object.create(Object.defineProperty({}, "name", { get: function() {
-            return this === object;
-          } }));
+          var object = Object.create(Object.defineProperty({}, "name", {
+            get: function() {
+              return this === object;
+            }
+          }));
           if (nativeErrorToString.call(object) !== "true") return true;
         }
-        return nativeErrorToString.call({ message: 1, name: 2 }) !== "2: 1" || nativeErrorToString.call({}) !== "Error";
+        return nativeErrorToString.call({
+          message: 1,
+          name: 2
+        }) !== "2: 1" || nativeErrorToString.call({}) !== "Error";
       });
       module.exports = INCORRECT_TO_STRING ? function toString() {
         var O = anObject(this);
@@ -2959,8 +3076,7 @@
       "use strict";
       var fails = require_fails();
       module.exports = !fails(function() {
-        function F() {
-        }
+        function F() {}
         F.prototype.constructor = null;
         return Object.getPrototypeOf(new F()) !== F.prototype;
       });
@@ -3182,18 +3298,26 @@
         installErrorStack(that, $AggregateError, that.stack, 1);
         if (arguments.length > 2) installErrorCause(that, arguments[2]);
         var errorsArray = [];
-        iterate(errors, push, { that: errorsArray });
+        iterate(errors, push, {
+          that: errorsArray
+        });
         createNonEnumerableProperty(that, "errors", errorsArray);
         return that;
       };
       if (setPrototypeOf) setPrototypeOf($AggregateError, $Error);
-      else copyConstructorProperties($AggregateError, $Error, { name: true });
+      else copyConstructorProperties($AggregateError, $Error, {
+        name: true
+      });
       var AggregateErrorPrototype = $AggregateError.prototype = create($Error.prototype, {
         constructor: createPropertyDescriptor(1, $AggregateError),
         message: createPropertyDescriptor(1, ""),
         name: createPropertyDescriptor(1, "AggregateError")
       });
-      $({ global: true, constructor: true, arity: 2 }, {
+      $({
+        global: true,
+        constructor: true,
+        arity: 2
+      }, {
         AggregateError: $AggregateError
       });
     }
@@ -3221,9 +3345,16 @@
       var FORCED = !fails(function() {
         return $AggregateError([1]).errors[0] !== 1;
       }) && fails(function() {
-        return $AggregateError([1], AGGREGATE_ERROR, { cause: 7 }).cause !== 7;
+        return $AggregateError([1], AGGREGATE_ERROR, {
+          cause: 7
+        }).cause !== 7;
       });
-      $({ global: true, constructor: true, arity: 2, forced: FORCED }, {
+      $({
+        global: true,
+        constructor: true,
+        arity: 2,
+        forced: FORCED
+      }, {
         AggregateError: wrapErrorConstructorWithCause(AGGREGATE_ERROR, function(init) {
           return function AggregateError(errors, message) {
             return apply(init, this, arguments);
@@ -3256,7 +3387,9 @@
       var $Error = Error;
       var WRONG_ARITY = !!NativeSuppressedError && NativeSuppressedError.length !== 3;
       var EXTRA_ARGS_SUPPORT = !!NativeSuppressedError && fails(function() {
-        return new NativeSuppressedError(1, 2, 3, { cause: 4 }).cause === 4;
+        return new NativeSuppressedError(1, 2, 3, {
+          cause: 4
+        }).cause === 4;
       });
       var PATCH = WRONG_ARITY || EXTRA_ARGS_SUPPORT;
       var $SuppressedError = function SuppressedError2(error, suppressed, message) {
@@ -3275,14 +3408,21 @@
         return that;
       };
       if (setPrototypeOf) setPrototypeOf($SuppressedError, $Error);
-      else copyConstructorProperties($SuppressedError, $Error, { name: true });
+      else copyConstructorProperties($SuppressedError, $Error, {
+        name: true
+      });
       var SuppressedErrorPrototype = $SuppressedError.prototype = PATCH ? NativeSuppressedError.prototype : create($Error.prototype, {
         constructor: createPropertyDescriptor(1, $SuppressedError),
         message: createPropertyDescriptor(1, ""),
         name: createPropertyDescriptor(1, "SuppressedError")
       });
       if (PATCH && !IS_PURE) SuppressedErrorPrototype.constructor = $SuppressedError;
-      $({ global: true, constructor: true, arity: 3, forced: PATCH }, {
+      $({
+        global: true,
+        constructor: true,
+        arity: 3,
+        forced: PATCH
+      }, {
         SuppressedError: $SuppressedError
       });
     }
@@ -3318,7 +3458,10 @@
       var lengthOfArrayLike = require_length_of_array_like();
       var toIntegerOrInfinity = require_to_integer_or_infinity();
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         at: function at(index) {
           var O = toObject(this);
           var len = lengthOfArrayLike(O);
@@ -3355,7 +3498,9 @@
       var SILENT_ON_NON_WRITABLE_LENGTH_SET = DESCRIPTORS && !(function() {
         if (this !== void 0) return true;
         try {
-          Object.defineProperty([], "length", { writable: false }).length = 1;
+          Object.defineProperty([], "length", {
+            writable: false
+          }).length = 1;
         } catch (error) {
           return error instanceof TypeError;
         }
@@ -3384,7 +3529,9 @@
           var array = [];
           var constructor = array.constructor = {};
           constructor[SPECIES] = function() {
-            return { foo: 1 };
+            return {
+              foo: 1
+            };
           };
           return array[METHOD_NAME](Boolean).foo !== 1;
         });
@@ -3421,7 +3568,12 @@
         return spreadable !== void 0 ? !!spreadable : isArray(O);
       };
       var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !arrayMethodHasSpeciesSupport("concat");
-      $({ target: "Array", proto: true, arity: 1, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        arity: 1,
+        forced: FORCED
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         concat: function concat(arg) {
           var O = toObject(this);
@@ -3433,7 +3585,8 @@
             if (isConcatSpreadable(E)) {
               len = lengthOfArrayLike(E);
               doesNotExceedSafeInteger(n + len);
-              for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
+              for (k = 0; k < len; k++, n++)
+                if (k in E) createProperty(A, n, E[k]);
             } else {
               doesNotExceedSafeInteger(n + 1);
               createProperty(A, n++, E);
@@ -3498,7 +3651,10 @@
       var $ = require_export();
       var copyWithin = require_array_copy_within();
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         copyWithin
       });
       addToUnscopables("copyWithin");
@@ -3529,7 +3685,11 @@
       var $every = require_array_iteration().every;
       var arrayMethodIsStrict = require_array_method_is_strict();
       var STRICT_METHOD = arrayMethodIsStrict("every");
-      $({ target: "Array", proto: true, forced: !STRICT_METHOD }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !STRICT_METHOD
+      }, {
         every: function every(callbackfn) {
           return $every(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3564,7 +3724,10 @@
       var $ = require_export();
       var fill = require_array_fill();
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         fill
       });
       addToUnscopables("fill");
@@ -3579,7 +3742,11 @@
       var $filter = require_array_iteration().filter;
       var arrayMethodHasSpeciesSupport = require_array_method_has_species_support();
       var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport("filter");
-      $({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !HAS_SPECIES_SUPPORT
+      }, {
         filter: function filter(callbackfn) {
           return $filter(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3599,7 +3766,11 @@
       if (FIND in []) Array(1)[FIND](function() {
         SKIPS_HOLES = false;
       });
-      $({ target: "Array", proto: true, forced: SKIPS_HOLES }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: SKIPS_HOLES
+      }, {
         find: function find(callbackfn) {
           return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3620,7 +3791,11 @@
       if (FIND_INDEX in []) Array(1)[FIND_INDEX](function() {
         SKIPS_HOLES = false;
       });
-      $({ target: "Array", proto: true, forced: SKIPS_HOLES }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: SKIPS_HOLES
+      }, {
         findIndex: function findIndex(callbackfn) {
           return $findIndex(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3651,7 +3826,7 @@
             if (result) switch (TYPE) {
               case 0:
                 return value;
-              // findLast
+                // findLast
               case 1:
                 return index;
             }
@@ -3677,7 +3852,10 @@
       var $ = require_export();
       var $findLast = require_array_iteration_from_last().findLast;
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         findLast: function findLast(callbackfn) {
           return $findLast(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3693,7 +3871,10 @@
       var $ = require_export();
       var $findLastIndex = require_array_iteration_from_last().findLastIndex;
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         findLastIndex: function findLastIndex(callbackfn) {
           return $findLastIndex(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3746,7 +3927,10 @@
       var lengthOfArrayLike = require_length_of_array_like();
       var toIntegerOrInfinity = require_to_integer_or_infinity();
       var arraySpeciesCreate = require_array_species_create();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         flat: function flat() {
           var depthArg = arguments.length ? arguments[0] : void 0;
           var O = toObject(this);
@@ -3770,7 +3954,10 @@
       var toObject = require_to_object();
       var lengthOfArrayLike = require_length_of_array_like();
       var arraySpeciesCreate = require_array_species_create();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         flatMap: function flatMap(callbackfn) {
           var O = toObject(this);
           var sourceLen = lengthOfArrayLike(O);
@@ -3803,7 +3990,11 @@
       "use strict";
       var $ = require_export();
       var forEach = require_array_for_each();
-      $({ target: "Array", proto: true, forced: [].forEach !== forEach }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: [].forEach !== forEach
+      }, {
         forEach
       });
     }
@@ -3895,7 +4086,9 @@
         called = 0;
         iteratorWithReturn = {
           next: function() {
-            return { done: !!called++ };
+            return {
+              done: !!called++
+            };
           },
           "return": function() {
             SAFE_CLOSING = true;
@@ -3907,8 +4100,7 @@
         Array.from(iteratorWithReturn, function() {
           throw 2;
         });
-      } catch (error) {
-      }
+      } catch (error) {}
       var called;
       var iteratorWithReturn;
       module.exports = function(exec, SKIP_CLOSING) {
@@ -3923,13 +4115,14 @@
           object[ITERATOR] = function() {
             return {
               next: function() {
-                return { done: ITERATION_SUPPORT = true };
+                return {
+                  done: ITERATION_SUPPORT = true
+                };
               }
             };
           };
           exec(object);
-        } catch (error) {
-        }
+        } catch (error) {}
         return ITERATION_SUPPORT;
       };
     }
@@ -3945,7 +4138,11 @@
       var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function(iterable) {
         Array.from(iterable);
       });
-      $({ target: "Array", stat: true, forced: INCORRECT_ITERATION }, {
+      $({
+        target: "Array",
+        stat: true,
+        forced: INCORRECT_ITERATION
+      }, {
         from
       });
     }
@@ -3965,7 +4162,11 @@
       var BROKEN_ON_SPARSE_WITH_FROM_INDEX = fails(function() {
         return [, 1].includes(void 0, 1);
       });
-      $({ target: "Array", proto: true, forced: BROKEN_ON_SPARSE || BROKEN_ON_SPARSE_WITH_FROM_INDEX }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: BROKEN_ON_SPARSE || BROKEN_ON_SPARSE_WITH_FROM_INDEX
+      }, {
         includes: function includes(el) {
           return $includes(this, el, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -3985,7 +4186,11 @@
       var nativeIndexOf = uncurryThis([].indexOf);
       var NEGATIVE_ZERO = !!nativeIndexOf && 1 / nativeIndexOf([1], 1, -0) < 0;
       var FORCED = NEGATIVE_ZERO || !arrayMethodIsStrict("indexOf");
-      $({ target: "Array", proto: true, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: FORCED
+      }, {
         indexOf: function indexOf(searchElement) {
           var fromIndex = arguments.length > 1 ? arguments[1] : void 0;
           return NEGATIVE_ZERO ? nativeIndexOf(this, searchElement, fromIndex) || 0 : $indexOf(this, searchElement, fromIndex);
@@ -4000,7 +4205,10 @@
       "use strict";
       var $ = require_export();
       var isArray = require_is_array();
-      $({ target: "Array", stat: true }, {
+      $({
+        target: "Array",
+        stat: true
+      }, {
         isArray
       });
     }
@@ -4063,7 +4271,9 @@
       };
       module.exports = function(IteratorConstructor, NAME, next, ENUMERABLE_NEXT) {
         var TO_STRING_TAG = NAME + " Iterator";
-        IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(+!ENUMERABLE_NEXT, next) });
+        IteratorConstructor.prototype = create(IteratorPrototype, {
+          next: createPropertyDescriptor(+!ENUMERABLE_NEXT, next)
+        });
         setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
         Iterators[TO_STRING_TAG] = returnThis;
         return IteratorConstructor;
@@ -4160,15 +4370,22 @@
             keys: IS_SET ? defaultIterator : getIterationMethod(KEYS),
             entries: getIterationMethod(ENTRIES)
           };
-          if (FORCED) for (KEY in methods) {
-            if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
-              defineBuiltIn(IterablePrototype, KEY, methods[KEY]);
+          if (FORCED)
+            for (KEY in methods) {
+              if (BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME || !(KEY in IterablePrototype)) {
+                defineBuiltIn(IterablePrototype, KEY, methods[KEY]);
+              }
             }
-          }
-          else $({ target: NAME, proto: true, forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME }, methods);
+          else $({
+            target: NAME,
+            proto: true,
+            forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME
+          }, methods);
         }
         if ((!IS_PURE || FORCED) && IterablePrototype[ITERATOR] !== defaultIterator) {
-          defineBuiltIn(IterablePrototype, ITERATOR, defaultIterator, { name: DEFAULT });
+          defineBuiltIn(IterablePrototype, ITERATOR, defaultIterator, {
+            name: DEFAULT
+          });
         }
         Iterators[NAME] = defaultIterator;
         return methods;
@@ -4181,7 +4398,10 @@
     "node_modules/core-js/internals/create-iter-result-object.js"(exports, module) {
       "use strict";
       module.exports = function(value, done) {
-        return { value, done };
+        return {
+          value,
+          done
+        };
       };
     }
   });
@@ -4233,9 +4453,10 @@
       addToUnscopables("values");
       addToUnscopables("entries");
       if (!IS_PURE && DESCRIPTORS && values.name !== "values") try {
-        defineProperty(values, "name", { value: "values" });
-      } catch (error) {
-      }
+        defineProperty(values, "name", {
+          value: "values"
+        });
+      } catch (error) {}
     }
   });
 
@@ -4251,7 +4472,11 @@
       var nativeJoin = uncurryThis([].join);
       var ES3_STRINGS = IndexedObject !== Object;
       var FORCED = ES3_STRINGS || !arrayMethodIsStrict("join", ",");
-      $({ target: "Array", proto: true, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: FORCED
+      }, {
         join: function join(separator) {
           return nativeJoin(toIndexedObject(this), separator === void 0 ? "," : separator);
         }
@@ -4281,7 +4506,8 @@
         var index = length - 1;
         if (arguments.length > 1) index = min(index, toIntegerOrInfinity(arguments[1]));
         if (index < 0) index = length + index;
-        for (; index >= 0; index--) if (index in O && O[index] === searchElement) return index || 0;
+        for (; index >= 0; index--)
+          if (index in O && O[index] === searchElement) return index || 0;
         return -1;
       } : $lastIndexOf;
     }
@@ -4293,7 +4519,11 @@
       "use strict";
       var $ = require_export();
       var lastIndexOf = require_array_last_index_of();
-      $({ target: "Array", proto: true, forced: lastIndexOf !== [].lastIndexOf }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: lastIndexOf !== [].lastIndexOf
+      }, {
         lastIndexOf
       });
     }
@@ -4307,7 +4537,11 @@
       var $map = require_array_iteration().map;
       var arrayMethodHasSpeciesSupport = require_array_method_has_species_support();
       var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport("map");
-      $({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !HAS_SPECIES_SUPPORT
+      }, {
         map: function map(callbackfn) {
           return $map(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -4326,15 +4560,18 @@
       var setArrayLength = require_array_set_length();
       var $Array = Array;
       var ISNT_GENERIC = fails(function() {
-        function F() {
-        }
+        function F() {}
         return !($Array.of.call(F) instanceof F);
       });
-      $({ target: "Array", stat: true, forced: ISNT_GENERIC }, {
+      $({
+        target: "Array",
+        stat: true,
+        forced: ISNT_GENERIC
+      }, {
         of: function of() {
           var index = 0;
           var argumentsLength = arguments.length;
-          var result = new (isConstructor(this) ? this : $Array)(argumentsLength);
+          var result = new(isConstructor(this) ? this : $Array)(argumentsLength);
           while (argumentsLength > index) createProperty(result, index, arguments[index++]);
           setArrayLength(result, argumentsLength);
           return result;
@@ -4354,17 +4591,26 @@
       var doesNotExceedSafeInteger = require_does_not_exceed_safe_integer();
       var fails = require_fails();
       var INCORRECT_TO_LENGTH = fails(function() {
-        return [].push.call({ length: 4294967296 }, 1) !== 4294967297;
+        return [].push.call({
+          length: 4294967296
+        }, 1) !== 4294967297;
       });
       var properErrorOnNonWritableLength = function() {
         try {
-          Object.defineProperty([], "length", { writable: false }).push();
+          Object.defineProperty([], "length", {
+            writable: false
+          }).push();
         } catch (error) {
           return error instanceof TypeError;
         }
       };
       var FORCED = INCORRECT_TO_LENGTH || !properErrorOnNonWritableLength();
-      $({ target: "Array", proto: true, arity: 1, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        arity: 1,
+        forced: FORCED
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         push: function push(item) {
           var O = toObject(this);
@@ -4401,20 +4647,22 @@
           if (length === 0 && argumentsLength < 2) throw new $TypeError(REDUCE_EMPTY);
           var index = IS_RIGHT ? length - 1 : 0;
           var i = IS_RIGHT ? -1 : 1;
-          if (argumentsLength < 2) while (true) {
-            if (index in self2) {
-              memo = self2[index];
+          if (argumentsLength < 2)
+            while (true) {
+              if (index in self2) {
+                memo = self2[index];
+                index += i;
+                break;
+              }
               index += i;
-              break;
+              if (IS_RIGHT ? index < 0 : length <= index) {
+                throw new $TypeError(REDUCE_EMPTY);
+              }
             }
-            index += i;
-            if (IS_RIGHT ? index < 0 : length <= index) {
-              throw new $TypeError(REDUCE_EMPTY);
+          for (; IS_RIGHT ? index >= 0 : length > index; index += i)
+            if (index in self2) {
+              memo = callbackfn(memo, self2[index], index, O);
             }
-          }
-          for (; IS_RIGHT ? index >= 0 : length > index; index += i) if (index in self2) {
-            memo = callbackfn(memo, self2[index], index, O);
-          }
           return memo;
         };
       };
@@ -4473,7 +4721,11 @@
       var IS_NODE = require_environment_is_node();
       var CHROME_BUG = !IS_NODE && CHROME_VERSION > 79 && CHROME_VERSION < 83;
       var FORCED = CHROME_BUG || !arrayMethodIsStrict("reduce");
-      $({ target: "Array", proto: true, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: FORCED
+      }, {
         reduce: function reduce(callbackfn) {
           var length = arguments.length;
           return $reduce(this, callbackfn, length, length > 1 ? arguments[1] : void 0);
@@ -4493,7 +4745,11 @@
       var IS_NODE = require_environment_is_node();
       var CHROME_BUG = !IS_NODE && CHROME_VERSION > 79 && CHROME_VERSION < 83;
       var FORCED = CHROME_BUG || !arrayMethodIsStrict("reduceRight");
-      $({ target: "Array", proto: true, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: FORCED
+      }, {
         reduceRight: function reduceRight(callbackfn) {
           return $reduceRight(this, callbackfn, arguments.length, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -4510,7 +4766,11 @@
       var isArray = require_is_array();
       var nativeReverse = uncurryThis([].reverse);
       var test = [1, 2];
-      $({ target: "Array", proto: true, forced: String(test) === String(test.reverse()) }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: String(test) === String(test.reverse())
+      }, {
         reverse: function reverse() {
           if (isArray(this)) this.length = this.length;
           return nativeReverse(this);
@@ -4539,7 +4799,11 @@
       var SPECIES = wellKnownSymbol("species");
       var $Array = Array;
       var max = Math.max;
-      $({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !HAS_SPECIES_SUPPORT
+      }, {
         slice: function slice(start, end) {
           var O = toIndexedObject(this);
           var length = lengthOfArrayLike(O);
@@ -4558,8 +4822,9 @@
               return nativeSlice(O, k, fin);
             }
           }
-          result = new (Constructor === void 0 ? $Array : Constructor)(max(fin - k, 0));
-          for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k]);
+          result = new(Constructor === void 0 ? $Array : Constructor)(max(fin - k, 0));
+          for (n = 0; k < fin; k++, n++)
+            if (k in O) createProperty(result, n, O[k]);
           setArrayLength(result, n);
           return result;
         }
@@ -4575,7 +4840,11 @@
       var $some = require_array_iteration().some;
       var arrayMethodIsStrict = require_array_method_is_strict();
       var STRICT_METHOD = arrayMethodIsStrict("some");
-      $({ target: "Array", proto: true, forced: !STRICT_METHOD }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !STRICT_METHOD
+      }, {
         some: function some(callbackfn) {
           return $some(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -4701,7 +4970,10 @@
               value = 2;
           }
           for (index = 0; index < 47; index++) {
-            test.push({ k: chr + index, v: value });
+            test.push({
+              k: chr + index,
+              v: value
+            });
           }
         }
         test.sort(function(a, b) {
@@ -4724,7 +4996,11 @@
           return xString === yString ? 0 : xString > yString ? 1 : -1;
         };
       };
-      $({ target: "Array", proto: true, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: FORCED
+      }, {
         sort: function sort(comparefn) {
           if (comparefn !== void 0) aCallable(comparefn);
           var array = toObject(this);
@@ -4796,7 +5072,11 @@
       var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport("splice");
       var max = Math.max;
       var min = Math.min;
-      $({ target: "Array", proto: true, forced: !HAS_SPECIES_SUPPORT }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !HAS_SPECIES_SUPPORT
+      }, {
         splice: function splice(start, deleteCount) {
           var O = toObject(this);
           var len = lengthOfArrayLike(O);
@@ -4855,7 +5135,10 @@
       var createProperty = require_create_property();
       var addToUnscopables = require_add_to_unscopables();
       var $Array = Array;
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         toReversed: function toReversed() {
           var O = toIndexedObject(this);
           var len = lengthOfArrayLike(O);
@@ -4910,7 +5193,10 @@
       var addToUnscopables = require_add_to_unscopables();
       var $Array = Array;
       var sort = uncurryThis(getBuiltInPrototypeMethod("Array", "sort"));
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         toSorted: function toSorted(compareFn) {
           if (compareFn !== void 0) aCallable(compareFn);
           var O = toIndexedObject(this);
@@ -4937,7 +5223,10 @@
       var $Array = Array;
       var max = Math.max;
       var min = Math.min;
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         toSpliced: function toSpliced(start, deleteCount) {
           var O = toIndexedObject(this);
           var len = lengthOfArrayLike(O);
@@ -4997,13 +5286,20 @@
       var INCORRECT_RESULT = [].unshift(0) !== 1;
       var properErrorOnNonWritableLength = function() {
         try {
-          Object.defineProperty([], "length", { writable: false }).unshift();
+          Object.defineProperty([], "length", {
+            writable: false
+          }).unshift();
         } catch (error) {
           return error instanceof TypeError;
         }
       };
       var FORCED = INCORRECT_RESULT || !properErrorOnNonWritableLength();
-      $({ target: "Array", proto: true, arity: 1, forced: FORCED }, {
+      $({
+        target: "Array",
+        proto: true,
+        arity: 1,
+        forced: FORCED
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         unshift: function unshift(item) {
           var O = toObject(this);
@@ -5040,14 +5336,20 @@
       var $RangeError = RangeError;
       var INCORRECT_EXCEPTION_ON_COERCION_FAIL = (function() {
         try {
-          []["with"]({ valueOf: function() {
-            throw 4;
-          } }, null);
+          []["with"]({
+            valueOf: function() {
+              throw 4;
+            }
+          }, null);
         } catch (error) {
           return error !== 4;
         }
       })();
-      $({ target: "Array", proto: true, forced: INCORRECT_EXCEPTION_ON_COERCION_FAIL }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: INCORRECT_EXCEPTION_ON_COERCION_FAIL
+      }, {
         "with": function(index, value) {
           var O = toIndexedObject(this);
           var len = lengthOfArrayLike(O);
@@ -5468,15 +5770,15 @@
       } else {
         INCORRECT_ARRAY_BUFFER_NAME = PROPER_FUNCTION_NAME && NativeArrayBuffer.name !== ARRAY_BUFFER;
         if (!fails(function() {
-          NativeArrayBuffer(1);
-        }) || !fails(function() {
-          new NativeArrayBuffer(-1);
-        }) || fails(function() {
-          new NativeArrayBuffer();
-          new NativeArrayBuffer(1.5);
-          new NativeArrayBuffer(NaN);
-          return NativeArrayBuffer.length !== 1 || INCORRECT_ARRAY_BUFFER_NAME && !CONFIGURABLE_FUNCTION_NAME;
-        })) {
+            NativeArrayBuffer(1);
+          }) || !fails(function() {
+            new NativeArrayBuffer(-1);
+          }) || fails(function() {
+            new NativeArrayBuffer();
+            new NativeArrayBuffer(1.5);
+            new NativeArrayBuffer(NaN);
+            return NativeArrayBuffer.length !== 1 || INCORRECT_ARRAY_BUFFER_NAME && !CONFIGURABLE_FUNCTION_NAME;
+          })) {
           $ArrayBuffer = function ArrayBuffer2(length) {
             anInstance(this, ArrayBufferPrototype);
             return inheritIfRequired(new NativeArrayBuffer(toIndex(length)), this, $ArrayBuffer);
@@ -5501,7 +5803,9 @@
           setUint8: function setUint8(byteOffset, value) {
             $setInt8(this, byteOffset, value << 24 >> 24);
           }
-        }, { unsafe: true });
+        }, {
+          unsafe: true
+        });
       }
       var INCORRECT_ARRAY_BUFFER_NAME;
       var testView;
@@ -5526,7 +5830,11 @@
       var ARRAY_BUFFER = "ArrayBuffer";
       var ArrayBuffer2 = arrayBufferModule[ARRAY_BUFFER];
       var NativeArrayBuffer = globalThis2[ARRAY_BUFFER];
-      $({ global: true, constructor: true, forced: NativeArrayBuffer !== ArrayBuffer2 }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: NativeArrayBuffer !== ArrayBuffer2
+      }, {
         ArrayBuffer: ArrayBuffer2
       });
       setSpecies(ARRAY_BUFFER);
@@ -5613,17 +5921,17 @@
       };
       var exportTypedArrayMethod = function(KEY, property, forced, options) {
         if (!DESCRIPTORS) return;
-        if (forced) for (var ARRAY in TypedArrayConstructorsList) {
-          var TypedArrayConstructor = globalThis2[ARRAY];
-          if (TypedArrayConstructor && hasOwn(TypedArrayConstructor.prototype, KEY)) try {
-            delete TypedArrayConstructor.prototype[KEY];
-          } catch (error) {
-            try {
-              TypedArrayConstructor.prototype[KEY] = property;
-            } catch (error2) {
+        if (forced)
+          for (var ARRAY in TypedArrayConstructorsList) {
+            var TypedArrayConstructor = globalThis2[ARRAY];
+            if (TypedArrayConstructor && hasOwn(TypedArrayConstructor.prototype, KEY)) try {
+              delete TypedArrayConstructor.prototype[KEY];
+            } catch (error) {
+              try {
+                TypedArrayConstructor.prototype[KEY] = property;
+              } catch (error2) {}
             }
           }
-        }
         if (!TypedArrayPrototype[KEY] || forced) {
           defineBuiltIn(TypedArrayPrototype, KEY, forced ? property : NATIVE_ARRAY_BUFFER_VIEWS && Int8ArrayPrototype[KEY] || property, options);
         }
@@ -5632,18 +5940,17 @@
         var ARRAY, TypedArrayConstructor;
         if (!DESCRIPTORS) return;
         if (setPrototypeOf) {
-          if (forced) for (ARRAY in TypedArrayConstructorsList) {
-            TypedArrayConstructor = globalThis2[ARRAY];
-            if (TypedArrayConstructor && hasOwn(TypedArrayConstructor, KEY)) try {
-              delete TypedArrayConstructor[KEY];
-            } catch (error) {
+          if (forced)
+            for (ARRAY in TypedArrayConstructorsList) {
+              TypedArrayConstructor = globalThis2[ARRAY];
+              if (TypedArrayConstructor && hasOwn(TypedArrayConstructor, KEY)) try {
+                delete TypedArrayConstructor[KEY];
+              } catch (error) {}
             }
-          }
           if (!TypedArray[KEY] || forced) {
             try {
               return defineBuiltIn(TypedArray, KEY, forced ? property : NATIVE_ARRAY_BUFFER_VIEWS && TypedArray[KEY] || property);
-            } catch (error) {
-            }
+            } catch (error) {}
           } else return;
         }
         for (ARRAY in TypedArrayConstructorsList) {
@@ -5668,15 +5975,17 @@
         TypedArray = function TypedArray2() {
           throw new TypeError2("Incorrect invocation");
         };
-        if (NATIVE_ARRAY_BUFFER_VIEWS) for (NAME in TypedArrayConstructorsList) {
-          if (globalThis2[NAME]) setPrototypeOf(globalThis2[NAME], TypedArray);
-        }
+        if (NATIVE_ARRAY_BUFFER_VIEWS)
+          for (NAME in TypedArrayConstructorsList) {
+            if (globalThis2[NAME]) setPrototypeOf(globalThis2[NAME], TypedArray);
+          }
       }
       if (!NATIVE_ARRAY_BUFFER_VIEWS || !TypedArrayPrototype || TypedArrayPrototype === ObjectPrototype) {
         TypedArrayPrototype = TypedArray.prototype;
-        if (NATIVE_ARRAY_BUFFER_VIEWS) for (NAME in TypedArrayConstructorsList) {
-          if (globalThis2[NAME]) setPrototypeOf(globalThis2[NAME].prototype, TypedArrayPrototype);
-        }
+        if (NATIVE_ARRAY_BUFFER_VIEWS)
+          for (NAME in TypedArrayConstructorsList) {
+            if (globalThis2[NAME]) setPrototypeOf(globalThis2[NAME].prototype, TypedArrayPrototype);
+          }
       }
       if (NATIVE_ARRAY_BUFFER_VIEWS && getPrototypeOf(Uint8ClampedArrayPrototype) !== TypedArrayPrototype) {
         setPrototypeOf(Uint8ClampedArrayPrototype, TypedArrayPrototype);
@@ -5689,9 +5998,10 @@
             return isObject(this) ? this[TYPED_ARRAY_TAG] : void 0;
           }
         });
-        for (NAME in TypedArrayConstructorsList) if (globalThis2[NAME]) {
-          createNonEnumerableProperty(globalThis2[NAME].prototype, TYPED_ARRAY_TAG, NAME);
-        }
+        for (NAME in TypedArrayConstructorsList)
+          if (globalThis2[NAME]) {
+            createNonEnumerableProperty(globalThis2[NAME].prototype, TYPED_ARRAY_TAG, NAME);
+          }
       }
       module.exports = {
         NATIVE_ARRAY_BUFFER_VIEWS,
@@ -5716,7 +6026,11 @@
       var $ = require_export();
       var ArrayBufferViewCore = require_array_buffer_view_core();
       var NATIVE_ARRAY_BUFFER_VIEWS = ArrayBufferViewCore.NATIVE_ARRAY_BUFFER_VIEWS;
-      $({ target: "ArrayBuffer", stat: true, forced: !NATIVE_ARRAY_BUFFER_VIEWS }, {
+      $({
+        target: "ArrayBuffer",
+        stat: true,
+        forced: !NATIVE_ARRAY_BUFFER_VIEWS
+      }, {
         isView: ArrayBufferViewCore.isView
       });
     }
@@ -5742,7 +6056,12 @@
       var INCORRECT_SLICE = fails(function() {
         return !new ArrayBuffer2(2).slice(1, void 0).byteLength;
       });
-      $({ target: "ArrayBuffer", proto: true, unsafe: true, forced: INCORRECT_SLICE }, {
+      $({
+        target: "ArrayBuffer",
+        proto: true,
+        unsafe: true,
+        forced: INCORRECT_SLICE
+      }, {
         slice: function slice(start, end) {
           if (nativeArrayBufferSlice && end === void 0) {
             return nativeArrayBufferSlice(anObject(this), start);
@@ -5770,7 +6089,11 @@
       var $ = require_export();
       var ArrayBufferModule = require_array_buffer();
       var NATIVE_ARRAY_BUFFER = require_array_buffer_basic_detection();
-      $({ global: true, constructor: true, forced: !NATIVE_ARRAY_BUFFER }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: !NATIVE_ARRAY_BUFFER
+      }, {
         DataView: ArrayBufferModule.DataView
       });
     }
@@ -5804,7 +6127,10 @@
         return pow(2, exponent - 15) * (sign === 0 ? 1 + significand * SIGNIFICAND_DENOM16 : -1 - significand * SIGNIFICAND_DENOM16);
       };
       var getUint16 = uncurryThis(DataView.prototype.getUint16);
-      $({ target: "DataView", proto: true }, {
+      $({
+        target: "DataView",
+        proto: true
+      }, {
         getFloat16: function getFloat16(byteOffset) {
           return unpackFloat16(getUint16(this, byteOffset, arguments.length > 1 ? arguments[1] : false));
         }
@@ -5871,7 +6197,10 @@
         return neg << 15 | exponent + 15 << 10 | significand;
       };
       var setUint16 = uncurryThis(DataView.prototype.setUint16);
-      $({ target: "DataView", proto: true }, {
+      $({
+        target: "DataView",
+        proto: true
+      }, {
         setFloat16: function setFloat16(byteOffset, value) {
           setUint16(
             aDataView(this),
@@ -5962,12 +6291,10 @@
         if (IS_NODE) {
           try {
             return globalThis2.process.getBuiltinModule(name);
-          } catch (error) {
-          }
+          } catch (error) {}
           try {
             return Function('return require("' + name + '")')();
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       };
     }
@@ -5985,7 +6312,9 @@
       module.exports = !!structuredClone2 && !fails(function() {
         if (ENVIRONMENT === "DENO" && V8 > 92 || ENVIRONMENT === "NODE" && V8 > 94 || ENVIRONMENT === "BROWSER" && V8 > 97) return false;
         var buffer = new ArrayBuffer(8);
-        var clone = structuredClone2(buffer, { transfer: [buffer] });
+        var clone = structuredClone2(buffer, {
+          transfer: [buffer]
+        });
         return buffer.byteLength !== 0 || clone.byteLength !== 8;
       });
     }
@@ -6008,7 +6337,9 @@
       var $detach;
       if (PROPER_STRUCTURED_CLONE_TRANSFER) {
         detach = function(transferable) {
-          structuredClone2(transferable, { transfer: [transferable] });
+          structuredClone2(transferable, {
+            transfer: [transferable]
+          });
         };
       } else if ($ArrayBuffer) try {
         if (!$MessageChannel) {
@@ -6026,8 +6357,7 @@
             if (buffer.byteLength === 0) detach = $detach;
           }
         }
-      } catch (error) {
-      }
+      } catch (error) {}
       module.exports = detach;
     }
   });
@@ -6063,13 +6393,17 @@
         var newBuffer;
         notDetached(arrayBuffer);
         if (PROPER_STRUCTURED_CLONE_TRANSFER) {
-          arrayBuffer = structuredClone2(arrayBuffer, { transfer: [arrayBuffer] });
+          arrayBuffer = structuredClone2(arrayBuffer, {
+            transfer: [arrayBuffer]
+          });
           if (byteLength === newByteLength && (preserveResizability || fixedLength)) return arrayBuffer;
         }
         if (byteLength >= newByteLength && (!preserveResizability || fixedLength)) {
           newBuffer = slice(arrayBuffer, 0, newByteLength);
         } else {
-          var options = preserveResizability && !fixedLength && maxByteLength ? { maxByteLength: max(newByteLength, maxByteLength(arrayBuffer)) } : void 0;
+          var options = preserveResizability && !fixedLength && maxByteLength ? {
+            maxByteLength: max(newByteLength, maxByteLength(arrayBuffer))
+          } : void 0;
           newBuffer = new ArrayBuffer2(newByteLength, options);
           var a = new DataView2(arrayBuffer);
           var b = new DataView2(newBuffer);
@@ -6088,7 +6422,10 @@
       "use strict";
       var $ = require_export();
       var $transfer = require_array_buffer_transfer();
-      if ($transfer) $({ target: "ArrayBuffer", proto: true }, {
+      if ($transfer) $({
+        target: "ArrayBuffer",
+        proto: true
+      }, {
         transfer: function transfer() {
           return $transfer(this, arguments.length ? arguments[0] : void 0, true);
         }
@@ -6102,7 +6439,10 @@
       "use strict";
       var $ = require_export();
       var $transfer = require_array_buffer_transfer();
-      if ($transfer) $({ target: "ArrayBuffer", proto: true }, {
+      if ($transfer) $({
+        target: "ArrayBuffer",
+        proto: true
+      }, {
         transferToFixedLength: function transferToFixedLength() {
           return $transfer(this, arguments.length ? arguments[0] : void 0, false);
         }
@@ -6118,10 +6458,14 @@
       var uncurryThis = require_function_uncurry_this();
       var fails = require_fails();
       var FORCED = fails(function() {
-        return (/* @__PURE__ */ new Date(16e11)).getYear() !== 120;
+        return ( /* @__PURE__ */ new Date(16e11)).getYear() !== 120;
       });
       var getFullYear = uncurryThis(Date.prototype.getFullYear);
-      $({ target: "Date", proto: true, forced: FORCED }, {
+      $({
+        target: "Date",
+        proto: true,
+        forced: FORCED
+      }, {
         getYear: function getYear() {
           return getFullYear(this) - 1900;
         }
@@ -6137,7 +6481,10 @@
       var uncurryThis = require_function_uncurry_this();
       var $Date = Date;
       var thisTimeValue = uncurryThis($Date.prototype.getTime);
-      $({ target: "Date", stat: true }, {
+      $({
+        target: "Date",
+        stat: true
+      }, {
         now: function now() {
           return thisTimeValue(new $Date());
         }
@@ -6155,7 +6502,10 @@
       var DatePrototype = Date.prototype;
       var thisTimeValue = uncurryThis(DatePrototype.getTime);
       var setFullYear = uncurryThis(DatePrototype.setFullYear);
-      $({ target: "Date", proto: true }, {
+      $({
+        target: "Date",
+        proto: true
+      }, {
         setYear: function setYear(year) {
           thisTimeValue(this);
           var y = +year;
@@ -6173,7 +6523,10 @@
     "node_modules/core-js/modules/es.date.to-gmt-string.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Date", proto: true }, {
+      $({
+        target: "Date",
+        proto: true
+      }, {
         toGMTString: Date.prototype.toUTCString
       });
     }
@@ -6193,7 +6546,9 @@
         var result = "";
         var n = toIntegerOrInfinity(count);
         if (n < 0 || n === Infinity) throw new $RangeError("Wrong number of repetitions");
-        for (; n > 0; (n = floor(n / 2)) && (str += str)) if (n % 2) result += str;
+        for (; n > 0;
+          (n = floor(n / 2)) && (str += str))
+          if (n % 2) result += str;
         return result;
       };
     }
@@ -6260,7 +6615,7 @@
       module.exports = fails(function() {
         return nativeDateToISOString.call(new Date(-5e13 - 1)) !== "0385-07-25T07:06:39.999Z";
       }) || !fails(function() {
-        nativeDateToISOString.call(/* @__PURE__ */ new Date(NaN));
+        nativeDateToISOString.call( /* @__PURE__ */ new Date(NaN));
       }) ? function toISOString() {
         if (!$isFinite(thisTimeValue(this))) throw new $RangeError("Invalid time value");
         var date = this;
@@ -6278,7 +6633,11 @@
       "use strict";
       var $ = require_export();
       var toISOString = require_date_to_iso_string();
-      $({ target: "Date", proto: true, forced: Date.prototype.toISOString !== toISOString }, {
+      $({
+        target: "Date",
+        proto: true,
+        forced: Date.prototype.toISOString !== toISOString
+      }, {
         toISOString
       });
     }
@@ -6293,11 +6652,17 @@
       var toObject = require_to_object();
       var toPrimitive = require_to_primitive();
       var FORCED = fails(function() {
-        return (/* @__PURE__ */ new Date(NaN)).toJSON() !== null || Date.prototype.toJSON.call({ toISOString: function() {
-          return 1;
-        } }) !== 1;
+        return ( /* @__PURE__ */ new Date(NaN)).toJSON() !== null || Date.prototype.toJSON.call({
+          toISOString: function() {
+            return 1;
+          }
+        }) !== 1;
       });
-      $({ target: "Date", proto: true, forced: FORCED }, {
+      $({
+        target: "Date",
+        proto: true,
+        forced: FORCED
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         toJSON: function toJSON(key) {
           var O = toObject(this);
@@ -6351,7 +6716,7 @@
       var TO_STRING = "toString";
       var nativeDateToString = uncurryThis(DatePrototype[TO_STRING]);
       var thisTimeValue = uncurryThis(DatePrototype.getTime);
-      if (String(/* @__PURE__ */ new Date(NaN)) !== INVALID_DATE) {
+      if (String( /* @__PURE__ */ new Date(NaN)) !== INVALID_DATE) {
         defineBuiltIn(DatePrototype, TO_STRING, function toString() {
           var value = thisTimeValue(this);
           return value === value ? nativeDateToString(this) : INVALID_DATE;
@@ -6513,9 +6878,16 @@
           return getDisposableStackInternalState(this).state === DISPOSED;
         }
       });
-      defineBuiltIn(DisposableStackPrototype, DISPOSE, DisposableStackPrototype.dispose, { name: "dispose" });
-      defineBuiltIn(DisposableStackPrototype, TO_STRING_TAG, DISPOSABLE_STACK, { nonWritable: true });
-      $({ global: true, constructor: true }, {
+      defineBuiltIn(DisposableStackPrototype, DISPOSE, DisposableStackPrototype.dispose, {
+        name: "dispose"
+      });
+      defineBuiltIn(DisposableStackPrototype, TO_STRING_TAG, DISPOSABLE_STACK, {
+        nonWritable: true
+      });
+      $({
+        global: true,
+        constructor: true
+      }, {
         DisposableStack: $DisposableStack
       });
     }
@@ -6541,7 +6913,9 @@
         while (result.length < length) result = "0" + result;
         return result;
       };
-      $({ global: true }, {
+      $({
+        global: true
+      }, {
         escape: function escape(string) {
           var str = toString(string);
           var length = str.length;
@@ -6610,7 +6984,11 @@
       "use strict";
       var $ = require_export();
       var bind = require_function_bind();
-      $({ target: "Function", proto: true, forced: Function.bind !== bind }, {
+      $({
+        target: "Function",
+        proto: true,
+        forced: Function.bind !== bind
+      }, {
         bind
       });
     }
@@ -6629,11 +7007,13 @@
       var HAS_INSTANCE = wellKnownSymbol("hasInstance");
       var FunctionPrototype = Function.prototype;
       if (!(HAS_INSTANCE in FunctionPrototype)) {
-        definePropertyModule.f(FunctionPrototype, HAS_INSTANCE, { value: makeBuiltIn(function(O) {
-          if (!isCallable(this) || !isObject(O)) return false;
-          var P = this.prototype;
-          return isObject(P) ? isPrototypeOf(P, O) : O instanceof this;
-        }, HAS_INSTANCE) });
+        definePropertyModule.f(FunctionPrototype, HAS_INSTANCE, {
+          value: makeBuiltIn(function(O) {
+            if (!isCallable(this) || !isObject(O)) return false;
+            var P = this.prototype;
+            return isObject(P) ? isPrototypeOf(P, O) : O instanceof this;
+          }, HAS_INSTANCE)
+        });
       }
     }
   });
@@ -6672,7 +7052,10 @@
       "use strict";
       var $ = require_export();
       var globalThis2 = require_global_this();
-      $({ global: true, forced: globalThis2.globalThis !== globalThis2 }, {
+      $({
+        global: true,
+        forced: globalThis2.globalThis !== globalThis2
+      }, {
         globalThis: globalThis2
       });
     }
@@ -6729,7 +7112,11 @@
         defineIteratorPrototypeAccessor(CONSTRUCTOR, IteratorConstructor);
       }
       IteratorConstructor.prototype = IteratorPrototype;
-      $({ global: true, constructor: true, forced: FORCED }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: FORCED
+      }, {
         Iterator: IteratorConstructor
       });
     }
@@ -6892,7 +7279,11 @@
           return result.value;
         }
       });
-      $({ target: "Iterator", stat: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        stat: true,
+        forced: IS_PURE
+      }, {
         concat: function concat() {
           var length = arguments.length;
           var iterables = $Array(length);
@@ -6981,7 +7372,9 @@
       module.exports = function(methodName, argument) {
         var method = typeof Iterator == "function" && Iterator.prototype[methodName];
         if (method) try {
-          method.call({ next: null }, argument).next();
+          method.call({
+            next: null
+          }, argument).next();
         } catch (error) {
           return true;
         }
@@ -7002,7 +7395,9 @@
         if (method) try {
           method.call({
             next: function() {
-              return { done: true };
+              return {
+                done: true
+              };
             },
             "return": function() {
               CLOSED = true;
@@ -7039,7 +7434,9 @@
         try {
           Iterator.prototype.drop.call({
             next: function() {
-              return { done: true };
+              return {
+                done: true
+              };
             }
           }, 9007199254740992);
         } catch (error) {
@@ -7060,7 +7457,12 @@
         done = this.done = !!result.done;
         if (!done) return result.value;
       });
-      $({ target: "Iterator", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         drop: function drop(limit) {
           anObject(this);
           var remaining;
@@ -7094,7 +7496,12 @@
       var iteratorClose = require_iterator_close();
       var iteratorHelperWithoutClosingOnEarlyError = require_iterator_helper_without_closing_on_early_error();
       var everyWithoutClosingOnEarlyError = iteratorHelperWithoutClosingOnEarlyError("every", TypeError);
-      $({ target: "Iterator", proto: true, real: true, forced: everyWithoutClosingOnEarlyError }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: everyWithoutClosingOnEarlyError
+      }, {
         every: function every(predicate) {
           anObject(this);
           try {
@@ -7107,7 +7514,10 @@
           var counter = 0;
           return !iterate(record, function(value, stop) {
             if (!predicate(value, counter++)) return stop();
-          }, { IS_RECORD: true, INTERRUPTED: true }).stopped;
+          }, {
+            IS_RECORD: true,
+            INTERRUPTED: true
+          }).stopped;
         }
       });
     }
@@ -7128,8 +7538,7 @@
       var iteratorClose = require_iterator_close();
       var iteratorHelperThrowsOnInvalidIterator = require_iterator_helper_throws_on_invalid_iterator();
       var iteratorHelperWithoutClosingOnEarlyError = require_iterator_helper_without_closing_on_early_error();
-      var FILTER_WITHOUT_THROWING_ON_INVALID_ITERATOR = !IS_PURE && !iteratorHelperThrowsOnInvalidIterator("filter", function() {
-      });
+      var FILTER_WITHOUT_THROWING_ON_INVALID_ITERATOR = !IS_PURE && !iteratorHelperThrowsOnInvalidIterator("filter", function() {});
       var filterWithoutClosingOnEarlyError = !IS_PURE && !FILTER_WITHOUT_THROWING_ON_INVALID_ITERATOR && iteratorHelperWithoutClosingOnEarlyError("filter", TypeError);
       var FORCED = IS_PURE || FILTER_WITHOUT_THROWING_ON_INVALID_ITERATOR || filterWithoutClosingOnEarlyError;
       var IteratorProxy = createIteratorProxy(function() {
@@ -7145,7 +7554,12 @@
           if (callWithSafeIterationClosing(iterator, predicate, [value, this.counter++], true)) return value;
         }
       });
-      $({ target: "Iterator", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         filter: function filter(predicate) {
           anObject(this);
           try {
@@ -7175,7 +7589,12 @@
       var iteratorClose = require_iterator_close();
       var iteratorHelperWithoutClosingOnEarlyError = require_iterator_helper_without_closing_on_early_error();
       var findWithoutClosingOnEarlyError = iteratorHelperWithoutClosingOnEarlyError("find", TypeError);
-      $({ target: "Iterator", proto: true, real: true, forced: findWithoutClosingOnEarlyError }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: findWithoutClosingOnEarlyError
+      }, {
         find: function find(predicate) {
           anObject(this);
           try {
@@ -7188,7 +7607,10 @@
           var counter = 0;
           return iterate(record, function(value, stop) {
             if (predicate(value, counter++)) return stop(value);
-          }, { IS_RECORD: true, INTERRUPTED: true }).result;
+          }, {
+            IS_RECORD: true,
+            INTERRUPTED: true
+          }).result;
         }
       });
     }
@@ -7233,8 +7655,7 @@
           return true;
         }) !== 1;
       });
-      var FLAT_MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR = !IS_PURE && !THROWS_ON_ITERATOR_WITHOUT_RETURN && !iteratorHelperThrowsOnInvalidIterator("flatMap", function() {
-      });
+      var FLAT_MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR = !IS_PURE && !THROWS_ON_ITERATOR_WITHOUT_RETURN && !iteratorHelperThrowsOnInvalidIterator("flatMap", function() {});
       var flatMapWithoutClosingOnEarlyError = !IS_PURE && !THROWS_ON_ITERATOR_WITHOUT_RETURN && !FLAT_MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR && iteratorHelperWithoutClosingOnEarlyError("flatMap", TypeError);
       var FORCED = IS_PURE || THROWS_ON_ITERATOR_WITHOUT_RETURN || FLAT_MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR || flatMapWithoutClosingOnEarlyError;
       var IteratorProxy = createIteratorProxy(function() {
@@ -7258,7 +7679,12 @@
           }
         }
       });
-      $({ target: "Iterator", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         flatMap: function flatMap(mapper) {
           anObject(this);
           try {
@@ -7289,7 +7715,12 @@
       var iteratorClose = require_iterator_close();
       var iteratorHelperWithoutClosingOnEarlyError = require_iterator_helper_without_closing_on_early_error();
       var forEachWithoutClosingOnEarlyError = iteratorHelperWithoutClosingOnEarlyError("forEach", TypeError);
-      $({ target: "Iterator", proto: true, real: true, forced: forEachWithoutClosingOnEarlyError }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: forEachWithoutClosingOnEarlyError
+      }, {
         forEach: function forEach(fn) {
           anObject(this);
           try {
@@ -7302,7 +7733,9 @@
           var counter = 0;
           iterate(record, function(value) {
             fn(value, counter++);
-          }, { IS_RECORD: true });
+          }, {
+            IS_RECORD: true
+          });
         }
       });
     }
@@ -7322,7 +7755,9 @@
       var IS_PURE = require_is_pure();
       var FORCED = IS_PURE || (function() {
         try {
-          Iterator.from({ "return": null })["return"]();
+          Iterator.from({
+            "return": null
+          })["return"]();
         } catch (error) {
           return true;
         }
@@ -7330,7 +7765,11 @@
       var IteratorProxy = createIteratorProxy(function() {
         return call(this.next, this.iterator);
       }, true);
-      $({ target: "Iterator", stat: true, forced: FORCED }, {
+      $({
+        target: "Iterator",
+        stat: true,
+        forced: FORCED
+      }, {
         from: function from(O) {
           var iteratorRecord = getIteratorFlattenable(typeof O == "string" ? toObject(O) : O, true);
           return isPrototypeOf(IteratorPrototype, iteratorRecord.iterator) ? iteratorRecord.iterator : new IteratorProxy(iteratorRecord);
@@ -7354,8 +7793,7 @@
       var iteratorHelperThrowsOnInvalidIterator = require_iterator_helper_throws_on_invalid_iterator();
       var iteratorHelperWithoutClosingOnEarlyError = require_iterator_helper_without_closing_on_early_error();
       var IS_PURE = require_is_pure();
-      var MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR = !IS_PURE && !iteratorHelperThrowsOnInvalidIterator("map", function() {
-      });
+      var MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR = !IS_PURE && !iteratorHelperThrowsOnInvalidIterator("map", function() {});
       var mapWithoutClosingOnEarlyError = !IS_PURE && !MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR && iteratorHelperWithoutClosingOnEarlyError("map", TypeError);
       var FORCED = IS_PURE || MAP_WITHOUT_THROWING_ON_INVALID_ITERATOR || mapWithoutClosingOnEarlyError;
       var IteratorProxy = createIteratorProxy(function() {
@@ -7364,7 +7802,12 @@
         var done = this.done = !!result.done;
         if (!done) return callWithSafeIterationClosing(iterator, this.mapper, [result.value, this.counter++], true);
       });
-      $({ target: "Iterator", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         map: function map(mapper) {
           anObject(this);
           try {
@@ -7396,11 +7839,15 @@
       var fails = require_fails();
       var $TypeError = TypeError;
       var FAILS_ON_INITIAL_UNDEFINED = fails(function() {
-        [].keys().reduce(function() {
-        }, void 0);
+        [].keys().reduce(function() {}, void 0);
       });
       var reduceWithoutClosingOnEarlyError = !FAILS_ON_INITIAL_UNDEFINED && iteratorHelperWithoutClosingOnEarlyError("reduce", $TypeError);
-      $({ target: "Iterator", proto: true, real: true, forced: FAILS_ON_INITIAL_UNDEFINED || reduceWithoutClosingOnEarlyError }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: FAILS_ON_INITIAL_UNDEFINED || reduceWithoutClosingOnEarlyError
+      }, {
         reduce: function reduce(reducer) {
           anObject(this);
           try {
@@ -7423,7 +7870,9 @@
               accumulator = reducer(accumulator, value, counter);
             }
             counter++;
-          }, { IS_RECORD: true });
+          }, {
+            IS_RECORD: true
+          });
           if (noInitial) throw new $TypeError("Reduce of empty iterator with no initial value");
           return accumulator;
         }
@@ -7444,7 +7893,12 @@
       var iteratorClose = require_iterator_close();
       var iteratorHelperWithoutClosingOnEarlyError = require_iterator_helper_without_closing_on_early_error();
       var someWithoutClosingOnEarlyError = iteratorHelperWithoutClosingOnEarlyError("some", TypeError);
-      $({ target: "Iterator", proto: true, real: true, forced: someWithoutClosingOnEarlyError }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: someWithoutClosingOnEarlyError
+      }, {
         some: function some(predicate) {
           anObject(this);
           try {
@@ -7457,7 +7911,10 @@
           var counter = 0;
           return iterate(record, function(value, stop) {
             if (predicate(value, counter++)) return stop();
-          }, { IS_RECORD: true, INTERRUPTED: true }).stopped;
+          }, {
+            IS_RECORD: true,
+            INTERRUPTED: true
+          }).stopped;
         }
       });
     }
@@ -7486,7 +7943,9 @@
         try {
           Iterator.prototype.take.call({
             next: function() {
-              return { done: true };
+              return {
+                done: true
+              };
             }
           }, 9007199254740992);
         } catch (error) {
@@ -7503,7 +7962,12 @@
         var done = this.done = !!result.done;
         if (!done) return result.value;
       });
-      $({ target: "Iterator", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         take: function take(limit) {
           anObject(this);
           var remaining;
@@ -7533,13 +7997,19 @@
       var createProperty = require_create_property();
       var iterate = require_iterate();
       var getIteratorDirect = require_get_iterator_direct();
-      $({ target: "Iterator", proto: true, real: true }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true
+      }, {
         toArray: function toArray() {
           var result = [];
           var index = 0;
           iterate(getIteratorDirect(anObject(this)), function(element) {
             createProperty(result, index++, element);
-          }, { IS_RECORD: true });
+          }, {
+            IS_RECORD: true
+          });
           return result;
         }
       });
@@ -7702,7 +8172,11 @@
       var concat = uncurryThis([].concat);
       var push = uncurryThis([].push);
       var THROW = "throw";
-      $({ target: "Iterator", stat: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        stat: true,
+        forced: IS_PURE
+      }, {
         zip: function zip(iterables) {
           anObject(iterables);
           var options = arguments.length > 1 ? anObjectOrUndefined(arguments[1]) : void 0;
@@ -7792,7 +8266,11 @@
       var IS_PURE = require_is_pure();
       var push = uncurryThis([].push);
       var THROW = "throw";
-      $({ target: "Iterator", stat: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        stat: true,
+        forced: IS_PURE
+      }, {
         zipKeyed: function zipKeyed(iterables) {
           anObject(iterables);
           var options = arguments.length > 1 ? anObjectOrUndefined(arguments[1]) : void 0;
@@ -7849,7 +8327,11 @@
       var $ = require_export();
       var NATIVE_RAW_JSON = require_native_raw_json();
       var isRawJSON = require_is_raw_json();
-      $({ target: "JSON", stat: true, forced: !NATIVE_RAW_JSON }, {
+      $({
+        target: "JSON",
+        stat: true,
+        forced: !NATIVE_RAW_JSON
+      }, {
         isRawJSON
       });
     }
@@ -7900,12 +8382,16 @@
         if (endIndex < source.length) {
           throw new SyntaxError2('Unexpected extra character: "' + at(source, endIndex) + '" after the parsed data at: ' + endIndex);
         }
-        return isCallable(reviver) ? internalize({ "": value }, "", reviver, root) : value;
+        return isCallable(reviver) ? internalize({
+          "": value
+        }, "", reviver, root) : value;
       };
       var internalize = function(holder, name, reviver, node) {
         var val = holder[name];
         var unmodified = node && val === node.value;
-        var context = unmodified && typeof node.source == "string" ? { source: node.source } : {};
+        var context = unmodified && typeof node.source == "string" ? {
+          source: node.source
+        } : {};
         var elementRecordsLen, keys, len, i, P;
         if (isObject(val)) {
           var nodeIsArray = isArray(val);
@@ -8076,13 +8562,15 @@
         },
         skip: function(regex, i) {
           var source = this.source;
-          for (; i < source.length; i++) if (!exec(regex, at(source, i))) break;
+          for (; i < source.length; i++)
+            if (!exec(regex, at(source, i))) break;
           return i;
         },
         until: function(array, i) {
           i = this.skip(IS_WHITESPACE, i);
           var chr = at(this.source, i);
-          for (var j = 0; j < array.length; j++) if (array[j] === chr) return i;
+          for (var j = 0; j < array.length; j++)
+            if (array[j] === chr) return i;
           throw new SyntaxError2('Unexpected character: "' + chr + '" at: ' + i);
         }
       };
@@ -8097,7 +8585,11 @@
       var PROPER_BASE_PARSE = NATIVE_SYMBOL && !fails(function() {
         return 1 / nativeParse("-0 	") !== -Infinity;
       });
-      $({ target: "JSON", stat: true, forced: NO_SOURCE_SUPPORT }, {
+      $({
+        target: "JSON",
+        stat: true,
+        forced: NO_SOURCE_SUPPORT
+      }, {
         parse: function parse(text, reviver) {
           return PROPER_BASE_PARSE && !isCallable(reviver) ? nativeParse(text) : $parse(text, reviver);
         }
@@ -8137,7 +8629,11 @@
       var isWhitespace = function(it) {
         return it === " " || it === "	" || it === "\n" || it === "\r";
       };
-      $({ target: "JSON", stat: true, forced: !NATIVE_RAW_JSON }, {
+      $({
+        target: "JSON",
+        stat: true,
+        forced: !NATIVE_RAW_JSON
+      }, {
         rawJSON: function rawJSON(text) {
           var jsonString = toString(text);
           if (jsonString === "" || isWhitespace(at(jsonString, 0)) || isWhitespace(at(jsonString, jsonString.length - 1))) {
@@ -8146,7 +8642,9 @@
           var parsed = parse(jsonString);
           if (typeof parsed == "object" && parsed !== null) throw new $SyntaxError(ERROR_MESSAGE);
           var obj = create(null);
-          setInternalState(obj, { type: "RawJSON" });
+          setInternalState(obj, {
+            type: "RawJSON"
+          });
           createProperty(obj, "rawJSON", jsonString);
           return FREEZING ? freeze(obj) : obj;
         }
@@ -8172,7 +8670,9 @@
       module.exports = fails(function() {
         if (typeof ArrayBuffer == "function") {
           var buffer = new ArrayBuffer(8);
-          if (Object.isExtensible(buffer)) Object.defineProperty(buffer, "a", { value: 8 });
+          if (Object.isExtensible(buffer)) Object.defineProperty(buffer, "a", {
+            value: 8
+          });
         }
       });
     }
@@ -8217,12 +8717,14 @@
       var METADATA = uid("meta");
       var id = 0;
       var setMetadata = function(it) {
-        defineProperty(it, METADATA, { value: {
-          objectID: "O" + id++,
-          // object ID
-          weakData: {}
-          // weak collections IDs
-        } });
+        defineProperty(it, METADATA, {
+          value: {
+            objectID: "O" + id++,
+            // object ID
+            weakData: {}
+            // weak collections IDs
+          }
+        });
       };
       var fastKey = function(it, create) {
         if (!isObject(it)) return typeof it == "symbol" ? it : (typeof it == "string" ? "S" : "P") + it;
@@ -8246,8 +8748,7 @@
         return it;
       };
       var enable = function() {
-        meta.enable = function() {
-        };
+        meta.enable = function() {};
         REQUIRED = true;
         var getOwnPropertyNames = getOwnPropertyNamesModule.f;
         var splice = uncurryThis([].splice);
@@ -8264,7 +8765,11 @@
             }
             return result;
           };
-          $({ target: "Object", stat: true, forced: true }, {
+          $({
+            target: "Object",
+            stat: true,
+            forced: true
+          }, {
             getOwnPropertyNames: getOwnPropertyNamesExternalModule.f
           });
         }
@@ -8354,7 +8859,10 @@
             Constructor = wrapper(function(dummy, iterable) {
               anInstance(dummy, NativePrototype);
               var that = inheritIfRequired(new NativeConstructor(), dummy, Constructor);
-              if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], { that, AS_ENTRIES: IS_MAP });
+              if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], {
+                that,
+                AS_ENTRIES: IS_MAP
+              });
               return that;
             });
             Constructor.prototype = NativePrototype;
@@ -8369,7 +8877,11 @@
           if (IS_WEAK && NativePrototype.clear) delete NativePrototype.clear;
         }
         exported[CONSTRUCTOR_NAME] = Constructor;
-        $({ global: true, constructor: true, forced: Constructor !== NativeConstructor }, exported);
+        $({
+          global: true,
+          constructor: true,
+          forced: Constructor !== NativeConstructor
+        }, exported);
         setToStringTag(Constructor, CONSTRUCTOR_NAME);
         if (!IS_WEAK) common.setStrong(Constructor, CONSTRUCTOR_NAME, IS_MAP);
         return Constructor;
@@ -8408,7 +8920,10 @@
               size: 0
             });
             if (!DESCRIPTORS) that.size = 0;
-            if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], { that, AS_ENTRIES: IS_MAP });
+            if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], {
+              that,
+              AS_ENTRIES: IS_MAP
+            });
           });
           var Prototype = Constructor.prototype;
           var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
@@ -8623,7 +9138,11 @@
           return it;
         }).get("a").length !== 1;
       });
-      $({ target: "Map", stat: true, forced: IS_PURE || DOES_NOT_WORK_WITH_PRIMITIVES }, {
+      $({
+        target: "Map",
+        stat: true,
+        forced: IS_PURE || DOES_NOT_WORK_WITH_PRIMITIVES
+      }, {
         groupBy: function groupBy(items, callbackfn) {
           requireObjectCoercible(items);
           aCallable(callbackfn);
@@ -8651,7 +9170,12 @@
       var get = MapHelpers.get;
       var has = MapHelpers.has;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         getOrInsert: function getOrInsert(key, value) {
           if (has(this, key)) return get(this, key);
           set(this, key, value);
@@ -8672,7 +9196,12 @@
       var get = MapHelpers.get;
       var has = MapHelpers.has;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         getOrInsertComputed: function getOrInsertComputed(key, callbackfn) {
           var hasKey = has(this, key);
           aCallable(callbackfn);
@@ -8711,7 +9240,11 @@
       var sqrt = Math.sqrt;
       var LN2 = Math.LN2;
       var FORCED = !$acosh || Math.floor($acosh(Number.MAX_VALUE)) !== 710 || $acosh(Infinity) !== Infinity;
-      $({ target: "Math", stat: true, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: FORCED
+      }, {
         acosh: function acosh(x) {
           var n = +x;
           return n < 1 ? NaN : n > 9490626562425156e-8 ? log(n) + LN2 : log1p(n - 1 + sqrt(n - 1) * sqrt(n + 1));
@@ -8731,12 +9264,17 @@
       var sqrt = Math.sqrt;
       var LN2 = Math.LN2;
       var SQRT_2_POW_53 = 9490626562425156e-8;
+
       function asinh(x) {
         var n = +x;
         return !isFinite(n) || n === 0 ? n : n < 0 ? -asinh(-n) : n > SQRT_2_POW_53 ? log(n) + LN2 : n < 1e-8 ? n : log1p(n + n * n / (1 + sqrt(n * n + 1)));
       }
       var FORCED = !($asinh && 1 / $asinh(0) > 0);
-      $({ target: "Math", stat: true, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: FORCED
+      }, {
         asinh
       });
     }
@@ -8750,7 +9288,11 @@
       var log1p = require_math_log1p();
       var $atanh = Math.atanh;
       var FORCED = !($atanh && 1 / $atanh(-0) < 0);
-      $({ target: "Math", stat: true, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: FORCED
+      }, {
         atanh: function atanh(x) {
           var n = +x;
           return n === 0 ? n : log1p(2 * n / (1 - n)) / 2;
@@ -8767,7 +9309,10 @@
       var sign = require_math_sign();
       var abs = Math.abs;
       var pow = Math.pow;
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         cbrt: function cbrt(x) {
           var n = +x;
           var y = sign(n) * pow(abs(n), 1 / 3);
@@ -8785,7 +9330,10 @@
       var floor = Math.floor;
       var log = Math.log;
       var LOG2E = Math.LOG2E;
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         clz32: function clz32(x) {
           var n = x >>> 0;
           return n ? 31 - floor(log(n + 0.5) * LOG2E) : 32;
@@ -8817,7 +9365,11 @@
       var abs = Math.abs;
       var E = Math.E;
       var FORCED = !$cosh || $cosh(710) === Infinity;
-      $({ target: "Math", stat: true, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: FORCED
+      }, {
         cosh: function cosh(x) {
           var t = expm1(abs(x) - 1) + 1;
           return (t + 1 / (t * E * E)) * (E / 2);
@@ -8832,7 +9384,13 @@
       "use strict";
       var $ = require_export();
       var expm1 = require_math_expm1();
-      $({ target: "Math", stat: true, forced: expm1 !== Math.expm1 }, { expm1 });
+      $({
+        target: "Math",
+        stat: true,
+        forced: expm1 !== Math.expm1
+      }, {
+        expm1
+      });
     }
   });
 
@@ -8842,7 +9400,12 @@
       "use strict";
       var $ = require_export();
       var fround = require_math_fround();
-      $({ target: "Math", stat: true }, { fround });
+      $({
+        target: "Math",
+        stat: true
+      }, {
+        fround
+      });
     }
   });
 
@@ -8855,7 +9418,10 @@
       var FLOAT16_EPSILON = 9765625e-10;
       var FLOAT16_MAX_VALUE = 65504;
       var FLOAT16_MIN_VALUE = 6103515625e-14;
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         f16round: function f16round(x) {
           return floatRound(x, FLOAT16_EPSILON, FLOAT16_MAX_VALUE, FLOAT16_MIN_VALUE);
         }
@@ -8872,7 +9438,12 @@
       var abs = Math.abs;
       var sqrt = Math.sqrt;
       var FORCED = !!$hypot && $hypot(Infinity, NaN) !== Infinity;
-      $({ target: "Math", stat: true, arity: 2, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        arity: 2,
+        forced: FORCED
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         hypot: function hypot(value1, value2) {
           var sum = 0;
@@ -8907,7 +9478,11 @@
       var FORCED = fails(function() {
         return $imul(4294967295, 5) !== -5 || $imul.length !== 2;
       });
-      $({ target: "Math", stat: true, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: FORCED
+      }, {
         imul: function imul(x, y) {
           var UINT16 = 65535;
           var xn = +x;
@@ -8938,7 +9513,10 @@
       "use strict";
       var $ = require_export();
       var log10 = require_math_log10();
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         log10
       });
     }
@@ -8950,7 +9528,12 @@
       "use strict";
       var $ = require_export();
       var log1p = require_math_log1p();
-      $({ target: "Math", stat: true }, { log1p });
+      $({
+        target: "Math",
+        stat: true
+      }, {
+        log1p
+      });
     }
   });
 
@@ -8960,7 +9543,10 @@
       "use strict";
       var $ = require_export();
       var log2 = require_math_log2();
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         log2
       });
     }
@@ -8972,7 +9558,10 @@
       "use strict";
       var $ = require_export();
       var sign = require_math_sign();
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         sign
       });
     }
@@ -8991,7 +9580,11 @@
       var FORCED = fails(function() {
         return Math.sinh(-2e-17) !== -2e-17;
       });
-      $({ target: "Math", stat: true, forced: FORCED }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: FORCED
+      }, {
         sinh: function sinh(x) {
           var n = +x;
           return abs(n) < 1 ? (expm1(n) - expm1(-n)) / 2 : (exp(n - 1) - exp(-n - 1)) * (E / 2);
@@ -9026,9 +9619,15 @@
       var twosum = function(x, y) {
         var hi = x + y;
         var lo = y - (hi - x);
-        return { hi, lo };
+        return {
+          hi,
+          lo
+        };
       };
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         // eslint-disable-next-line max-statements -- ok
         sumPrecise: function sumPrecise(items) {
           var numbers = [];
@@ -9141,7 +9740,10 @@
       var $ = require_export();
       var expm1 = require_math_expm1();
       var exp = Math.exp;
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         tanh: function tanh(x) {
           var n = +x;
           var a = expm1(n);
@@ -9167,7 +9769,10 @@
       "use strict";
       var $ = require_export();
       var trunc = require_math_trunc();
-      $({ target: "Math", stat: true }, {
+      $({
+        target: "Math",
+        stat: true
+      }, {
         trunc
       });
     }
@@ -9265,7 +9870,7 @@
                 radix = 2;
                 maxCode = 49;
                 break;
-              // fast equal of /^0o[0-7]+$/i
+                // fast equal of /^0o[0-7]+$/i
               case 79:
               case 111:
                 radix = 8;
@@ -9297,14 +9902,19 @@
       };
       NumberWrapper.prototype = NumberPrototype;
       if (FORCED && !IS_PURE) NumberPrototype.constructor = NumberWrapper;
-      $({ global: true, constructor: true, wrap: true, forced: FORCED }, {
+      $({
+        global: true,
+        constructor: true,
+        wrap: true,
+        forced: FORCED
+      }, {
         Number: NumberWrapper
       });
       var copyConstructorProperties = function(target, source) {
         for (var keys = DESCRIPTORS ? getOwnPropertyNames(source) : (
-          // ES3:
-          "MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,EPSILON,MAX_SAFE_INTEGER,MIN_SAFE_INTEGER,isFinite,isInteger,isNaN,isSafeInteger,parseFloat,parseInt,fromString,range".split(",")
-        ), j = 0, key; keys.length > j; j++) {
+            // ES3:
+            "MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,EPSILON,MAX_SAFE_INTEGER,MIN_SAFE_INTEGER,isFinite,isInteger,isNaN,isSafeInteger,parseFloat,parseInt,fromString,range".split(",")
+          ), j = 0, key; keys.length > j; j++) {
           if (hasOwn(source, key = keys[j]) && !hasOwn(target, key)) {
             defineProperty(target, key, getOwnPropertyDescriptor(source, key));
           }
@@ -9320,7 +9930,12 @@
     "node_modules/core-js/modules/es.number.epsilon.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Number", stat: true, nonConfigurable: true, nonWritable: true }, {
+      $({
+        target: "Number",
+        stat: true,
+        nonConfigurable: true,
+        nonWritable: true
+      }, {
         EPSILON: Math.pow(2, -52)
       });
     }
@@ -9344,7 +9959,12 @@
       "use strict";
       var $ = require_export();
       var numberIsFinite = require_number_is_finite();
-      $({ target: "Number", stat: true }, { isFinite: numberIsFinite });
+      $({
+        target: "Number",
+        stat: true
+      }, {
+        isFinite: numberIsFinite
+      });
     }
   });
 
@@ -9366,7 +9986,10 @@
       "use strict";
       var $ = require_export();
       var isIntegralNumber = require_is_integral_number();
-      $({ target: "Number", stat: true }, {
+      $({
+        target: "Number",
+        stat: true
+      }, {
         isInteger: isIntegralNumber
       });
     }
@@ -9377,7 +10000,10 @@
     "node_modules/core-js/modules/es.number.is-nan.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Number", stat: true }, {
+      $({
+        target: "Number",
+        stat: true
+      }, {
         isNaN: function isNaN(number) {
           return number !== number;
         }
@@ -9392,7 +10018,10 @@
       var $ = require_export();
       var isIntegralNumber = require_is_integral_number();
       var abs = Math.abs;
-      $({ target: "Number", stat: true }, {
+      $({
+        target: "Number",
+        stat: true
+      }, {
         isSafeInteger: function isSafeInteger(number) {
           return isIntegralNumber(number) && abs(number) <= 9007199254740991;
         }
@@ -9405,7 +10034,12 @@
     "node_modules/core-js/modules/es.number.max-safe-integer.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Number", stat: true, nonConfigurable: true, nonWritable: true }, {
+      $({
+        target: "Number",
+        stat: true,
+        nonConfigurable: true,
+        nonWritable: true
+      }, {
         MAX_SAFE_INTEGER: 9007199254740991
       });
     }
@@ -9416,7 +10050,12 @@
     "node_modules/core-js/modules/es.number.min-safe-integer.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Number", stat: true, nonConfigurable: true, nonWritable: true }, {
+      $({
+        target: "Number",
+        stat: true,
+        nonConfigurable: true,
+        nonWritable: true
+      }, {
         MIN_SAFE_INTEGER: -9007199254740991
       });
     }
@@ -9453,7 +10092,11 @@
       "use strict";
       var $ = require_export();
       var parseFloat2 = require_number_parse_float();
-      $({ target: "Number", stat: true, forced: Number.parseFloat !== parseFloat2 }, {
+      $({
+        target: "Number",
+        stat: true,
+        forced: Number.parseFloat !== parseFloat2
+      }, {
         parseFloat: parseFloat2
       });
     }
@@ -9490,7 +10133,11 @@
       "use strict";
       var $ = require_export();
       var parseInt2 = require_number_parse_int();
-      $({ target: "Number", stat: true, forced: Number.parseInt !== parseInt2 }, {
+      $({
+        target: "Number",
+        stat: true,
+        forced: Number.parseInt !== parseInt2
+      }, {
         parseInt: parseInt2
       });
     }
@@ -9533,7 +10180,11 @@
         });
       };
       var FORCED = !ROUNDS_PROPERLY || !throwsOnInfinityFraction() || !properNonFiniteThisCheck();
-      $({ target: "Number", proto: true, forced: FORCED }, {
+      $({
+        target: "Number",
+        proto: true,
+        forced: FORCED
+      }, {
         toExponential: function toExponential(fractionDigits) {
           var x = thisNumberValue(this);
           if (fractionDigits === void 0) return nativeToExponential(x);
@@ -9651,7 +10302,11 @@
       }) || !fails(function() {
         nativeToFixed({});
       });
-      $({ target: "Number", proto: true, forced: FORCED }, {
+      $({
+        target: "Number",
+        proto: true,
+        forced: FORCED
+      }, {
         toFixed: function toFixed(fractionDigits) {
           var number = thisNumberValue(this);
           var fractDigits = toIntegerOrInfinity(fractionDigits);
@@ -9720,7 +10375,11 @@
       }) || !fails(function() {
         nativeToPrecision({});
       });
-      $({ target: "Number", proto: true, forced: FORCED }, {
+      $({
+        target: "Number",
+        proto: true,
+        forced: FORCED
+      }, {
         toPrecision: function toPrecision(precision) {
           return precision === void 0 ? nativeToPrecision(thisNumberValue(this)) : nativeToPrecision(thisNumberValue(this), precision);
         }
@@ -9745,15 +10404,19 @@
       var defineProperty = Object.defineProperty;
       var concat = uncurryThis([].concat);
       module.exports = !$assign || fails(function() {
-        if (DESCRIPTORS && $assign({ b: 1 }, $assign(defineProperty({}, "a", {
-          enumerable: true,
-          get: function() {
-            defineProperty(this, "b", {
-              value: 3,
-              enumerable: false
-            });
-          }
-        }), { b: 2 })).b !== 1) return true;
+        if (DESCRIPTORS && $assign({
+            b: 1
+          }, $assign(defineProperty({}, "a", {
+            enumerable: true,
+            get: function() {
+              defineProperty(this, "b", {
+                value: 3,
+                enumerable: false
+              });
+            }
+          }), {
+            b: 2
+          })).b !== 1) return true;
         var A = {};
         var B = {};
         var symbol = /* @__PURE__ */ Symbol("assign detection");
@@ -9791,7 +10454,12 @@
       "use strict";
       var $ = require_export();
       var assign = require_object_assign();
-      $({ target: "Object", stat: true, arity: 2, forced: Object.assign !== assign }, {
+      $({
+        target: "Object",
+        stat: true,
+        arity: 2,
+        forced: Object.assign !== assign
+      }, {
         assign
       });
     }
@@ -9804,7 +10472,11 @@
       var $ = require_export();
       var DESCRIPTORS = require_descriptors();
       var create = require_object_create();
-      $({ target: "Object", stat: true, sham: !DESCRIPTORS }, {
+      $({
+        target: "Object",
+        stat: true,
+        sham: !DESCRIPTORS
+      }, {
         create
       });
     }
@@ -9821,8 +10493,7 @@
       module.exports = IS_PURE || !fails(function() {
         if (WEBKIT && WEBKIT < 535) return;
         var key = Math.random();
-        __defineSetter__.call(null, key, function() {
-        });
+        __defineSetter__.call(null, key, function() {});
         delete globalThis2[key];
       });
     }
@@ -9839,9 +10510,17 @@
       var toObject = require_to_object();
       var definePropertyModule = require_object_define_property();
       if (DESCRIPTORS) {
-        $({ target: "Object", proto: true, forced: FORCED }, {
+        $({
+          target: "Object",
+          proto: true,
+          forced: FORCED
+        }, {
           __defineGetter__: function __defineGetter__(P, getter) {
-            definePropertyModule.f(toObject(this), P, { get: aCallable(getter), enumerable: true, configurable: true });
+            definePropertyModule.f(toObject(this), P, {
+              get: aCallable(getter),
+              enumerable: true,
+              configurable: true
+            });
           }
         });
       }
@@ -9855,7 +10534,12 @@
       var $ = require_export();
       var DESCRIPTORS = require_descriptors();
       var defineProperties = require_object_define_properties().f;
-      $({ target: "Object", stat: true, forced: Object.defineProperties !== defineProperties, sham: !DESCRIPTORS }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: Object.defineProperties !== defineProperties,
+        sham: !DESCRIPTORS
+      }, {
         defineProperties
       });
     }
@@ -9868,7 +10552,12 @@
       var $ = require_export();
       var DESCRIPTORS = require_descriptors();
       var defineProperty = require_object_define_property().f;
-      $({ target: "Object", stat: true, forced: Object.defineProperty !== defineProperty, sham: !DESCRIPTORS }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: Object.defineProperty !== defineProperty,
+        sham: !DESCRIPTORS
+      }, {
         defineProperty
       });
     }
@@ -9885,9 +10574,17 @@
       var toObject = require_to_object();
       var definePropertyModule = require_object_define_property();
       if (DESCRIPTORS) {
-        $({ target: "Object", proto: true, forced: FORCED }, {
+        $({
+          target: "Object",
+          proto: true,
+          forced: FORCED
+        }, {
           __defineSetter__: function __defineSetter__2(P, setter) {
-            definePropertyModule.f(toObject(this), P, { set: aCallable(setter), enumerable: true, configurable: true });
+            definePropertyModule.f(toObject(this), P, {
+              set: aCallable(setter),
+              enumerable: true,
+              configurable: true
+            });
           }
         });
       }
@@ -9947,7 +10644,10 @@
       "use strict";
       var $ = require_export();
       var $entries = require_object_to_array().entries;
-      $({ target: "Object", stat: true }, {
+      $({
+        target: "Object",
+        stat: true
+      }, {
         entries: function entries(O) {
           return $entries(O);
         }
@@ -9968,7 +10668,12 @@
       var FAILS_ON_PRIMITIVES = fails(function() {
         $freeze(1);
       });
-      $({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES, sham: !FREEZING }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FAILS_ON_PRIMITIVES,
+        sham: !FREEZING
+      }, {
         freeze: function freeze(it) {
           return $freeze && isObject(it) ? $freeze(onFreeze(it)) : it;
         }
@@ -9983,12 +10688,17 @@
       var $ = require_export();
       var iterate = require_iterate();
       var createProperty = require_create_property();
-      $({ target: "Object", stat: true }, {
+      $({
+        target: "Object",
+        stat: true
+      }, {
         fromEntries: function fromEntries(iterable) {
           var obj = {};
           iterate(iterable, function(k, v) {
             createProperty(obj, k, v);
-          }, { AS_ENTRIES: true });
+          }, {
+            AS_ENTRIES: true
+          });
           return obj;
         }
       });
@@ -10007,7 +10717,12 @@
       var FORCED = !DESCRIPTORS || fails(function() {
         nativeGetOwnPropertyDescriptor(1);
       });
-      $({ target: "Object", stat: true, forced: FORCED, sham: !DESCRIPTORS }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FORCED,
+        sham: !DESCRIPTORS
+      }, {
         getOwnPropertyDescriptor: function getOwnPropertyDescriptor(it, key) {
           return nativeGetOwnPropertyDescriptor(toIndexedObject(it), key);
         }
@@ -10025,7 +10740,11 @@
       var toIndexedObject = require_to_indexed_object();
       var getOwnPropertyDescriptorModule = require_object_get_own_property_descriptor();
       var createProperty = require_create_property();
-      $({ target: "Object", stat: true, sham: !DESCRIPTORS }, {
+      $({
+        target: "Object",
+        stat: true,
+        sham: !DESCRIPTORS
+      }, {
         getOwnPropertyDescriptors: function getOwnPropertyDescriptors(object) {
           var O = toIndexedObject(object);
           var getOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
@@ -10053,7 +10772,11 @@
       var FAILS_ON_PRIMITIVES = fails(function() {
         return !Object.getOwnPropertyNames(1);
       });
-      $({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FAILS_ON_PRIMITIVES
+      }, {
         getOwnPropertyNames
       });
     }
@@ -10071,7 +10794,12 @@
       var FAILS_ON_PRIMITIVES = fails(function() {
         nativeGetPrototypeOf(1);
       });
-      $({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES, sham: !CORRECT_PROTOTYPE_GETTER }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FAILS_ON_PRIMITIVES,
+        sham: !CORRECT_PROTOTYPE_GETTER
+      }, {
         getPrototypeOf: function getPrototypeOf(it) {
           return nativeGetPrototypeOf(toObject(it));
         }
@@ -10101,7 +10829,11 @@
           return it;
         }).a.length !== 1;
       });
-      $({ target: "Object", stat: true, forced: DOES_NOT_WORK_WITH_PRIMITIVES }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: DOES_NOT_WORK_WITH_PRIMITIVES
+      }, {
         groupBy: function groupBy(items, callbackfn) {
           requireObjectCoercible(items);
           aCallable(callbackfn);
@@ -10125,7 +10857,10 @@
       "use strict";
       var $ = require_export();
       var hasOwn = require_has_own_property();
-      $({ target: "Object", stat: true }, {
+      $({
+        target: "Object",
+        stat: true
+      }, {
         hasOwn
       });
     }
@@ -10147,7 +10882,10 @@
       "use strict";
       var $ = require_export();
       var is = require_same_value();
-      $({ target: "Object", stat: true }, {
+      $({
+        target: "Object",
+        stat: true
+      }, {
         is
       });
     }
@@ -10159,7 +10897,11 @@
       "use strict";
       var $ = require_export();
       var $isExtensible = require_object_is_extensible();
-      $({ target: "Object", stat: true, forced: Object.isExtensible !== $isExtensible }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: Object.isExtensible !== $isExtensible
+      }, {
         isExtensible: $isExtensible
       });
     }
@@ -10178,7 +10920,11 @@
       var FORCED = ARRAY_BUFFER_NON_EXTENSIBLE || fails(function() {
         $isFrozen(1);
       });
-      $({ target: "Object", stat: true, forced: FORCED }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FORCED
+      }, {
         isFrozen: function isFrozen(it) {
           if (!isObject(it)) return true;
           if (ARRAY_BUFFER_NON_EXTENSIBLE && classof(it) === "ArrayBuffer") return true;
@@ -10201,7 +10947,11 @@
       var FORCED = ARRAY_BUFFER_NON_EXTENSIBLE || fails(function() {
         $isSealed(1);
       });
-      $({ target: "Object", stat: true, forced: FORCED }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FORCED
+      }, {
         isSealed: function isSealed(it) {
           if (!isObject(it)) return true;
           if (ARRAY_BUFFER_NON_EXTENSIBLE && classof(it) === "ArrayBuffer") return true;
@@ -10222,7 +10972,11 @@
       var FAILS_ON_PRIMITIVES = fails(function() {
         nativeKeys(1);
       });
-      $({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FAILS_ON_PRIMITIVES
+      }, {
         keys: function keys(it) {
           return nativeKeys(toObject(it));
         }
@@ -10242,7 +10996,11 @@
       var getPrototypeOf = require_object_get_prototype_of();
       var getOwnPropertyDescriptor = require_object_get_own_property_descriptor().f;
       if (DESCRIPTORS) {
-        $({ target: "Object", proto: true, forced: FORCED }, {
+        $({
+          target: "Object",
+          proto: true,
+          forced: FORCED
+        }, {
           __lookupGetter__: function __lookupGetter__(P) {
             var O = toObject(this);
             var key = toPropertyKey(P);
@@ -10268,7 +11026,11 @@
       var getPrototypeOf = require_object_get_prototype_of();
       var getOwnPropertyDescriptor = require_object_get_own_property_descriptor().f;
       if (DESCRIPTORS) {
-        $({ target: "Object", proto: true, forced: FORCED }, {
+        $({
+          target: "Object",
+          proto: true,
+          forced: FORCED
+        }, {
           __lookupSetter__: function __lookupSetter__(P) {
             var O = toObject(this);
             var key = toPropertyKey(P);
@@ -10295,7 +11057,12 @@
       var FAILS_ON_PRIMITIVES = fails(function() {
         $preventExtensions(1);
       });
-      $({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES, sham: !FREEZING }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FAILS_ON_PRIMITIVES,
+        sham: !FREEZING
+      }, {
         preventExtensions: function preventExtensions(it) {
           return $preventExtensions && isObject(it) ? $preventExtensions(onFreeze(it)) : it;
         }
@@ -10317,7 +11084,7 @@
       var setPrototypeOf = Object.setPrototypeOf;
       var ObjectPrototype = Object.prototype;
       var PROTO = "__proto__";
-      if (DESCRIPTORS && getPrototypeOf && setPrototypeOf && {}[PROTO] !== ObjectPrototype) try {
+      if (DESCRIPTORS && getPrototypeOf && setPrototypeOf && {} [PROTO] !== ObjectPrototype) try {
         defineBuiltInAccessor(ObjectPrototype, PROTO, {
           configurable: true,
           get: function __proto__() {
@@ -10330,8 +11097,7 @@
             }
           }
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     }
   });
 
@@ -10348,7 +11114,12 @@
       var FAILS_ON_PRIMITIVES = fails(function() {
         $seal(1);
       });
-      $({ target: "Object", stat: true, forced: FAILS_ON_PRIMITIVES, sham: !FREEZING }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: FAILS_ON_PRIMITIVES,
+        sham: !FREEZING
+      }, {
         seal: function seal(it) {
           return $seal && isObject(it) ? $seal(onFreeze(it)) : it;
         }
@@ -10362,7 +11133,10 @@
       "use strict";
       var $ = require_export();
       var setPrototypeOf = require_object_set_prototype_of();
-      $({ target: "Object", stat: true }, {
+      $({
+        target: "Object",
+        stat: true
+      }, {
         setPrototypeOf
       });
     }
@@ -10388,7 +11162,9 @@
       var defineBuiltIn = require_define_built_in();
       var toString = require_object_to_string();
       if (!TO_STRING_TAG_SUPPORT) {
-        defineBuiltIn(Object.prototype, "toString", toString, { unsafe: true });
+        defineBuiltIn(Object.prototype, "toString", toString, {
+          unsafe: true
+        });
       }
     }
   });
@@ -10399,7 +11175,10 @@
       "use strict";
       var $ = require_export();
       var $values = require_object_to_array().values;
-      $({ target: "Object", stat: true }, {
+      $({
+        target: "Object",
+        stat: true
+      }, {
         values: function values(O) {
           return $values(O);
         }
@@ -10413,7 +11192,10 @@
       "use strict";
       var $ = require_export();
       var $parseFloat = require_number_parse_float();
-      $({ global: true, forced: parseFloat !== $parseFloat }, {
+      $({
+        global: true,
+        forced: parseFloat !== $parseFloat
+      }, {
         parseFloat: $parseFloat
       });
     }
@@ -10425,7 +11207,10 @@
       "use strict";
       var $ = require_export();
       var $parseInt = require_number_parse_int();
-      $({ global: true, forced: parseInt !== $parseInt }, {
+      $({
+        global: true,
+        forced: parseInt !== $parseInt
+      }, {
         parseInt: $parseInt
       });
     }
@@ -10609,7 +11394,10 @@
       };
       Queue.prototype = {
         add: function(item) {
-          var entry = { item, next: null };
+          var entry = {
+            item,
+            next: null
+          };
           var tail = this.tail;
           if (tail) tail.next = entry;
           else this.head = entry;
@@ -10685,7 +11473,9 @@
         if (!IS_IOS && !IS_NODE && !IS_WEBOS_WEBKIT && MutationObserver && document2) {
           toggle = true;
           node = document2.createTextNode("");
-          new MutationObserver(flush).observe(node, { characterData: true });
+          new MutationObserver(flush).observe(node, {
+            characterData: true
+          });
           notify = function() {
             node.data = toggle = !toggle;
           };
@@ -10724,8 +11514,7 @@
       module.exports = function(a, b) {
         try {
           arguments.length === 1 ? console.error(a) : console.error(a, b);
-        } catch (error) {
-        }
+        } catch (error) {}
       };
     }
   });
@@ -10736,9 +11525,15 @@
       "use strict";
       module.exports = function(exec) {
         try {
-          return { error: false, value: exec() };
+          return {
+            error: false,
+            value: exec()
+          };
         } catch (error) {
-          return { error: true, value: error };
+          return {
+            error: true,
+            value: error
+          };
         }
       };
     }
@@ -10780,14 +11575,11 @@
             resolve(1);
           });
           var FakePromise = function(exec) {
-            exec(function() {
-            }, function() {
-            });
+            exec(function() {}, function() {});
           };
           var constructor = promise.constructor = {};
           constructor[SPECIES] = FakePromise;
-          SUBCLASSING = promise.then(function() {
-          }) instanceof FakePromise;
+          SUBCLASSING = promise.then(function() {}) instanceof FakePromise;
           if (!SUBCLASSING) return true;
         }
         return !GLOBAL_CORE_JS_PROMISE && (ENVIRONMENT === "BROWSER" || ENVIRONMENT === "DENO") && !NATIVE_PROMISE_REJECTION_EVENT;
@@ -10935,7 +11727,10 @@
           event.reason = reason;
           event.initEvent(name, false, true);
           globalThis2.dispatchEvent(event);
-        } else event = { promise, reason };
+        } else event = {
+          promise,
+          reason
+        };
         if (!NATIVE_PROMISE_REJECTION_EVENT && (handler = globalThis2["on" + name])) handler(event);
         else if (name === UNHANDLED_REJECTION) hostReportErrors("Unhandled promise rejection", reason);
       };
@@ -10989,7 +11784,9 @@
           var then = isThenable(value);
           if (then) {
             microtask(function() {
-              var wrapper = { done: false };
+              var wrapper = {
+                done: false
+              };
               try {
                 call(
                   then,
@@ -11007,7 +11804,9 @@
             notify(state, false);
           }
         } catch (error) {
-          internalReject({ done: false }, error, state);
+          internalReject({
+            done: false
+          }, error, state);
         }
       };
       if (FORCED_PROMISE_CONSTRUCTOR) {
@@ -11066,18 +11865,24 @@
               return new PromiseConstructor(function(resolve, reject) {
                 call(nativeThen, that, resolve, reject);
               }).then(onFulfilled, onRejected);
-            }, { unsafe: true });
+            }, {
+              unsafe: true
+            });
           }
           try {
             delete NativePromisePrototype.constructor;
-          } catch (error) {
-          }
+          } catch (error) {}
           if (setPrototypeOf) {
             setPrototypeOf(NativePromisePrototype, PromisePrototype);
           }
         }
       }
-      $({ global: true, constructor: true, wrap: true, forced: FORCED_PROMISE_CONSTRUCTOR }, {
+      $({
+        global: true,
+        constructor: true,
+        wrap: true,
+        forced: FORCED_PROMISE_CONSTRUCTOR
+      }, {
         Promise: PromiseConstructor
       });
       PromiseWrapper = path.Promise;
@@ -11094,8 +11899,7 @@
       var checkCorrectnessOfIteration = require_check_correctness_of_iteration();
       var FORCED_PROMISE_CONSTRUCTOR = require_promise_constructor_detection().CONSTRUCTOR;
       module.exports = FORCED_PROMISE_CONSTRUCTOR || !checkCorrectnessOfIteration(function(iterable) {
-        NativePromiseConstructor.all(iterable).then(void 0, function() {
-        });
+        NativePromiseConstructor.all(iterable).then(void 0, function() {});
       });
     }
   });
@@ -11111,7 +11915,11 @@
       var perform = require_perform();
       var iterate = require_iterate();
       var PROMISE_STATICS_INCORRECT_ITERATION = require_promise_statics_incorrect_iteration();
-      $({ target: "Promise", stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: PROMISE_STATICS_INCORRECT_ITERATION
+      }, {
         all: function all(iterable) {
           var C = this;
           var capability = newPromiseCapabilityModule.f(C);
@@ -11154,7 +11962,12 @@
       var isCallable = require_is_callable();
       var defineBuiltIn = require_define_built_in();
       var NativePromisePrototype = NativePromiseConstructor && NativePromiseConstructor.prototype;
-      $({ target: "Promise", proto: true, forced: FORCED_PROMISE_CONSTRUCTOR, real: true }, {
+      $({
+        target: "Promise",
+        proto: true,
+        forced: FORCED_PROMISE_CONSTRUCTOR,
+        real: true
+      }, {
         "catch": function(onRejected) {
           return this.then(void 0, onRejected);
         }
@@ -11162,7 +11975,9 @@
       if (!IS_PURE && isCallable(NativePromiseConstructor)) {
         method = getBuiltIn("Promise").prototype["catch"];
         if (NativePromisePrototype["catch"] !== method) {
-          defineBuiltIn(NativePromisePrototype, "catch", method, { unsafe: true });
+          defineBuiltIn(NativePromisePrototype, "catch", method, {
+            unsafe: true
+          });
         }
       }
       var method;
@@ -11180,7 +11995,11 @@
       var perform = require_perform();
       var iterate = require_iterate();
       var PROMISE_STATICS_INCORRECT_ITERATION = require_promise_statics_incorrect_iteration();
-      $({ target: "Promise", stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: PROMISE_STATICS_INCORRECT_ITERATION
+      }, {
         race: function race(iterable) {
           var C = this;
           var capability = newPromiseCapabilityModule.f(C);
@@ -11205,7 +12024,11 @@
       var $ = require_export();
       var newPromiseCapabilityModule = require_new_promise_capability();
       var FORCED_PROMISE_CONSTRUCTOR = require_promise_constructor_detection().CONSTRUCTOR;
-      $({ target: "Promise", stat: true, forced: FORCED_PROMISE_CONSTRUCTOR }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: FORCED_PROMISE_CONSTRUCTOR
+      }, {
         reject: function reject(r) {
           var capability = newPromiseCapabilityModule.f(this);
           var capabilityReject = capability.reject;
@@ -11246,7 +12069,11 @@
       var promiseResolve = require_promise_resolve();
       var PromiseConstructorWrapper = getBuiltIn("Promise");
       var CHECK_WRAPPER = IS_PURE && !FORCED_PROMISE_CONSTRUCTOR;
-      $({ target: "Promise", stat: true, forced: IS_PURE || FORCED_PROMISE_CONSTRUCTOR }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: IS_PURE || FORCED_PROMISE_CONSTRUCTOR
+      }, {
         resolve: function resolve(x) {
           return promiseResolve(CHECK_WRAPPER && this === PromiseConstructorWrapper ? NativePromiseConstructor : this, x);
         }
@@ -11278,7 +12105,11 @@
       var perform = require_perform();
       var iterate = require_iterate();
       var PROMISE_STATICS_INCORRECT_ITERATION = require_promise_statics_incorrect_iteration();
-      $({ target: "Promise", stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: PROMISE_STATICS_INCORRECT_ITERATION
+      }, {
         allSettled: function allSettled(iterable) {
           var C = this;
           var capability = newPromiseCapabilityModule.f(C);
@@ -11296,12 +12127,18 @@
               call(promiseResolve, C, promise).then(function(value) {
                 if (alreadyCalled) return;
                 alreadyCalled = true;
-                values[index] = { status: "fulfilled", value };
+                values[index] = {
+                  status: "fulfilled",
+                  value
+                };
                 --remaining || resolve(values);
               }, function(error) {
                 if (alreadyCalled) return;
                 alreadyCalled = true;
-                values[index] = { status: "rejected", reason: error };
+                values[index] = {
+                  status: "rejected",
+                  reason: error
+                };
                 --remaining || resolve(values);
               });
             });
@@ -11327,7 +12164,11 @@
       var iterate = require_iterate();
       var PROMISE_STATICS_INCORRECT_ITERATION = require_promise_statics_incorrect_iteration();
       var PROMISE_ANY_ERROR = "No one promise resolved";
-      $({ target: "Promise", stat: true, forced: PROMISE_STATICS_INCORRECT_ITERATION }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: PROMISE_STATICS_INCORRECT_ITERATION
+      }, {
         any: function any(iterable) {
           var C = this;
           var AggregateError = getBuiltIn("AggregateError");
@@ -11379,11 +12220,16 @@
       var defineBuiltIn = require_define_built_in();
       var NativePromisePrototype = NativePromiseConstructor && NativePromiseConstructor.prototype;
       var NON_GENERIC = !!NativePromiseConstructor && fails(function() {
-        NativePromisePrototype["finally"].call({ then: function() {
-        } }, function() {
-        });
+        NativePromisePrototype["finally"].call({
+          then: function() {}
+        }, function() {});
       });
-      $({ target: "Promise", proto: true, real: true, forced: NON_GENERIC }, {
+      $({
+        target: "Promise",
+        proto: true,
+        real: true,
+        forced: NON_GENERIC
+      }, {
         "finally": function(onFinally) {
           var C = speciesConstructor(this, getBuiltIn("Promise"));
           var isFunction = isCallable(onFinally);
@@ -11404,7 +12250,9 @@
       if (!IS_PURE && isCallable(NativePromiseConstructor)) {
         method = getBuiltIn("Promise").prototype["finally"];
         if (NativePromisePrototype["finally"] !== method) {
-          defineBuiltIn(NativePromisePrototype, "finally", method, { unsafe: true });
+          defineBuiltIn(NativePromisePrototype, "finally", method, {
+            unsafe: true
+          });
         }
       }
       var method;
@@ -11433,7 +12281,11 @@
           return p;
         }, 8) !== p;
       }) || !ACCEPT_ARGUMENTS;
-      $({ target: "Promise", stat: true, forced: FORCED }, {
+      $({
+        target: "Promise",
+        stat: true,
+        forced: FORCED
+      }, {
         "try": function(callbackfn) {
           var args = arguments.length > 1 ? slice(arguments, 1) : [];
           var result = perform(function() {
@@ -11455,7 +12307,10 @@
       "use strict";
       var $ = require_export();
       var newPromiseCapabilityModule = require_new_promise_capability();
-      $({ target: "Promise", stat: true }, {
+      $({
+        target: "Promise",
+        stat: true
+      }, {
         withResolvers: function withResolvers() {
           var promiseCapability = newPromiseCapabilityModule.f(this);
           return {
@@ -11494,8 +12349,7 @@
         try {
           prototype = getPrototypeOf(getPrototypeOf(getPrototypeOf(Function("return async function*(){}()")())));
           if (getPrototypeOf(prototype) === Object.prototype) AsyncIteratorPrototype = prototype;
-        } catch (error) {
-        }
+        } catch (error) {}
       }
       if (!AsyncIteratorPrototype) AsyncIteratorPrototype = {};
       else if (IS_PURE) AsyncIteratorPrototype = create(AsyncIteratorPrototype);
@@ -11781,7 +12635,7 @@
         var argumentsLength = arguments.length;
         var mapfn = argumentsLength > 1 ? arguments[1] : void 0;
         var thisArg = argumentsLength > 2 ? arguments[2] : void 0;
-        return new (getBuiltIn("Promise"))(function(resolve) {
+        return new(getBuiltIn("Promise"))(function(resolve) {
           if (mapfn !== void 0) mapfn = bind(mapfn, thisArg);
           var usingAsyncIterator = getMethod(items, ASYNC_ITERATOR);
           var usingSyncIterator = usingAsyncIterator ? void 0 : getIteratorMethod(items) || safeArrayIterator;
@@ -11806,10 +12660,16 @@
         nativeFromAsync.call(function() {
           counter++;
           return [];
-        }, { length: 0 });
+        }, {
+          length: 0
+        });
         return counter !== 1;
       });
-      $({ target: "Array", stat: true, forced: INCORRECT_CONSTRUCTURING }, {
+      $({
+        target: "Array",
+        stat: true,
+        forced: INCORRECT_CONSTRUCTURING
+      }, {
         fromAsync
       });
     }
@@ -11927,10 +12787,18 @@
           return getAsyncDisposableStackInternalState(this).state === DISPOSED;
         }
       });
-      defineBuiltIn(AsyncDisposableStackPrototype, ASYNC_DISPOSE, AsyncDisposableStackPrototype.disposeAsync, { name: "disposeAsync" });
-      defineBuiltIn(AsyncDisposableStackPrototype, TO_STRING_TAG, ASYNC_DISPOSABLE_STACK, { nonWritable: true });
+      defineBuiltIn(AsyncDisposableStackPrototype, ASYNC_DISPOSE, AsyncDisposableStackPrototype.disposeAsync, {
+        name: "disposeAsync"
+      });
+      defineBuiltIn(AsyncDisposableStackPrototype, TO_STRING_TAG, ASYNC_DISPOSABLE_STACK, {
+        nonWritable: true
+      });
       var SYNC_DISPOSE_RETURNING_PROMISE_RESOLUTION_BUG = V8_VERSION && V8_VERSION < 136;
-      $({ global: true, constructor: true, forced: SYNC_DISPOSE_RETURNING_PROMISE_RESOLUTION_BUG }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: SYNC_DISPOSE_RETURNING_PROMISE_RESOLUTION_BUG
+      }, {
         AsyncDisposableStack: $AsyncDisposableStack
       });
     }
@@ -11975,10 +12843,13 @@
       var anObject = require_an_object();
       var fails = require_fails();
       var OPTIONAL_ARGUMENTS_LIST = !fails(function() {
-        Reflect.apply(function() {
-        });
+        Reflect.apply(function() {});
       });
-      $({ target: "Reflect", stat: true, forced: OPTIONAL_ARGUMENTS_LIST }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        forced: OPTIONAL_ARGUMENTS_LIST
+      }, {
         apply: function apply(target, thisArgument, argumentsList) {
           return functionApply(aCallable(target), thisArgument, anObject(argumentsList));
         }
@@ -12003,17 +12874,19 @@
       var ObjectPrototype = Object.prototype;
       var push = [].push;
       var NEW_TARGET_BUG = fails(function() {
-        function F() {
-        }
-        return !(nativeConstruct(function() {
-        }, [], F) instanceof F);
+        function F() {}
+        return !(nativeConstruct(function() {}, [], F) instanceof F);
       });
       var ARGS_BUG = !fails(function() {
-        nativeConstruct(function() {
-        });
+        nativeConstruct(function() {});
       });
       var FORCED = NEW_TARGET_BUG || ARGS_BUG;
-      $({ target: "Reflect", stat: true, forced: FORCED, sham: FORCED }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        forced: FORCED,
+        sham: FORCED
+      }, {
         construct: function construct(Target, args) {
           aConstructor(Target);
           var newTarget = arguments.length < 3 ? Target : aConstructor(arguments[2]);
@@ -12034,7 +12907,7 @@
             }
             var $args = [null];
             apply(push, $args, args);
-            return new (apply(bind, Target, $args))();
+            return new(apply(bind, Target, $args))();
           }
           var proto = newTarget.prototype;
           var instance = create(isObject(proto) ? proto : ObjectPrototype);
@@ -12058,9 +12931,18 @@
       var fails = require_fails();
       var $TypeError = TypeError;
       var ERROR_INSTEAD_OF_FALSE = fails(function() {
-        Reflect.defineProperty(definePropertyModule.f({}, 1, { value: 1 }), 1, { value: 2 });
+        Reflect.defineProperty(definePropertyModule.f({}, 1, {
+          value: 1
+        }), 1, {
+          value: 2
+        });
       });
-      $({ target: "Reflect", stat: true, forced: ERROR_INSTEAD_OF_FALSE, sham: !DESCRIPTORS }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        forced: ERROR_INSTEAD_OF_FALSE,
+        sham: !DESCRIPTORS
+      }, {
         defineProperty: function defineProperty(target, propertyKey, attributes) {
           anObject(target);
           var key = toPropertyKey(propertyKey);
@@ -12086,7 +12968,10 @@
       var anObject = require_an_object();
       var getOwnPropertyDescriptor = require_object_get_own_property_descriptor().f;
       var toPropertyKey = require_to_property_key();
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         deleteProperty: function deleteProperty(target, propertyKey) {
           anObject(target);
           var key = toPropertyKey(propertyKey);
@@ -12127,7 +13012,10 @@
         var prototype = getPrototypeOf(target);
         if (isObject(prototype)) return $get(prototype, propertyKey, receiver);
       };
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         get: function get(target, propertyKey) {
           return $get(anObject(target), toPropertyKey(propertyKey), arguments.length < 3 ? target : arguments[2]);
         }
@@ -12143,7 +13031,11 @@
       var DESCRIPTORS = require_descriptors();
       var anObject = require_an_object();
       var getOwnPropertyDescriptorModule = require_object_get_own_property_descriptor();
-      $({ target: "Reflect", stat: true, sham: !DESCRIPTORS }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        sham: !DESCRIPTORS
+      }, {
         getOwnPropertyDescriptor: function getOwnPropertyDescriptor(target, propertyKey) {
           return getOwnPropertyDescriptorModule.f(anObject(target), propertyKey);
         }
@@ -12159,7 +13051,11 @@
       var anObject = require_an_object();
       var objectGetPrototypeOf = require_object_get_prototype_of();
       var CORRECT_PROTOTYPE_GETTER = require_correct_prototype_getter();
-      $({ target: "Reflect", stat: true, sham: !CORRECT_PROTOTYPE_GETTER }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        sham: !CORRECT_PROTOTYPE_GETTER
+      }, {
         getPrototypeOf: function getPrototypeOf(target) {
           return objectGetPrototypeOf(anObject(target));
         }
@@ -12172,7 +13068,10 @@
     "node_modules/core-js/modules/es.reflect.has.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         has: function has(target, propertyKey) {
           return propertyKey in target;
         }
@@ -12187,7 +13086,10 @@
       var $ = require_export();
       var anObject = require_an_object();
       var $isExtensible = require_object_is_extensible();
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         isExtensible: function isExtensible(target) {
           anObject(target);
           return $isExtensible(target);
@@ -12202,7 +13104,10 @@
       "use strict";
       var $ = require_export();
       var ownKeys = require_own_keys();
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         ownKeys
       });
     }
@@ -12216,7 +13121,11 @@
       var getBuiltIn = require_get_built_in();
       var anObject = require_an_object();
       var FREEZING = require_freezing();
-      $({ target: "Reflect", stat: true, sham: !FREEZING }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        sham: !FREEZING
+      }, {
         preventExtensions: function preventExtensions(target) {
           anObject(target);
           try {
@@ -12259,7 +13168,9 @@
           if (ownDescriptor.writable === false || !isObject(receiver)) return false;
           if (existingDescriptor = getOwnPropertyDescriptorModule.f(receiver, propertyKey)) {
             if (!isDataDescriptor(existingDescriptor) || existingDescriptor.writable === false) return false;
-            definePropertyModule.f(receiver, propertyKey, { value: V });
+            definePropertyModule.f(receiver, propertyKey, {
+              value: V
+            });
           } else try {
             definePropertyModule.f(receiver, propertyKey, createPropertyDescriptor(0, V));
           } catch (error) {
@@ -12273,12 +13184,17 @@
         return true;
       };
       var MS_EDGE_BUG = fails(function() {
-        var Constructor = function() {
-        };
-        var object = definePropertyModule.f(new Constructor(), "a", { configurable: true });
+        var Constructor = function() {};
+        var object = definePropertyModule.f(new Constructor(), "a", {
+          configurable: true
+        });
         return Reflect.set(Constructor.prototype, "a", 1, object) !== false;
       });
-      $({ target: "Reflect", stat: true, forced: MS_EDGE_BUG }, {
+      $({
+        target: "Reflect",
+        stat: true,
+        forced: MS_EDGE_BUG
+      }, {
         set: function set(target, propertyKey, V) {
           return $set(anObject(target), toPropertyKey(propertyKey), V, arguments.length < 4 ? target : arguments[3]);
         }
@@ -12294,7 +13210,10 @@
       var anObject = require_an_object();
       var aPossiblePrototype = require_a_possible_prototype();
       var objectSetPrototypeOf = require_object_set_prototype_of();
-      if (objectSetPrototypeOf) $({ target: "Reflect", stat: true }, {
+      if (objectSetPrototypeOf) $({
+        target: "Reflect",
+        stat: true
+      }, {
         setPrototypeOf: function setPrototypeOf(target, proto) {
           anObject(target);
           aPossiblePrototype(proto);
@@ -12316,7 +13235,11 @@
       var $ = require_export();
       var globalThis2 = require_global_this();
       var setToStringTag = require_set_to_string_tag();
-      $({ global: true }, { Reflect: {} });
+      $({
+        global: true
+      }, {
+        Reflect: {}
+      });
       setToStringTag(globalThis2.Reflect, "Reflect", true);
     }
   });
@@ -12354,10 +13277,12 @@
         var calls = "";
         var expected = INDICES_SUPPORT ? "dgimsy" : "gimsy";
         var addGetter = function(key2, chr) {
-          Object.defineProperty(O, key2, { get: function() {
-            calls += chr;
-            return true;
-          } });
+          Object.defineProperty(O, key2, {
+            get: function() {
+              calls += chr;
+              return true;
+            }
+          });
         };
         var pairs = {
           dotAll: "s",
@@ -12371,7 +13296,9 @@
         var result = Object.getOwnPropertyDescriptor(RegExp2.prototype, "flags").get.call(O);
         return result !== expected || calls !== expected;
       });
-      module.exports = { correct: FLAGS_GETTER_IS_CORRECT };
+      module.exports = {
+        correct: FLAGS_GETTER_IS_CORRECT
+      };
     }
   });
 
@@ -12641,16 +13568,17 @@
           }
           if (pattern !== rawPattern) try {
             createNonEnumerableProperty(result, "source", rawPattern === "" ? "(?:)" : rawPattern);
-          } catch (error) {
-          }
+          } catch (error) {}
           return result;
         };
-        for (keys = getOwnPropertyNames(NativeRegExp), index = 0; keys.length > index; ) {
+        for (keys = getOwnPropertyNames(NativeRegExp), index = 0; keys.length > index;) {
           proxyAccessor(RegExpWrapper, NativeRegExp, keys[index++]);
         }
         RegExpPrototype.constructor = RegExpWrapper;
         RegExpWrapper.prototype = RegExpPrototype;
-        defineBuiltIn(globalThis2, "RegExp", RegExpWrapper, { constructor: true });
+        defineBuiltIn(globalThis2, "RegExp", RegExpWrapper, {
+          constructor: true
+        });
       }
       var RegExpWrapper;
       var keys;
@@ -12703,7 +13631,11 @@
         return hex.length < 3 ? "\\x" + padStart(hex, 2, "0") : "\\u" + padStart(hex, 4, "0");
       };
       var FORCED = !$escape || $escape("ab") !== "\\x61b";
-      $({ target: "RegExp", stat: true, forced: FORCED }, {
+      $({
+        target: "RegExp",
+        stat: true,
+        forced: FORCED
+      }, {
         escape: function escape(S) {
           aString(S);
           var length = S.length;
@@ -12868,7 +13800,11 @@
       "use strict";
       var $ = require_export();
       var exec = require_regexp_exec();
-      $({ target: "RegExp", proto: true, forced: /./.exec !== exec }, {
+      $({
+        target: "RegExp",
+        proto: true,
+        forced: /./.exec !== exec
+      }, {
         exec
       });
     }
@@ -12938,7 +13874,11 @@
         return re.test("abc") === true && execCalled;
       })();
       var nativeTest = /./.test;
-      $({ target: "RegExp", proto: true, forced: !DELEGATES_TO_EXEC }, {
+      $({
+        target: "RegExp",
+        proto: true,
+        forced: !DELEGATES_TO_EXEC
+      }, {
         test: function(S) {
           var R = anObject(this);
           var string = toString(S);
@@ -12967,7 +13907,10 @@
       var RegExpPrototype = RegExp.prototype;
       var nativeToString = RegExpPrototype[TO_STRING];
       var NOT_GENERIC = fails(function() {
-        return nativeToString.call({ source: "a", flags: "b" }) !== "/a/b";
+        return nativeToString.call({
+          source: "a",
+          flags: "b"
+        }) !== "/a/b";
       });
       var INCORRECT_NAME = PROPER_FUNCTION_NAME && nativeToString.name !== TO_STRING;
       if (NOT_GENERIC || INCORRECT_NAME) {
@@ -12976,7 +13919,9 @@
           var pattern = $toString(R.source);
           var flags = $toString(getRegExpFlags(R));
           return "/" + pattern + "/" + flags;
-        }, { unsafe: true });
+        }, {
+          unsafe: true
+        });
       }
     }
   });
@@ -13062,7 +14007,10 @@
       var keys = uncurryThis(SetPrototype.keys);
       var next = keys(new Set2()).next;
       module.exports = function(set, fn, interruptible) {
-        return interruptible ? iterateSimple({ iterator: keys(set), next }, fn) : forEach(set, fn);
+        return interruptible ? iterateSimple({
+          iterator: keys(set),
+          next
+        }, fn) : forEach(set, fn);
       };
     }
   });
@@ -13177,7 +14125,9 @@
           keys: function() {
             return {
               next: function() {
-                return { done: true };
+                return {
+                  done: true
+                };
               }
             };
           }
@@ -13241,7 +14191,10 @@
               next: function() {
                 var done = index++ > 1;
                 if (baseSet.has(1)) baseSet.clear();
-                return { done, value: 2 };
+                return {
+                  done,
+                  value: 2
+                };
               }
             };
           }
@@ -13249,7 +14202,12 @@
         var baseSet = /* @__PURE__ */ new Set([1, 2, 3, 4]);
         return baseSet.difference(setLike).size !== 3;
       });
-      $({ target: "Set", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         difference
       });
     }
@@ -13297,9 +14255,14 @@
       var INCORRECT = !setMethodAcceptSetLike("intersection", function(result) {
         return result.size === 2 && result.has(1) && result.has(2);
       }) || fails(function() {
-        return String(Array.from((/* @__PURE__ */ new Set([1, 2, 3])).intersection(/* @__PURE__ */ new Set([3, 2])))) !== "3,2";
+        return String(Array.from(( /* @__PURE__ */ new Set([1, 2, 3])).intersection( /* @__PURE__ */ new Set([3, 2])))) !== "3,2";
       });
-      $({ target: "Set", proto: true, real: true, forced: INCORRECT }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: INCORRECT
+      }, {
         intersection
       });
     }
@@ -13340,7 +14303,12 @@
       var INCORRECT = !setMethodAcceptSetLike("isDisjointFrom", function(result) {
         return !result;
       });
-      $({ target: "Set", proto: true, real: true, forced: INCORRECT }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: INCORRECT
+      }, {
         isDisjointFrom
       });
     }
@@ -13375,7 +14343,12 @@
       var INCORRECT = !setMethodAcceptSetLike("isSubsetOf", function(result) {
         return result;
       });
-      $({ target: "Set", proto: true, real: true, forced: INCORRECT }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: INCORRECT
+      }, {
         isSubsetOf
       });
     }
@@ -13413,7 +14386,12 @@
       var INCORRECT = !setMethodAcceptSetLike("isSupersetOf", function(result) {
         return !result;
       });
-      $({ target: "Set", proto: true, real: true, forced: INCORRECT }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: INCORRECT
+      }, {
         isSupersetOf
       });
     }
@@ -13462,7 +14440,9 @@
                   baseSet.clear();
                   baseSet.add(4);
                   return function() {
-                    return { done: true };
+                    return {
+                      done: true
+                    };
                   };
                 }
               });
@@ -13486,7 +14466,12 @@
       var setMethodGetKeysBeforeCloning = require_set_method_get_keys_before_cloning_detection();
       var setMethodAcceptSetLike = require_set_method_accept_set_like();
       var FORCED = !setMethodAcceptSetLike("symmetricDifference") || !setMethodGetKeysBeforeCloning("symmetricDifference");
-      $({ target: "Set", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         symmetricDifference
       });
     }
@@ -13522,7 +14507,12 @@
       var setMethodGetKeysBeforeCloning = require_set_method_get_keys_before_cloning_detection();
       var setMethodAcceptSetLike = require_set_method_accept_set_like();
       var FORCED = !setMethodAcceptSetLike("union") || !setMethodGetKeysBeforeCloning("union");
-      $({ target: "Set", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         union
       });
     }
@@ -13542,7 +14532,11 @@
       var FORCED = fails(function() {
         return "\u{20BB7}".at(-2) !== "\uD842";
       });
-      $({ target: "String", proto: true, forced: FORCED }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: FORCED
+      }, {
         at: function at(index) {
           var S = toString(requireObjectCoercible(this));
           var len = S.length;
@@ -13593,7 +14587,10 @@
       "use strict";
       var $ = require_export();
       var codeAt = require_string_multibyte().codeAt;
-      $({ target: "String", proto: true }, {
+      $({
+        target: "String",
+        proto: true
+      }, {
         codePointAt: function codePointAt(pos) {
           return codeAt(this, pos);
         }
@@ -13625,13 +14622,12 @@
       module.exports = function(METHOD_NAME) {
         var regexp = /./;
         try {
-          "/./"[METHOD_NAME](regexp);
+          "/./" [METHOD_NAME](regexp);
         } catch (error1) {
           try {
             regexp[MATCH] = false;
-            return "/./"[METHOD_NAME](regexp);
-          } catch (error2) {
-          }
+            return "/./" [METHOD_NAME](regexp);
+          } catch (error2) {}
         }
         return false;
       };
@@ -13658,7 +14654,11 @@
         var descriptor = getOwnPropertyDescriptor(String.prototype, "endsWith");
         return descriptor && !descriptor.writable;
       })();
-      $({ target: "String", proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC
+      }, {
         endsWith: function endsWith(searchString) {
           var that = toString(requireObjectCoercible(this));
           notARegExp(searchString);
@@ -13684,7 +14684,12 @@
       var $fromCodePoint = String.fromCodePoint;
       var join = uncurryThis([].join);
       var INCORRECT_LENGTH = !!$fromCodePoint && $fromCodePoint.length !== 1;
-      $({ target: "String", stat: true, arity: 1, forced: INCORRECT_LENGTH }, {
+      $({
+        target: "String",
+        stat: true,
+        arity: 1,
+        forced: INCORRECT_LENGTH
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         fromCodePoint: function fromCodePoint(x) {
           var elements = [];
@@ -13713,7 +14718,11 @@
       var toString = require_to_string();
       var correctIsRegExpLogic = require_correct_is_regexp_logic();
       var stringIndexOf = uncurryThis("".indexOf);
-      $({ target: "String", proto: true, forced: !correctIsRegExpLogic("includes") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: !correctIsRegExpLogic("includes")
+      }, {
         includes: function includes(searchString) {
           return !!~stringIndexOf(
             toString(requireObjectCoercible(this)),
@@ -13734,7 +14743,10 @@
       var requireObjectCoercible = require_require_object_coercible();
       var toString = require_to_string();
       var charCodeAt = uncurryThis("".charCodeAt);
-      $({ target: "String", proto: true }, {
+      $({
+        target: "String",
+        proto: true
+      }, {
         isWellFormed: function isWellFormed() {
           var S = toString(requireObjectCoercible(this));
           var length = S.length;
@@ -13800,7 +14812,7 @@
           O[SYMBOL] = function() {
             return 7;
           };
-          return ""[KEY](O) !== 7;
+          return "" [KEY](O) !== 7;
         });
         var DELEGATES_TO_EXEC = DELEGATES_TO_SYMBOL && !fails(function() {
           var execCalled = false;
@@ -13810,8 +14822,11 @@
             constructor[SPECIES] = function() {
               return re;
             };
-            re = { constructor, flags: "" };
-            re[SYMBOL] = /./[SYMBOL];
+            re = {
+              constructor,
+              flags: ""
+            };
+            re[SYMBOL] = /./ [SYMBOL];
           }
           re.exec = function() {
             execCalled = true;
@@ -13821,16 +14836,24 @@
           return !execCalled;
         });
         if (!DELEGATES_TO_SYMBOL || !DELEGATES_TO_EXEC || FORCED) {
-          var nativeRegExpMethod = /./[SYMBOL];
-          var methods = exec(SYMBOL, ""[KEY], function(nativeMethod, regexp, str, arg2, forceStringMethod) {
+          var nativeRegExpMethod = /./ [SYMBOL];
+          var methods = exec(SYMBOL, "" [KEY], function(nativeMethod, regexp, str, arg2, forceStringMethod) {
             var $exec = regexp.exec;
             if ($exec === regexpExec || $exec === RegExpPrototype.exec) {
               if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
-                return { done: true, value: call(nativeRegExpMethod, regexp, str, arg2) };
+                return {
+                  done: true,
+                  value: call(nativeRegExpMethod, regexp, str, arg2)
+                };
               }
-              return { done: true, value: call(nativeMethod, str, regexp, arg2) };
+              return {
+                done: true,
+                value: call(nativeMethod, str, regexp, arg2)
+              };
             }
-            return { done: false };
+            return {
+              done: false
+            };
           });
           defineBuiltIn(String.prototype, KEY, methods[0]);
           defineBuiltIn(RegExpPrototype, SYMBOL, methods[1]);
@@ -14005,7 +15028,11 @@
         matcher.lastIndex = toLength(R.lastIndex);
         return new $RegExpStringIterator(matcher, S, $global, fullUnicode);
       };
-      $({ target: "String", proto: true, forced: WORKS_WITH_NON_GLOBAL_REGEX }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: WORKS_WITH_NON_GLOBAL_REGEX
+      }, {
         matchAll: function matchAll(regexp) {
           var O = requireObjectCoercible(this);
           var flags, S, matcher, rx;
@@ -14044,7 +15071,11 @@
       var $ = require_export();
       var $padEnd = require_string_pad().end;
       var WEBKIT_BUG = require_string_pad_webkit_bug();
-      $({ target: "String", proto: true, forced: WEBKIT_BUG }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: WEBKIT_BUG
+      }, {
         padEnd: function padEnd(maxLength) {
           return $padEnd(this, maxLength, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -14059,7 +15090,11 @@
       var $ = require_export();
       var $padStart = require_string_pad().start;
       var WEBKIT_BUG = require_string_pad_webkit_bug();
-      $({ target: "String", proto: true, forced: WEBKIT_BUG }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: WEBKIT_BUG
+      }, {
         padStart: function padStart(maxLength) {
           return $padStart(this, maxLength, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -14079,7 +15114,10 @@
       var lengthOfArrayLike = require_length_of_array_like();
       var push = uncurryThis([].push);
       var join = uncurryThis([].join);
-      $({ target: "String", stat: true }, {
+      $({
+        target: "String",
+        stat: true
+      }, {
         raw: function raw(template) {
           var rawTemplate = toIndexedObject(toObject(template).raw);
           var literalSegments = lengthOfArrayLike(rawTemplate);
@@ -14103,7 +15141,10 @@
       "use strict";
       var $ = require_export();
       var repeat = require_string_repeat();
-      $({ target: "String", proto: true }, {
+      $({
+        target: "String",
+        proto: true
+      }, {
         repeat
       });
     }
@@ -14196,8 +15237,8 @@
         return "a".replace(/./, "$0") === "$0";
       })();
       var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE = (function() {
-        if (/./[REPLACE]) {
-          return /./[REPLACE]("a", "$0") === "";
+        if (/./ [REPLACE]) {
+          return /./ [REPLACE]("a", "$0") === "";
         }
         return false;
       })();
@@ -14205,7 +15246,9 @@
         var re = /./;
         re.exec = function() {
           var result = [];
-          result.groups = { a: "7" };
+          result.groups = {
+            a: "7"
+          };
           return result;
         };
         return "".replace(re, "$<a>") !== "7";
@@ -14300,7 +15343,10 @@
       var replace = uncurryThis("".replace);
       var stringSlice = uncurryThis("".slice);
       var max = Math.max;
-      $({ target: "String", proto: true }, {
+      $({
+        target: "String",
+        proto: true
+      }, {
         replaceAll: function replaceAll(searchValue, replaceValue) {
           var O = requireObjectCoercible(this);
           var IS_REG_EXP, flags, replacer, string, searchString, functionalReplace, searchLength, advanceBy, position, replacement;
@@ -14415,8 +15461,8 @@
         return result.length !== 2 || result[0] !== "a" || result[1] !== "b";
       });
       var BUGGY = "abbc".split(/(b)*/)[1] === "c" || // eslint-disable-next-line regexp/no-empty-group -- required for testing
-      "test".split(/(?:)/, -1).length !== 4 || "ab".split(/(?:ab)*/).length !== 2 || ".".split(/(.?)(.?)/).length !== 4 || // eslint-disable-next-line regexp/no-empty-capturing-group, regexp/no-empty-group -- required for testing
-      ".".split(/()()/).length > 1 || "".split(/.?/).length;
+        "test".split(/(?:)/, -1).length !== 4 || "ab".split(/(?:ab)*/).length !== 2 || ".".split(/(.?)(.?)/).length !== 4 || // eslint-disable-next-line regexp/no-empty-capturing-group, regexp/no-empty-group -- required for testing
+        ".".split(/()()/).length > 1 || "".split(/.?/).length;
       fixRegExpWellKnownSymbolLogic("split", function(SPLIT, nativeSplit, maybeCallNative) {
         var internalSplit = "0".split(void 0, 0).length ? function(separator, limit) {
           return separator === void 0 && limit === 0 ? [] : call(nativeSplit, this, separator, limit);
@@ -14498,7 +15544,11 @@
         var descriptor = getOwnPropertyDescriptor(String.prototype, "startsWith");
         return descriptor && !descriptor.writable;
       })();
-      $({ target: "String", proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC
+      }, {
         startsWith: function startsWith(searchString) {
           var that = toString(requireObjectCoercible(this));
           notARegExp(searchString);
@@ -14523,7 +15573,11 @@
       var max = Math.max;
       var min = Math.min;
       var FORCED = !"".substr || "ab".substr(-1) !== "b";
-      $({ target: "String", proto: true, forced: FORCED }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: FORCED
+      }, {
         substr: function substr(start, length) {
           var that = toString(requireObjectCoercible(this));
           var size = that.length;
@@ -14557,7 +15611,11 @@
       var TO_STRING_CONVERSION_BUG = $toWellFormed && fails(function() {
         return call($toWellFormed, 1) !== "1";
       });
-      $({ target: "String", proto: true, forced: TO_STRING_CONVERSION_BUG }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: TO_STRING_CONVERSION_BUG
+      }, {
         toWellFormed: function toWellFormed() {
           var S = toString(requireObjectCoercible(this));
           if (TO_STRING_CONVERSION_BUG) return call($toWellFormed, S);
@@ -14601,7 +15659,11 @@
       var $ = require_export();
       var $trim = require_string_trim().trim;
       var forcedStringTrimMethod = require_string_trim_forced();
-      $({ target: "String", proto: true, forced: forcedStringTrimMethod("trim") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringTrimMethod("trim")
+      }, {
         trim: function trim() {
           return $trim(this);
         }
@@ -14627,7 +15689,12 @@
       "use strict";
       var $ = require_export();
       var trimEnd = require_string_trim_end();
-      $({ target: "String", proto: true, name: "trimEnd", forced: "".trimRight !== trimEnd }, {
+      $({
+        target: "String",
+        proto: true,
+        name: "trimEnd",
+        forced: "".trimRight !== trimEnd
+      }, {
         trimRight: trimEnd
       });
     }
@@ -14640,7 +15707,12 @@
       require_es_string_trim_right();
       var $ = require_export();
       var trimEnd = require_string_trim_end();
-      $({ target: "String", proto: true, name: "trimEnd", forced: "".trimEnd !== trimEnd }, {
+      $({
+        target: "String",
+        proto: true,
+        name: "trimEnd",
+        forced: "".trimEnd !== trimEnd
+      }, {
         trimEnd
       });
     }
@@ -14664,7 +15736,12 @@
       "use strict";
       var $ = require_export();
       var trimStart = require_string_trim_start();
-      $({ target: "String", proto: true, name: "trimStart", forced: "".trimLeft !== trimStart }, {
+      $({
+        target: "String",
+        proto: true,
+        name: "trimStart",
+        forced: "".trimLeft !== trimStart
+      }, {
         trimLeft: trimStart
       });
     }
@@ -14677,7 +15754,12 @@
       require_es_string_trim_left();
       var $ = require_export();
       var trimStart = require_string_trim_start();
-      $({ target: "String", proto: true, name: "trimStart", forced: "".trimStart !== trimStart }, {
+      $({
+        target: "String",
+        proto: true,
+        name: "trimStart",
+        forced: "".trimStart !== trimStart
+      }, {
         trimStart
       });
     }
@@ -14708,7 +15790,7 @@
       var fails = require_fails();
       module.exports = function(METHOD_NAME) {
         return fails(function() {
-          var test = ""[METHOD_NAME]('"');
+          var test = "" [METHOD_NAME]('"');
           return test !== test.toLowerCase() || test.split('"').length > 3;
         });
       };
@@ -14722,7 +15804,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("anchor") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("anchor")
+      }, {
         anchor: function anchor(name) {
           return createHTML(this, "a", "name", name);
         }
@@ -14737,7 +15823,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("big") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("big")
+      }, {
         big: function big() {
           return createHTML(this, "big", "", "");
         }
@@ -14752,7 +15842,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("blink") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("blink")
+      }, {
         blink: function blink() {
           return createHTML(this, "blink", "", "");
         }
@@ -14767,7 +15861,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("bold") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("bold")
+      }, {
         bold: function bold() {
           return createHTML(this, "b", "", "");
         }
@@ -14782,7 +15880,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("fixed") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("fixed")
+      }, {
         fixed: function fixed() {
           return createHTML(this, "tt", "", "");
         }
@@ -14797,7 +15899,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("fontcolor") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("fontcolor")
+      }, {
         fontcolor: function fontcolor(color) {
           return createHTML(this, "font", "color", color);
         }
@@ -14812,7 +15918,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("fontsize") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("fontsize")
+      }, {
         fontsize: function fontsize(size) {
           return createHTML(this, "font", "size", size);
         }
@@ -14827,7 +15937,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("italics") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("italics")
+      }, {
         italics: function italics() {
           return createHTML(this, "i", "", "");
         }
@@ -14842,7 +15956,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("link") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("link")
+      }, {
         link: function link(url) {
           return createHTML(this, "a", "href", url);
         }
@@ -14857,7 +15975,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("small") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("small")
+      }, {
         small: function small() {
           return createHTML(this, "small", "", "");
         }
@@ -14872,7 +15994,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("strike") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("strike")
+      }, {
         strike: function strike() {
           return createHTML(this, "strike", "", "");
         }
@@ -14887,7 +16013,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("sub") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("sub")
+      }, {
         sub: function sub() {
           return createHTML(this, "sub", "", "");
         }
@@ -14902,7 +16032,11 @@
       var $ = require_export();
       var createHTML = require_create_html();
       var forcedStringHTMLMethod = require_string_html_forced();
-      $({ target: "String", proto: true, forced: forcedStringHTMLMethod("sup") }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: forcedStringHTMLMethod("sup")
+      }, {
         sup: function sup() {
           return createHTML(this, "sup", "", "");
         }
@@ -15029,7 +16163,7 @@
           mapfn = bind(mapfn, arguments[2]);
         }
         length = lengthOfArrayLike(O);
-        result = new (aTypedArrayConstructor(C))(length);
+        result = new(aTypedArrayConstructor(C))(length);
         thisIsBigIntArray = isBigIntArray(result);
         for (i = 0; length > i; i++) {
           value = mapping ? mapfn(O[i], i) : O[i];
@@ -15128,7 +16262,11 @@
           addGetter(TypedArrayPrototype, "byteLength");
           addGetter(TypedArrayPrototype, "length");
         }
-        $({ target: "Object", stat: true, forced: !NATIVE_ARRAY_BUFFER_VIEWS }, {
+        $({
+          target: "Object",
+          stat: true,
+          forced: !NATIVE_ARRAY_BUFFER_VIEWS
+        }, {
           getOwnPropertyDescriptor: wrappedGetOwnPropertyDescriptor,
           defineProperty: wrappedDefineProperty
         });
@@ -15226,7 +16364,12 @@
           }
           var FORCED = TypedArrayConstructor !== NativeTypedArrayConstructor;
           exported[CONSTRUCTOR_NAME] = TypedArrayConstructor;
-          $({ global: true, constructor: true, forced: FORCED, sham: !NATIVE_ARRAY_BUFFER_VIEWS }, exported);
+          $({
+            global: true,
+            constructor: true,
+            forced: FORCED,
+            sham: !NATIVE_ARRAY_BUFFER_VIEWS
+          }, exported);
           if (!(BYTES_PER_ELEMENT in TypedArrayConstructor)) {
             createNonEnumerableProperty(TypedArrayConstructor, BYTES_PER_ELEMENT, BYTES);
           }
@@ -15235,8 +16378,7 @@
           }
           setSpecies(CONSTRUCTOR_NAME);
         };
-      } else module.exports = function() {
-      };
+      } else module.exports = function() {};
     }
   });
 
@@ -15422,9 +16564,11 @@
       var slice = uncurryThis("".slice);
       var CONVERSION_BUG = fails(function() {
         var count = 0;
-        new Int8Array(2).fill({ valueOf: function() {
-          return count++;
-        } });
+        new Int8Array(2).fill({
+          valueOf: function() {
+            return count++;
+          }
+        });
         return count !== 1;
       });
       exportTypedArrayMethod("fill", function fill(value) {
@@ -15604,8 +16748,12 @@
       exportTypedArrayMethod("keys", function keys() {
         return arrayKeys(aTypedArray(this));
       }, GENERIC);
-      exportTypedArrayMethod("values", typedArrayValues, GENERIC || !ITERATOR_IS_VALUES, { name: "values" });
-      exportTypedArrayMethod(ITERATOR, typedArrayValues, GENERIC || !ITERATOR_IS_VALUES, { name: "values" });
+      exportTypedArrayMethod("values", typedArrayValues, GENERIC || !ITERATOR_IS_VALUES, {
+        name: "values"
+      });
+      exportTypedArrayMethod(ITERATOR, typedArrayValues, GENERIC || !ITERATOR_IS_VALUES, {
+        name: "values"
+      });
     }
   });
 
@@ -15667,7 +16815,7 @@
       exportTypedArrayStaticMethod("of", function of() {
         var index = 0;
         var length = arguments.length;
-        var result = new (aTypedArrayConstructor(this))(length);
+        var result = new(aTypedArrayConstructor(this))(length);
         while (length > index) result[index] = arguments[index++];
         return result;
       }, TYPED_ARRAYS_CONSTRUCTORS_REQUIRES_WRAPPERS);
@@ -15747,7 +16895,10 @@
       var exportTypedArrayMethod = ArrayBufferViewCore.exportTypedArrayMethod;
       var WORKS_WITH_OBJECTS_AND_GENERIC_ON_TYPED_ARRAYS = !fails(function() {
         var array = new Uint8ClampedArray(2);
-        call($set, array, { length: 1, 0: 3 }, 1);
+        call($set, array, {
+          length: 1,
+          0: 3
+        }, 1);
         return array[1] !== 3;
       });
       var TO_OBJECT_BUG = WORKS_WITH_OBJECTS_AND_GENERIC_ON_TYPED_ARRAYS && ArrayBufferViewCore.NATIVE_ARRAY_BUFFER_VIEWS && fails(function() {
@@ -15936,7 +17087,7 @@
       exportTypedArrayMethod("toReversed", function toReversed() {
         var O = aTypedArray(this);
         var len = lengthOfArrayLike(O);
-        var A = new (getTypedArrayConstructor(O))(len);
+        var A = new(getTypedArrayConstructor(O))(len);
         var k = 0;
         for (; k < len; k++) A[k] = O[len - k - 1];
         return A;
@@ -15978,8 +17129,8 @@
       var arrayToString = [].toString;
       var join = uncurryThis([].join);
       if (fails(function() {
-        arrayToString.call({});
-      })) {
+          arrayToString.call({});
+        })) {
         arrayToString = function toString() {
           return join(this);
         };
@@ -16004,9 +17155,11 @@
       var $RangeError = RangeError;
       var PROPER_ORDER = (function() {
         try {
-          new Int8Array(1)["with"](2, { valueOf: function() {
-            throw 8;
-          } });
+          new Int8Array(1)["with"](2, {
+            valueOf: function() {
+              throw 8;
+            }
+          });
         } catch (error) {
           return error === 8;
         }
@@ -16018,18 +17171,20 @@
           return true;
         }
       })();
-      exportTypedArrayMethod("with", { "with": function(index, value) {
-        var O = aTypedArray(this);
-        var len = lengthOfArrayLike(O);
-        var relativeIndex = toIntegerOrInfinity(index);
-        var actualIndex = relativeIndex < 0 ? len + relativeIndex : relativeIndex;
-        var numericValue = isBigIntArray(O) ? toBigInt(value) : +value;
-        if (actualIndex >= len || actualIndex < 0) throw new $RangeError("Incorrect index");
-        var A = new (getTypedArrayConstructor(O))(len);
-        var k = 0;
-        for (; k < len; k++) A[k] = k === actualIndex ? numericValue : O[k];
-        return A;
-      } }["with"], !PROPER_ORDER || THROW_ON_NEGATIVE_FRACTIONAL_INDEX);
+      exportTypedArrayMethod("with", {
+        "with": function(index, value) {
+          var O = aTypedArray(this);
+          var len = lengthOfArrayLike(O);
+          var relativeIndex = toIntegerOrInfinity(index);
+          var actualIndex = relativeIndex < 0 ? len + relativeIndex : relativeIndex;
+          var numericValue = isBigIntArray(O) ? toBigInt(value) : +value;
+          if (actualIndex >= len || actualIndex < 0) throw new $RangeError("Incorrect index");
+          var A = new(getTypedArrayConstructor(O))(len);
+          var k = 0;
+          for (; k < len; k++) A[k] = k === actualIndex ? numericValue : O[k];
+          return A;
+        }
+      } ["with"], !PROPER_ORDER || THROW_ON_NEGATIVE_FRACTIONAL_INDEX);
     }
   });
 
@@ -16143,70 +17298,75 @@
         var read = 0;
         var chunk = "";
         var index = 0;
-        if (maxLength) while (true) {
-          index = skipAsciiWhitespace(string, index);
-          if (index === stringLength) {
-            if (chunk.length > 0) {
-              if (lastChunkHandling === "stop-before-partial") {
-                break;
-              }
-              if (lastChunkHandling === "loose") {
-                if (chunk.length === 1) {
-                  throw new SyntaxError2("Malformed padding: exactly one additional character");
-                }
-                written = writeBytes(bytes, decodeBase64Chunk(chunk, alphabet, false), written);
-              } else {
-                throw new SyntaxError2("Missing padding");
-              }
-            }
-            read = stringLength;
-            break;
-          }
-          var chr = at(string, index);
-          ++index;
-          if (chr === "=") {
-            if (chunk.length < 2) {
-              throw new SyntaxError2("Padding is too early");
-            }
+        if (maxLength)
+          while (true) {
             index = skipAsciiWhitespace(string, index);
-            if (chunk.length === 2) {
-              if (index === stringLength) {
+            if (index === stringLength) {
+              if (chunk.length > 0) {
                 if (lastChunkHandling === "stop-before-partial") {
                   break;
                 }
-                throw new SyntaxError2("Malformed padding: only one =");
+                if (lastChunkHandling === "loose") {
+                  if (chunk.length === 1) {
+                    throw new SyntaxError2("Malformed padding: exactly one additional character");
+                  }
+                  written = writeBytes(bytes, decodeBase64Chunk(chunk, alphabet, false), written);
+                } else {
+                  throw new SyntaxError2("Missing padding");
+                }
               }
-              if (at(string, index) === "=") {
-                ++index;
-                index = skipAsciiWhitespace(string, index);
-              }
-            }
-            if (index < stringLength) {
-              throw new SyntaxError2("Unexpected character after padding");
-            }
-            written = writeBytes(bytes, decodeBase64Chunk(chunk, alphabet, lastChunkHandling === "strict"), written);
-            read = stringLength;
-            break;
-          }
-          if (!hasOwn(alphabet, chr)) {
-            throw new SyntaxError2("Unexpected character");
-          }
-          var remainingBytes = maxLength - written;
-          if (remainingBytes === 1 && chunk.length === 2 || remainingBytes === 2 && chunk.length === 3) {
-            break;
-          }
-          chunk += chr;
-          if (chunk.length === 4) {
-            written = writeBytes(bytes, decodeBase64Chunk(chunk, alphabet, false), written);
-            chunk = "";
-            read = index;
-            if (written === maxLength) {
+              read = stringLength;
               break;
             }
+            var chr = at(string, index);
+            ++index;
+            if (chr === "=") {
+              if (chunk.length < 2) {
+                throw new SyntaxError2("Padding is too early");
+              }
+              index = skipAsciiWhitespace(string, index);
+              if (chunk.length === 2) {
+                if (index === stringLength) {
+                  if (lastChunkHandling === "stop-before-partial") {
+                    break;
+                  }
+                  throw new SyntaxError2("Malformed padding: only one =");
+                }
+                if (at(string, index) === "=") {
+                  ++index;
+                  index = skipAsciiWhitespace(string, index);
+                }
+              }
+              if (index < stringLength) {
+                throw new SyntaxError2("Unexpected character after padding");
+              }
+              written = writeBytes(bytes, decodeBase64Chunk(chunk, alphabet, lastChunkHandling === "strict"), written);
+              read = stringLength;
+              break;
+            }
+            if (!hasOwn(alphabet, chr)) {
+              throw new SyntaxError2("Unexpected character");
+            }
+            var remainingBytes = maxLength - written;
+            if (remainingBytes === 1 && chunk.length === 2 || remainingBytes === 2 && chunk.length === 3) {
+              break;
+            }
+            chunk += chr;
+            if (chunk.length === 4) {
+              written = writeBytes(bytes, decodeBase64Chunk(chunk, alphabet, false), written);
+              chunk = "";
+              read = index;
+              if (written === maxLength) {
+                break;
+              }
+            }
           }
-        }
         if (!into) bytes.length = written;
-        return { bytes, read, written };
+        return {
+          bytes,
+          read,
+          written
+        };
       };
     }
   });
@@ -16224,15 +17384,18 @@
         try {
           Uint8Array2.fromBase64("a");
           return;
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
           Uint8Array2.fromBase64("", null);
         } catch (error) {
           return true;
         }
       })();
-      if (Uint8Array2) $({ target: "Uint8Array", stat: true, forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS }, {
+      if (Uint8Array2) $({
+        target: "Uint8Array",
+        stat: true,
+        forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS
+      }, {
         fromBase64: function fromBase64(string) {
           var result = $fromBase64(string, arguments.length > 1 ? arguments[1] : void 0, null, 9007199254740991);
           return arrayFromConstructorAndList(Uint8Array2, result.bytes);
@@ -16265,7 +17428,10 @@
           }
           bytes[written] = result >> 4;
         }
-        return { bytes, read: written << 1 };
+        return {
+          bytes,
+          read: written << 1
+        };
       };
     }
   });
@@ -16278,7 +17444,10 @@
       var globalThis2 = require_global_this();
       var aString = require_a_string();
       var $fromHex = require_uint8_from_hex();
-      if (globalThis2.Uint8Array) $({ target: "Uint8Array", stat: true }, {
+      if (globalThis2.Uint8Array) $({
+        target: "Uint8Array",
+        stat: true
+      }, {
         fromHex: function fromHex(string) {
           return $fromHex(aString(string)).bytes;
         }
@@ -16313,24 +17482,29 @@
         try {
           target.setFromBase64("", null);
           return;
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
           target.setFromBase64("a");
           return;
-        } catch (error) {
-        }
+        } catch (error) {}
         try {
           target.setFromBase64("MjYyZg===");
         } catch (error) {
           return target[0] === 50 && target[1] === 54 && target[2] === 50 && target[3] === 255 && target[4] === 255;
         }
       })();
-      if (Uint8Array2) $({ target: "Uint8Array", proto: true, forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS }, {
+      if (Uint8Array2) $({
+        target: "Uint8Array",
+        proto: true,
+        forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS
+      }, {
         setFromBase64: function setFromBase64(string) {
           anUint8Array(this);
           var result = $fromBase64(string, arguments.length > 1 ? arguments[1] : void 0, this, this.length);
-          return { read: result.read, written: result.written };
+          return {
+            read: result.read,
+            written: result.written
+          };
         }
       });
     }
@@ -16346,21 +17520,31 @@
       var anUint8Array = require_an_uint8_array();
       var notDetached = require_array_buffer_not_detached();
       var $fromHex = require_uint8_from_hex();
+
       function throwsOnLengthTrackingView() {
         try {
-          var rab = new ArrayBuffer(16, { maxByteLength: 1024 });
+          var rab = new ArrayBuffer(16, {
+            maxByteLength: 1024
+          });
           new Uint8Array(rab).setFromHex("cafed00d");
         } catch (error) {
           return true;
         }
       }
-      if (globalThis2.Uint8Array) $({ target: "Uint8Array", proto: true, forced: throwsOnLengthTrackingView() }, {
+      if (globalThis2.Uint8Array) $({
+        target: "Uint8Array",
+        proto: true,
+        forced: throwsOnLengthTrackingView()
+      }, {
         setFromHex: function setFromHex(string) {
           anUint8Array(this);
           aString(string);
           notDetached(this.buffer);
           var read = $fromHex(string, this).read;
-          return { read, written: read / 2 };
+          return {
+            read,
+            written: read / 2
+          };
         }
       });
     }
@@ -16394,7 +17578,11 @@
           return true;
         }
       })();
-      if (Uint8Array2) $({ target: "Uint8Array", proto: true, forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS }, {
+      if (Uint8Array2) $({
+        target: "Uint8Array",
+        proto: true,
+        forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS
+      }, {
         toBase64: function toBase64() {
           var array = anUint8Array(this);
           var options = arguments.length ? anObjectOrUndefined(arguments[0]) : void 0;
@@ -16458,7 +17646,11 @@
           return false;
         }
       })();
-      if (Uint8Array2) $({ target: "Uint8Array", proto: true, forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS }, {
+      if (Uint8Array2) $({
+        target: "Uint8Array",
+        proto: true,
+        forced: INCORRECT_BEHAVIOR_OR_DOESNT_EXISTS
+      }, {
         toHex: function toHex() {
           anUint8Array(this);
           notDetached(this.buffer);
@@ -16486,7 +17678,9 @@
       var stringSlice = uncurryThis("".slice);
       var hex2 = /^[\da-f]{2}$/i;
       var hex4 = /^[\da-f]{4}$/i;
-      $({ global: true }, {
+      $({
+        global: true
+      }, {
         unescape: function unescape(string) {
           var str = toString(string);
           var result = "";
@@ -16582,7 +17776,10 @@
               id: id++,
               frozen: null
             });
-            if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], { that, AS_ENTRIES: IS_MAP });
+            if (!isNullOrUndefined(iterable)) iterate(iterable, that[ADDER], {
+              that,
+              AS_ENTRIES: IS_MAP
+            });
           });
           var Prototype = Constructor.prototype;
           var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME);
@@ -16780,7 +17977,12 @@
       var get = WeakMapHelpers.get;
       var has = WeakMapHelpers.has;
       var set = WeakMapHelpers.set;
-      $({ target: "WeakMap", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "WeakMap",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         getOrInsert: function getOrInsert(key, value) {
           if (has(this, key)) return get(this, key);
           set(this, key, value);
@@ -16833,14 +18035,19 @@
       var set = WeakMapHelpers.set;
       var FORCED = IS_PURE || !(function() {
         try {
-          if (WeakMap.prototype.getOrInsertComputed) (/* @__PURE__ */ new WeakMap()).getOrInsertComputed(1, function() {
+          if (WeakMap.prototype.getOrInsertComputed)( /* @__PURE__ */ new WeakMap()).getOrInsertComputed(1, function() {
             throw 1;
           });
         } catch (error) {
           return error instanceof TypeError;
         }
       })();
-      $({ target: "WeakMap", proto: true, real: true, forced: FORCED }, {
+      $({
+        target: "WeakMap",
+        proto: true,
+        real: true,
+        forced: FORCED
+      }, {
         getOrInsertComputed: function getOrInsertComputed(key, callbackfn) {
           if (!IS_PURE) aWeakMap(this);
           aWeakKey(key);
@@ -16915,7 +18122,11 @@
       var $ = require_export();
       var $filterReject = require_array_iteration().filterReject;
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true, forced: true }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: true
+      }, {
         filterOut: function filterOut(callbackfn) {
           return $filterReject(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -16931,7 +18142,11 @@
       var $ = require_export();
       var $filterReject = require_array_iteration().filterReject;
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true, forced: true }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: true
+      }, {
         filterReject: function filterReject(callbackfn) {
           return $filterReject(this, callbackfn, arguments.length > 1 ? arguments[1] : void 0);
         }
@@ -17002,7 +18217,10 @@
       var $ = require_export();
       var $group = require_array_group();
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true }, {
+      $({
+        target: "Array",
+        proto: true
+      }, {
         group: function group(callbackfn) {
           var thisArg = arguments.length > 1 ? arguments[1] : void 0;
           return $group(this, callbackfn, thisArg);
@@ -17020,7 +18238,11 @@
       var $group = require_array_group();
       var arrayMethodIsStrict = require_array_method_is_strict();
       var addToUnscopables = require_add_to_unscopables();
-      $({ target: "Array", proto: true, forced: !arrayMethodIsStrict("groupBy") }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: !arrayMethodIsStrict("groupBy")
+      }, {
         groupBy: function groupBy(callbackfn) {
           var thisArg = arguments.length > 1 ? arguments[1] : void 0;
           return $group(this, callbackfn, thisArg);
@@ -17073,7 +18295,12 @@
       var addToUnscopables = require_add_to_unscopables();
       var $groupToMap = require_array_group_to_map();
       var IS_PURE = require_is_pure();
-      $({ target: "Array", proto: true, name: "groupToMap", forced: IS_PURE || !arrayMethodIsStrict("groupByToMap") }, {
+      $({
+        target: "Array",
+        proto: true,
+        name: "groupToMap",
+        forced: IS_PURE || !arrayMethodIsStrict("groupByToMap")
+      }, {
         groupByToMap: $groupToMap
       });
       addToUnscopables("groupByToMap");
@@ -17088,7 +18315,11 @@
       var addToUnscopables = require_add_to_unscopables();
       var $groupToMap = require_array_group_to_map();
       var IS_PURE = require_is_pure();
-      $({ target: "Array", proto: true, forced: IS_PURE }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: IS_PURE
+      }, {
         groupToMap: $groupToMap
       });
       addToUnscopables("groupToMap");
@@ -17115,7 +18346,12 @@
         }
         return length !== 0;
       };
-      $({ target: "Array", stat: true, sham: true, forced: true }, {
+      $({
+        target: "Array",
+        stat: true,
+        sham: true,
+        forced: true
+      }, {
         isTemplateObject: function isTemplateObject(value) {
           if (!isFrozenStringArray(value, true)) return false;
           var raw = value.raw;
@@ -17213,7 +18449,10 @@
       var entries = uncurryThis(MapPrototype.entries);
       var next = entries(new Map2()).next;
       module.exports = function(map, fn, interruptible) {
-        return interruptible ? iterateSimple({ iterator: entries(map), next }, function(entry) {
+        return interruptible ? iterateSimple({
+          iterator: entries(map),
+          next
+        }, function(entry) {
           return fn(entry[1], entry[0]);
         }) : forEach(map, fn);
       };
@@ -17264,7 +18503,11 @@
       var $ = require_export();
       var addToUnscopables = require_add_to_unscopables();
       var uniqueBy = require_array_unique_by();
-      $({ target: "Array", proto: true, forced: true }, {
+      $({
+        target: "Array",
+        proto: true,
+        forced: true
+      }, {
         uniqueBy
       });
       addToUnscopables("uniqueBy");
@@ -17336,7 +18579,11 @@
       if (IS_PURE || !hasOwn(AsyncIteratorPrototype, "constructor") || AsyncIteratorPrototype.constructor === Object) {
         createNonEnumerableProperty(AsyncIteratorPrototype, "constructor", AsyncIteratorConstructor);
       }
-      $({ global: true, constructor: true, forced: IS_PURE }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: IS_PURE
+      }, {
         AsyncIterator: AsyncIteratorConstructor
       });
     }
@@ -17374,9 +18621,15 @@
           var stateError = stateCompletion.error;
           var state = stateCompletion.value;
           if (stateError || IS_GENERATOR && state.done) {
-            return { exit: true, value: stateError ? Promise2.reject(state) : Promise2.resolve(createIterResultObject(void 0, true)) };
+            return {
+              exit: true,
+              value: stateError ? Promise2.reject(state) : Promise2.resolve(createIterResultObject(void 0, true))
+            };
           }
-          return { exit: false, value: state };
+          return {
+            exit: false,
+            value: state
+          };
         };
         return defineBuiltIns(create(AsyncIteratorPrototype), {
           next: function next() {
@@ -17561,7 +18814,13 @@
       "use strict";
       var $ = require_export();
       var indexed = require_async_iterator_indexed();
-      $({ target: "AsyncIterator", name: "indexed", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        name: "indexed",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         asIndexedPairs: indexed
       });
     }
@@ -17616,7 +18875,12 @@
           loop();
         });
       });
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         drop: function drop(limit) {
           anObject(this);
           var remaining = toPositiveInteger(notANaN(+limit));
@@ -17634,7 +18898,12 @@
       "use strict";
       var $ = require_export();
       var $every = require_async_iterator_iteration().every;
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         every: function every(predicate) {
           return $every(this, predicate);
         }
@@ -17698,7 +18967,12 @@
           loop();
         });
       });
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         filter: function filter(predicate) {
           anObject(this);
           aCallable(predicate);
@@ -17716,7 +18990,12 @@
       "use strict";
       var $ = require_export();
       var $find = require_async_iterator_iteration().find;
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         find: function find(predicate) {
           return $find(this, predicate);
         }
@@ -17839,7 +19118,12 @@
           innerLoop();
         });
       });
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         flatMap: function flatMap(mapper) {
           anObject(this);
           aCallable(mapper);
@@ -17858,7 +19142,12 @@
       "use strict";
       var $ = require_export();
       var $forEach = require_async_iterator_iteration().forEach;
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         forEach: function forEach(fn) {
           return $forEach(this, fn);
         }
@@ -17888,7 +19177,11 @@
       var getAsyncIteratorFlattenable = require_get_async_iterator_flattenable();
       var AsyncIteratorPrototype = require_async_iterator_prototype();
       var WrapAsyncIterator = require_async_iterator_wrap();
-      $({ target: "AsyncIterator", stat: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        stat: true,
+        forced: true
+      }, {
         from: function from(O) {
           var iteratorRecord = getAsyncIteratorFlattenable(typeof O == "string" ? toObject(O) : O);
           return isPrototypeOf(AsyncIteratorPrototype, iteratorRecord.iterator) ? iteratorRecord.iterator : new WrapAsyncIterator(iteratorRecord);
@@ -17903,7 +19196,12 @@
       "use strict";
       var $ = require_export();
       var indexed = require_async_iterator_indexed();
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         indexed
       });
     }
@@ -17915,7 +19213,12 @@
       "use strict";
       var $ = require_export();
       var map = require_async_iterator_map();
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         map
       });
     }
@@ -17935,7 +19238,12 @@
       var closeAsyncIteration = require_async_iterator_close();
       var Promise2 = getBuiltIn("Promise");
       var $TypeError = TypeError;
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         reduce: function reduce(reducer) {
           anObject(this);
           aCallable(reducer);
@@ -17995,7 +19303,12 @@
       "use strict";
       var $ = require_export();
       var $some = require_async_iterator_iteration().some;
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         some: function some(predicate) {
           return $some(this, predicate);
         }
@@ -18043,7 +19356,12 @@
           throw error;
         });
       });
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         take: function take(limit) {
           anObject(this);
           var remaining = toPositiveInteger(notANaN(+limit));
@@ -18061,7 +19379,12 @@
       "use strict";
       var $ = require_export();
       var $toArray = require_async_iterator_iteration().toArray;
-      $({ target: "AsyncIterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "AsyncIterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         toArray: function toArray() {
           return $toArray(this, void 0, []);
         }
@@ -18161,8 +19484,7 @@
           get: function() {
             return getInternalState(this)[key];
           },
-          set: function() {
-          },
+          set: function() {},
           configurable: true,
           enumerable: false
         });
@@ -18184,7 +19506,11 @@
       var $ = require_export();
       var NumericRangeIterator = require_numeric_range_iterator();
       if (typeof BigInt == "function") {
-        $({ target: "BigInt", stat: true, forced: true }, {
+        $({
+          target: "BigInt",
+          stat: true,
+          forced: true
+        }, {
           range: function range(start, end, option) {
             return new NumericRangeIterator(start, end, option, "bigint", BigInt(0), BigInt(1));
           }
@@ -18252,7 +19578,10 @@
         var freeze = getBuiltIn("Object", "freeze");
         return freeze ? freeze(create(null)) : create(null);
       };
-      $({ global: true, forced: true }, {
+      $({
+        global: true,
+        forced: true
+      }, {
         compositeKey: function compositeKey() {
           return apply(getCompositeKeyNode, $Object, arguments).get("object", initializer);
         }
@@ -18268,7 +19597,10 @@
       var getCompositeKeyNode = require_composite_key();
       var getBuiltIn = require_get_built_in();
       var apply = require_function_apply();
-      $({ global: true, forced: true }, {
+      $({
+        global: true,
+        forced: true
+      }, {
         compositeSymbol: function compositeSymbol() {
           if (arguments.length === 1 && typeof arguments[0] == "string") return getBuiltIn("Symbol")["for"](arguments[0]);
           return apply(getCompositeKeyNode, null, arguments).get("symbol", getBuiltIn("Symbol"));
@@ -18292,7 +19624,11 @@
       var $ = require_export();
       var uncurryThis = require_function_uncurry_this();
       var getUint8 = uncurryThis(DataView.prototype.getUint8);
-      $({ target: "DataView", proto: true, forced: true }, {
+      $({
+        target: "DataView",
+        proto: true,
+        forced: true
+      }, {
         getUint8Clamped: function getUint8Clamped(byteOffset) {
           return getUint8(this, byteOffset);
         }
@@ -18318,7 +19654,11 @@
       var toIndex = require_to_index();
       var toUint8Clamped = require_to_uint8_clamped();
       var setUint8 = uncurryThis(DataView.prototype.setUint8);
-      $({ target: "DataView", proto: true, forced: true }, {
+      $({
+        target: "DataView",
+        proto: true,
+        forced: true
+      }, {
         setUint8Clamped: function setUint8Clamped(byteOffset, value) {
           setUint8(
             aDataView(this),
@@ -18364,7 +19704,11 @@
       "use strict";
       var $ = require_export();
       var demethodize = require_function_demethodize();
-      $({ target: "Function", proto: true, forced: true }, {
+      $({
+        target: "Function",
+        proto: true,
+        forced: true
+      }, {
         demethodize
       });
     }
@@ -18386,12 +19730,16 @@
       var isClassConstructor = function(argument) {
         try {
           if (!DESCRIPTORS || !exec(classRegExp, inspectSource(argument))) return false;
-        } catch (error) {
-        }
+        } catch (error) {}
         var prototype = getOwnPropertyDescriptor(argument, "prototype");
         return !!prototype && hasOwn(prototype, "writable") && !prototype.writable;
       };
-      $({ target: "Function", stat: true, sham: true, forced: true }, {
+      $({
+        target: "Function",
+        stat: true,
+        sham: true,
+        forced: true
+      }, {
         isCallable: function isCallable(argument) {
           return $isCallable(argument) && !isClassConstructor(argument);
         }
@@ -18405,7 +19753,11 @@
       "use strict";
       var $ = require_export();
       var isConstructor = require_is_constructor();
-      $({ target: "Function", stat: true, forced: true }, {
+      $({
+        target: "Function",
+        stat: true,
+        forced: true
+      }, {
         isConstructor
       });
     }
@@ -18433,7 +19785,12 @@
       "use strict";
       var $ = require_export();
       var demethodize = require_function_demethodize();
-      $({ target: "Function", proto: true, forced: true, name: "demethodize" }, {
+      $({
+        target: "Function",
+        proto: true,
+        forced: true,
+        name: "demethodize"
+      }, {
         unThis: demethodize
       });
     }
@@ -18477,7 +19834,13 @@
       "use strict";
       var $ = require_export();
       var indexed = require_iterator_indexed();
-      $({ target: "Iterator", name: "indexed", proto: true, real: true, forced: true }, {
+      $({
+        target: "Iterator",
+        name: "indexed",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         asIndexedPairs: indexed
       });
     }
@@ -18534,7 +19897,12 @@
           if (buffer.length === chunkSize) return buffer;
         }
       });
-      $({ target: "Iterator", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         chunks: function chunks(chunkSize) {
           anObject(this);
           chunkSizeValidation(chunkSize, this);
@@ -18643,7 +20011,12 @@
       var $TypeError = TypeError;
       var $Infinity = Infinity;
       var INVALID_SKIPPED_ELEMENTS = "skippedElements should be a positive safe integer";
-      $({ target: "Iterator", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         includes: function includes(searchElement) {
           anObject(this);
           var skippedElements = arguments.length > 1 ? arguments[1] : void 0;
@@ -18666,7 +20039,10 @@
           return iterate(this, function(value, stop) {
             if (skipped < toSkip) skipped++;
             else if (sameValueZero(value, searchElement)) return stop();
-          }, { IS_ITERATOR: true, INTERRUPTED: true }).stopped;
+          }, {
+            IS_ITERATOR: true,
+            INTERRUPTED: true
+          }).stopped;
         }
       });
     }
@@ -18678,7 +20054,12 @@
       "use strict";
       var $ = require_export();
       var indexed = require_iterator_indexed();
-      $({ target: "Iterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         indexed
       });
     }
@@ -18698,7 +20079,12 @@
       var IS_PURE = require_is_pure();
       var $join = uncurryThis([].join);
       var push = uncurryThis([].push);
-      $({ target: "Iterator", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         join: function join(separator) {
           anObject(this);
           var sep;
@@ -18710,7 +20096,9 @@
           var result = [];
           iterate(this, function(value) {
             push(result, isNullOrUndefined(value) ? "" : $toString(value));
-          }, { IS_ITERATOR: true });
+          }, {
+            IS_ITERATOR: true
+          });
           return $join(result, sep);
         }
       });
@@ -18732,7 +20120,11 @@
       var $ = require_export();
       var NumericRangeIterator = require_numeric_range_iterator();
       var $TypeError = TypeError;
-      $({ target: "Iterator", stat: true, forced: true }, {
+      $({
+        target: "Iterator",
+        stat: true,
+        forced: true
+      }, {
         range: function range(start, end, option) {
           if (typeof start == "number") return new NumericRangeIterator(start, end, option, "number", 0, 1);
           if (typeof start == "bigint") return new NumericRangeIterator(start, end, option, "bigint", BigInt(0), BigInt(1));
@@ -18804,7 +20196,12 @@
       "use strict";
       var $ = require_export();
       var iteratorWindow = require_iterator_window();
-      $({ target: "Iterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         sliding: function sliding(windowSize) {
           return iteratorWindow(this, windowSize, "allow-partial");
         }
@@ -18845,7 +20242,12 @@
       var AsyncFromSyncIterator = require_async_from_sync_iterator();
       var WrapAsyncIterator = require_async_iterator_wrap();
       var getIteratorDirect = require_get_iterator_direct();
-      $({ target: "Iterator", proto: true, real: true, forced: true }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         toAsync: function toAsync() {
           return new WrapAsyncIterator(getIteratorDirect(new AsyncFromSyncIterator(getIteratorDirect(anObject(this)))));
         }
@@ -18860,7 +20262,12 @@
       var $ = require_export();
       var iteratorWindow = require_iterator_window();
       var IS_PURE = require_is_pure();
-      $({ target: "Iterator", proto: true, real: true, forced: IS_PURE }, {
+      $({
+        target: "Iterator",
+        proto: true,
+        real: true,
+        forced: IS_PURE
+      }, {
         windows: function windows(windowSize) {
           return iteratorWindow(this, windowSize, arguments.length < 2 ? void 0 : arguments[1]);
         }
@@ -18927,7 +20334,12 @@
       var $ = require_export();
       var aMap = require_a_map();
       var remove = require_map_helpers().remove;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         deleteAll: function deleteAll() {
           var collection = aMap(this);
           var allDeleted = true;
@@ -18952,7 +20364,12 @@
       var get = MapHelpers.get;
       var has = MapHelpers.has;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         emplace: function emplace(key, handler) {
           var map = aMap(this);
           var value, inserted;
@@ -18980,7 +20397,12 @@
       var bind = require_function_bind_context();
       var aMap = require_a_map();
       var iterate = require_map_iterate();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         every: function every(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -19003,7 +20425,12 @@
       var iterate = require_map_iterate();
       var Map2 = MapHelpers.Map;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         filter: function filter(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -19025,12 +20452,19 @@
       var bind = require_function_bind_context();
       var aMap = require_a_map();
       var iterate = require_map_iterate();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         find: function find(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
           var result = iterate(map, function(value, key) {
-            if (boundFunction(value, key, map)) return { value };
+            if (boundFunction(value, key, map)) return {
+              value
+            };
           }, true);
           return result && result.value;
         }
@@ -19046,12 +20480,19 @@
       var bind = require_function_bind_context();
       var aMap = require_a_map();
       var iterate = require_map_iterate();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         findKey: function findKey(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
           var result = iterate(map, function(value, key) {
-            if (boundFunction(value, key, map)) return { key };
+            if (boundFunction(value, key, map)) return {
+              key
+            };
           }, true);
           return result && result.key;
         }
@@ -19094,7 +20535,11 @@
       var $ = require_export();
       var MapHelpers = require_map_helpers();
       var createCollectionFrom = require_collection_from();
-      $({ target: "Map", stat: true, forced: true }, {
+      $({
+        target: "Map",
+        stat: true,
+        forced: true
+      }, {
         from: createCollectionFrom(MapHelpers.Map, MapHelpers.set, true)
       });
     }
@@ -19132,7 +20577,12 @@
       var sameValueZero = require_same_value_zero();
       var aMap = require_a_map();
       var iterate = require_map_iterate();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         includes: function includes(searchElement) {
           return iterate(aMap(this), function(value) {
             if (sameValueZero(value, searchElement)) return true;
@@ -19152,7 +20602,11 @@
       var isCallable = require_is_callable();
       var aCallable = require_a_callable();
       var Map2 = require_map_helpers().Map;
-      $({ target: "Map", stat: true, forced: true }, {
+      $({
+        target: "Map",
+        stat: true,
+        forced: true
+      }, {
         keyBy: function keyBy(iterable, keyDerivative) {
           var C = isCallable(this) ? this : Map2;
           var newMap = new C();
@@ -19174,10 +20628,17 @@
       var $ = require_export();
       var aMap = require_a_map();
       var iterate = require_map_iterate();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         keyOf: function keyOf(searchElement) {
           var result = iterate(aMap(this), function(value, key) {
-            if (value === searchElement) return { key };
+            if (value === searchElement) return {
+              key
+            };
           }, true);
           return result && result.key;
         }
@@ -19196,7 +20657,12 @@
       var iterate = require_map_iterate();
       var Map2 = MapHelpers.Map;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         mapKeys: function mapKeys(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -19221,7 +20687,12 @@
       var iterate = require_map_iterate();
       var Map2 = MapHelpers.Map;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         mapValues: function mapValues(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -19243,7 +20714,13 @@
       var aMap = require_a_map();
       var iterate = require_iterate();
       var set = require_map_helpers().set;
-      $({ target: "Map", proto: true, real: true, arity: 1, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        arity: 1,
+        forced: true
+      }, {
         // eslint-disable-next-line no-unused-vars -- required for `.length`
         merge: function merge(iterable) {
           var map = aMap(this);
@@ -19252,7 +20729,9 @@
           while (i < argumentsLength) {
             iterate(arguments[i++], function(key, value) {
               set(map, key, value);
-            }, { AS_ENTRIES: true });
+            }, {
+              AS_ENTRIES: true
+            });
           }
           return map;
         }
@@ -19287,7 +20766,11 @@
       var $ = require_export();
       var MapHelpers = require_map_helpers();
       var createCollectionOf = require_collection_of();
-      $({ target: "Map", stat: true, forced: true }, {
+      $({
+        target: "Map",
+        stat: true,
+        forced: true
+      }, {
         of: createCollectionOf(MapHelpers.Map, MapHelpers.set, true)
       });
     }
@@ -19302,7 +20785,12 @@
       var aMap = require_a_map();
       var iterate = require_map_iterate();
       var $TypeError = TypeError;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         reduce: function reduce(callbackfn) {
           var map = aMap(this);
           var noInitial = arguments.length < 2;
@@ -19331,7 +20819,12 @@
       var bind = require_function_bind_context();
       var aMap = require_a_map();
       var iterate = require_map_iterate();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         some: function some(callbackfn) {
           var map = aMap(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -19355,7 +20848,12 @@
       var get = MapHelpers.get;
       var has = MapHelpers.has;
       var set = MapHelpers.set;
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         update: function update(key, callback) {
           var map = aMap(this);
           var length = arguments.length;
@@ -19412,7 +20910,13 @@
       "use strict";
       var $ = require_export();
       var upsert = require_map_upsert();
-      $({ target: "Map", proto: true, real: true, name: "upsert", forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        name: "upsert",
+        forced: true
+      }, {
         updateOrInsert: upsert
       });
     }
@@ -19424,7 +20928,12 @@
       "use strict";
       var $ = require_export();
       var upsert = require_map_upsert();
-      $({ target: "Map", proto: true, real: true, forced: true }, {
+      $({
+        target: "Map",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         upsert
       });
     }
@@ -19461,7 +20970,11 @@
       "use strict";
       var $ = require_export();
       var clamp = require_math_clamp();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         clamp
       });
     }
@@ -19472,7 +20985,12 @@
     "node_modules/core-js/modules/esnext.math.deg-per-rad.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, nonConfigurable: true, nonWritable: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        nonConfigurable: true,
+        nonWritable: true
+      }, {
         DEG_PER_RAD: Math.PI / 180
       });
     }
@@ -19484,7 +21002,11 @@
       "use strict";
       var $ = require_export();
       var RAD_PER_DEG = 180 / Math.PI;
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         degrees: function degrees(radians) {
           return radians * RAD_PER_DEG;
         }
@@ -19516,7 +21038,11 @@
       var $ = require_export();
       var scale = require_math_scale();
       var fround = require_math_fround();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         fscale: function fscale(x, inLow, inHigh, outLow, outHigh) {
           return fround(scale(x, inLow, inHigh, outLow, outHigh));
         }
@@ -19537,7 +21063,11 @@
     "node_modules/core-js/modules/esnext.math.iaddh.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         iaddh: function iaddh(x0, x1, y0, y1) {
           var $x0 = x0 >>> 0;
           var $x1 = x1 >>> 0;
@@ -19553,7 +21083,11 @@
     "node_modules/core-js/modules/esnext.math.imulh.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         imulh: function imulh(u, v) {
           var UINT16 = 65535;
           var $u = +u;
@@ -19574,7 +21108,11 @@
     "node_modules/core-js/modules/esnext.math.isubh.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         isubh: function isubh(x0, x1, y0, y1) {
           var $x0 = x0 >>> 0;
           var $x1 = x1 >>> 0;
@@ -19590,7 +21128,12 @@
     "node_modules/core-js/modules/esnext.math.rad-per-deg.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, nonConfigurable: true, nonWritable: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        nonConfigurable: true,
+        nonWritable: true
+      }, {
         RAD_PER_DEG: 180 / Math.PI
       });
     }
@@ -19602,7 +21145,11 @@
       "use strict";
       var $ = require_export();
       var DEG_PER_RAD = Math.PI / 180;
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         radians: function radians(degrees) {
           return degrees * DEG_PER_RAD;
         }
@@ -19616,7 +21163,11 @@
       "use strict";
       var $ = require_export();
       var scale = require_math_scale();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         scale
       });
     }
@@ -19648,7 +21199,11 @@
         var seed = state.seed = (state.seed * 1103515245 + 12345) % 2147483647;
         return createIterResultObject((seed & 1073741823) / 1073741823, false);
       });
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         seededPRNG: function seededPRNG(it) {
           var seed = anObject(it).seed;
           if (!numberIsFinite(seed)) throw new $TypeError(SEED_TYPE_ERROR);
@@ -19663,7 +21218,11 @@
     "node_modules/core-js/modules/esnext.math.signbit.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         signbit: function signbit(x) {
           var n = +x;
           return n === n && n === 0 ? 1 / n === -Infinity : n < 0;
@@ -19685,7 +21244,11 @@
     "node_modules/core-js/modules/esnext.math.umulh.js"() {
       "use strict";
       var $ = require_export();
-      $({ target: "Math", stat: true, forced: true }, {
+      $({
+        target: "Math",
+        stat: true,
+        forced: true
+      }, {
         umulh: function umulh(u, v) {
           var UINT16 = 65535;
           var $u = +u;
@@ -19708,7 +21271,11 @@
       var $ = require_export();
       var $clamp = require_math_clamp();
       var thisNumberValue = require_this_number_value();
-      $({ target: "Number", proto: true, forced: true }, {
+      $({
+        target: "Number",
+        proto: true,
+        forced: true
+      }, {
         clamp: function clamp(min, max) {
           return $clamp(thisNumberValue(this), min, max);
         }
@@ -19749,7 +21316,11 @@
         }
         return true;
       };
-      $({ target: "Number", stat: true, forced: true }, {
+      $({
+        target: "Number",
+        stat: true,
+        forced: true
+      }, {
         fromString: function fromString(string, radix) {
           var sign = 1;
           if (typeof string != "string") throw new $TypeError(INVALID_NUMBER_REPRESENTATION);
@@ -19788,7 +21359,11 @@
       "use strict";
       var $ = require_export();
       var NumericRangeIterator = require_numeric_range_iterator();
-      $({ target: "Number", stat: true, forced: true }, {
+      $({
+        target: "Number",
+        stat: true,
+        forced: true
+      }, {
         range: function range(start, end, option) {
           return new NumericRangeIterator(start, end, option, "number", 0, 1);
         }
@@ -19855,7 +21430,11 @@
       "use strict";
       var $ = require_export();
       var ObjectIterator = require_object_iterator();
-      $({ target: "Object", stat: true, forced: true }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: true
+      }, {
         iterateEntries: function iterateEntries(object) {
           return new ObjectIterator(object, "entries");
         }
@@ -19869,7 +21448,11 @@
       "use strict";
       var $ = require_export();
       var ObjectIterator = require_object_iterator();
-      $({ target: "Object", stat: true, forced: true }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: true
+      }, {
         iterateKeys: function iterateKeys(object) {
           return new ObjectIterator(object, "keys");
         }
@@ -19883,7 +21466,11 @@
       "use strict";
       var $ = require_export();
       var ObjectIterator = require_object_iterator();
-      $({ target: "Object", stat: true, forced: true }, {
+      $({
+        target: "Object",
+        stat: true,
+        forced: true
+      }, {
         iterateValues: function iterateValues(object) {
           return new ObjectIterator(object, "values");
         }
@@ -20075,7 +21662,11 @@
       defineBuiltIn(ObservablePrototype, $$OBSERVABLE, function() {
         return this;
       });
-      $({ global: true, constructor: true, forced: true }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: true
+      }, {
         Observable: $Observable
       });
       setSpecies(OBSERVABLE);
@@ -20097,7 +21688,11 @@
       var iterate = require_iterate();
       var wellKnownSymbol = require_well_known_symbol();
       var $$OBSERVABLE = wellKnownSymbol("observable");
-      $({ target: "Observable", stat: true, forced: true }, {
+      $({
+        target: "Observable",
+        stat: true,
+        forced: true
+      }, {
         from: function from(x) {
           var C = isConstructor(this) ? this : getBuiltIn("Observable");
           var observableMethod = getMethod(anObject(x), $$OBSERVABLE);
@@ -20113,7 +21708,10 @@
             iterate(getIterator(x, iteratorMethod), function(it, stop) {
               observer.next(it);
               if (observer.closed) return stop();
-            }, { IS_ITERATOR: true, INTERRUPTED: true });
+            }, {
+              IS_ITERATOR: true,
+              INTERRUPTED: true
+            });
             observer.complete();
           });
         }
@@ -20129,7 +21727,11 @@
       var getBuiltIn = require_get_built_in();
       var isConstructor = require_is_constructor();
       var Array2 = getBuiltIn("Array");
-      $({ target: "Observable", stat: true, forced: true }, {
+      $({
+        target: "Observable",
+        stat: true,
+        forced: true
+      }, {
         of: function of() {
           var C = isConstructor(this) ? this : getBuiltIn("Observable");
           var length = arguments.length;
@@ -20173,7 +21775,10 @@
       var perform = require_perform();
       var create = getBuiltIn("Object", "create");
       var ownKeys = getBuiltIn("Reflect", "ownKeys");
-      $({ target: "Promise", stat: true }, {
+      $({
+        target: "Promise",
+        stat: true
+      }, {
         allKeyed: function allKeyed(promises) {
           var C = this;
           var capability = newPromiseCapabilityModule.f(C);
@@ -20186,7 +21791,7 @@
             var values = [];
             var remaining = 1;
             var counter = 0;
-            for (var i = 0; i < allKeys.length; i++) (function(key) {
+            for (var i = 0; i < allKeys.length; i++)(function(key) {
               var desc = getOwnPropertyDescriptor.f(promises, key);
               if (desc && desc.enumerable) {
                 var index = counter;
@@ -20240,7 +21845,10 @@
       var perform = require_perform();
       var create = getBuiltIn("Object", "create");
       var ownKeys = getBuiltIn("Reflect", "ownKeys");
-      $({ target: "Promise", stat: true }, {
+      $({
+        target: "Promise",
+        stat: true
+      }, {
         allSettledKeyed: function allSettledKeyed(promises) {
           var C = this;
           var capability = newPromiseCapabilityModule.f(C);
@@ -20253,14 +21861,20 @@
             var values = [];
             var remaining = 1;
             var counter = 0;
-            for (var i = 0; i < allKeys.length; i++) (function(key) {
+            for (var i = 0; i < allKeys.length; i++)(function(key) {
               var desc = getOwnPropertyDescriptor.f(promises, key);
               if (desc && desc.enumerable) {
                 var createElementResolver = function(rejection) {
                   return function(value) {
                     if (alreadyCalled) return;
                     alreadyCalled = true;
-                    values[index] = rejection ? { status: "rejected", reason: value } : { status: "fulfilled", value };
+                    values[index] = rejection ? {
+                      status: "rejected",
+                      reason: value
+                    } : {
+                      status: "fulfilled",
+                      value
+                    };
                     if (--remaining) return;
                     var res = create(null);
                     for (var j = 0; j < keys.length; j++) createProperty(res, keys[j], values[j]);
@@ -20379,7 +21993,10 @@
       var anObject = require_an_object();
       var toMetadataKey = ReflectMetadataModule.toKey;
       var ordinaryDefineOwnMetadata = ReflectMetadataModule.set;
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         defineMetadata: function defineMetadata(metadataKey, metadataValue, target) {
           var targetKey = arguments.length < 4 ? void 0 : toMetadataKey(arguments[3]);
           ordinaryDefineOwnMetadata(metadataKey, metadataValue, anObject(target), targetKey);
@@ -20398,7 +22015,10 @@
       var toMetadataKey = ReflectMetadataModule.toKey;
       var getOrCreateMetadataMap = ReflectMetadataModule.getMap;
       var store = ReflectMetadataModule.store;
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         deleteMetadata: function deleteMetadata(metadataKey, target) {
           var targetKey = arguments.length < 3 ? void 0 : toMetadataKey(arguments[2]);
           var metadataMap = getOrCreateMetadataMap(anObject(target), targetKey, false);
@@ -20429,7 +22049,10 @@
         var parent = getPrototypeOf(O);
         return parent !== null ? ordinaryGetMetadata(MetadataKey, parent, P) : void 0;
       };
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         getMetadata: function getMetadata(metadataKey, target) {
           var targetKey = arguments.length < 3 ? void 0 : toMetadataKey(arguments[2]);
           return ordinaryGetMetadata(metadataKey, anObject(target), targetKey);
@@ -20459,7 +22082,10 @@
         var pKeys = ordinaryMetadataKeys(parent, P);
         return pKeys.length ? oKeys.length ? arrayUniqueBy(concat(oKeys, pKeys)) : pKeys : oKeys;
       };
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         getMetadataKeys: function getMetadataKeys(target) {
           var targetKey = arguments.length < 2 ? void 0 : toMetadataKey(arguments[1]);
           return ordinaryMetadataKeys(anObject(target), targetKey);
@@ -20477,7 +22103,10 @@
       var anObject = require_an_object();
       var ordinaryGetOwnMetadata = ReflectMetadataModule.get;
       var toMetadataKey = ReflectMetadataModule.toKey;
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         getOwnMetadata: function getOwnMetadata(metadataKey, target) {
           var targetKey = arguments.length < 3 ? void 0 : toMetadataKey(arguments[2]);
           return ordinaryGetOwnMetadata(metadataKey, anObject(target), targetKey);
@@ -20495,7 +22124,10 @@
       var anObject = require_an_object();
       var ordinaryOwnMetadataKeys = ReflectMetadataModule.keys;
       var toMetadataKey = ReflectMetadataModule.toKey;
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         getOwnMetadataKeys: function getOwnMetadataKeys(target) {
           var targetKey = arguments.length < 2 ? void 0 : toMetadataKey(arguments[1]);
           return ordinaryOwnMetadataKeys(anObject(target), targetKey);
@@ -20520,7 +22152,10 @@
         var parent = getPrototypeOf(O);
         return parent !== null ? ordinaryHasMetadata(MetadataKey, parent, P) : false;
       };
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         hasMetadata: function hasMetadata(metadataKey, target) {
           var targetKey = arguments.length < 3 ? void 0 : toMetadataKey(arguments[2]);
           return ordinaryHasMetadata(metadataKey, anObject(target), targetKey);
@@ -20538,7 +22173,10 @@
       var anObject = require_an_object();
       var ordinaryHasOwnMetadata = ReflectMetadataModule.has;
       var toMetadataKey = ReflectMetadataModule.toKey;
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         hasOwnMetadata: function hasOwnMetadata(metadataKey, target) {
           var targetKey = arguments.length < 3 ? void 0 : toMetadataKey(arguments[2]);
           return ordinaryHasOwnMetadata(metadataKey, anObject(target), targetKey);
@@ -20556,7 +22194,10 @@
       var anObject = require_an_object();
       var toMetadataKey = ReflectMetadataModule.toKey;
       var ordinaryDefineOwnMetadata = ReflectMetadataModule.set;
-      $({ target: "Reflect", stat: true }, {
+      $({
+        target: "Reflect",
+        stat: true
+      }, {
         metadata: function metadata(metadataKey, metadataValue) {
           return function decorator(target, key) {
             ordinaryDefineOwnMetadata(metadataKey, metadataValue, anObject(target), toMetadataKey(key));
@@ -20581,7 +22222,12 @@
       var $ = require_export();
       var aSet = require_a_set();
       var add = require_set_helpers().add;
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         addAll: function addAll() {
           var set = aSet(this);
           for (var k = 0, len = arguments.length; k < len; k++) {
@@ -20600,7 +22246,12 @@
       var $ = require_export();
       var aSet = require_a_set();
       var remove = require_set_helpers().remove;
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         deleteAll: function deleteAll() {
           var collection = aSet(this);
           var allDeleted = true;
@@ -20663,7 +22314,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $difference = require_set_difference();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         difference: function difference(other) {
           return call($difference, this, toSetLike(other));
         }
@@ -20679,7 +22335,12 @@
       var bind = require_function_bind_context();
       var aSet = require_a_set();
       var iterate = require_set_iterate();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         every: function every(callbackfn) {
           var set = aSet(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -20702,7 +22363,12 @@
       var iterate = require_set_iterate();
       var Set2 = SetHelpers.Set;
       var add = SetHelpers.add;
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         filter: function filter(callbackfn) {
           var set = aSet(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -20724,12 +22390,19 @@
       var bind = require_function_bind_context();
       var aSet = require_a_set();
       var iterate = require_set_iterate();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         find: function find(callbackfn) {
           var set = aSet(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
           var result = iterate(set, function(value) {
-            if (boundFunction(value, value, set)) return { value };
+            if (boundFunction(value, value, set)) return {
+              value
+            };
           }, true);
           return result && result.value;
         }
@@ -20744,7 +22417,11 @@
       var $ = require_export();
       var SetHelpers = require_set_helpers();
       var createCollectionFrom = require_collection_from();
-      $({ target: "Set", stat: true, forced: true }, {
+      $({
+        target: "Set",
+        stat: true,
+        forced: true
+      }, {
         from: createCollectionFrom(SetHelpers.Set, SetHelpers.add, false)
       });
     }
@@ -20766,7 +22443,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $intersection = require_set_intersection();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         intersection: function intersection(other) {
           return call($intersection, this, toSetLike(other));
         }
@@ -20790,7 +22472,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $isDisjointFrom = require_set_is_disjoint_from();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         isDisjointFrom: function isDisjointFrom(other) {
           return call($isDisjointFrom, this, toSetLike(other));
         }
@@ -20814,7 +22501,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $isSubsetOf = require_set_is_subset_of();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         isSubsetOf: function isSubsetOf(other) {
           return call($isSubsetOf, this, toSetLike(other));
         }
@@ -20838,7 +22530,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $isSupersetOf = require_set_is_superset_of();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         isSupersetOf: function isSupersetOf(other) {
           return call($isSupersetOf, this, toSetLike(other));
         }
@@ -20857,7 +22554,12 @@
       var toString = require_to_string();
       var arrayJoin = uncurryThis([].join);
       var push = uncurryThis([].push);
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         join: function join(separator) {
           var set = aSet(this);
           var sep = separator === void 0 ? "," : toString(separator);
@@ -20882,7 +22584,12 @@
       var iterate = require_set_iterate();
       var Set2 = SetHelpers.Set;
       var add = SetHelpers.add;
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         map: function map(callbackfn) {
           var set = aSet(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -20903,7 +22610,11 @@
       var $ = require_export();
       var SetHelpers = require_set_helpers();
       var createCollectionOf = require_collection_of();
-      $({ target: "Set", stat: true, forced: true }, {
+      $({
+        target: "Set",
+        stat: true,
+        forced: true
+      }, {
         of: createCollectionOf(SetHelpers.Set, SetHelpers.add, false)
       });
     }
@@ -20918,7 +22629,12 @@
       var aSet = require_a_set();
       var iterate = require_set_iterate();
       var $TypeError = TypeError;
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         reduce: function reduce(callbackfn) {
           var set = aSet(this);
           var noInitial = arguments.length < 2;
@@ -20947,7 +22663,12 @@
       var bind = require_function_bind_context();
       var aSet = require_a_set();
       var iterate = require_set_iterate();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         some: function some(callbackfn) {
           var set = aSet(this);
           var boundFunction = bind(callbackfn, arguments.length > 1 ? arguments[1] : void 0);
@@ -20975,7 +22696,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $symmetricDifference = require_set_symmetric_difference();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         symmetricDifference: function symmetricDifference(other) {
           return call($symmetricDifference, this, toSetLike(other));
         }
@@ -20999,7 +22725,12 @@
       var call = require_function_call();
       var toSetLike = require_to_set_like();
       var $union = require_set_union();
-      $({ target: "Set", proto: true, real: true, forced: true }, {
+      $({
+        target: "Set",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         union: function union(other) {
           return call($union, this, toSetLike(other));
         }
@@ -21016,7 +22747,11 @@
       var requireObjectCoercible = require_require_object_coercible();
       var toIntegerOrInfinity = require_to_integer_or_infinity();
       var toString = require_to_string();
-      $({ target: "String", proto: true, forced: true }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: true
+      }, {
         at: function at(index) {
           var S = toString(requireObjectCoercible(this));
           var len = S.length;
@@ -21063,7 +22798,11 @@
       "use strict";
       var $ = require_export();
       var cooked = require_string_cooked();
-      $({ target: "String", stat: true, forced: true }, {
+      $({
+        target: "String",
+        stat: true,
+        forced: true
+      }, {
         cooked
       });
     }
@@ -21099,9 +22838,16 @@
         if (index >= string.length) return createIterResultObject(void 0, true);
         point = charAt(string, index);
         state.index += point.length;
-        return createIterResultObject({ codePoint: codeAt(point, 0), position: index }, false);
+        return createIterResultObject({
+          codePoint: codeAt(point, 0),
+          position: index
+        }, false);
       });
-      $({ target: "String", proto: true, forced: true }, {
+      $({
+        target: "String",
+        proto: true,
+        forced: true
+      }, {
         codePoints: function codePoints() {
           return new $StringIterator(toString(requireObjectCoercible(this)));
         }
@@ -21176,28 +22922,28 @@
             case "r":
               out += "\r";
               break;
-            // Escaped line terminators just skip the char.
+              // Escaped line terminators just skip the char.
             case "\r":
               if (i < raw.length && charAt(raw, i) === "\n") ++i;
-            // break omitted
+              // break omitted
             case "\n":
             case "\u2028":
             case "\u2029":
               break;
-            // `\0` is a null control char, but `\0` followed by another digit is an illegal octal escape.
+              // `\0` is a null control char, but `\0` followed by another digit is an illegal octal escape.
             case "0":
               if (isDigit(raw, i)) return;
               out += "\0";
               break;
-            // Hex escapes must contain 2 hex chars.
+              // Hex escapes must contain 2 hex chars.
             case "x":
               n = parseHex(raw, i, i + 2);
               if (n === -1) return;
               i += 2;
               out += fromCharCode(n);
               break;
-            // Unicode escapes contain either 4 chars, or an unlimited number between `{` and `}`.
-            // The hex value must not overflow 0x10FFFF.
+              // Unicode escapes contain either 4 chars, or an unlimited number between `{` and `}`.
+              // The hex value must not overflow 0x10FFFF.
             case "u":
               if (i < raw.length && charAt(raw, i) === "{") {
                 var end = stringIndexOf(raw, "}", ++i);
@@ -21350,7 +23096,11 @@
         }, "");
       };
       var cookedDedentTag = makeDedentTag(cooked);
-      $({ target: "String", stat: true, forced: true }, {
+      $({
+        target: "String",
+        stat: true,
+        forced: true
+      }, {
         dedent: function dedent(templateOrFn) {
           anObject(templateOrFn);
           if (isCallable(templateOrFn)) return makeDedentTag(templateOrFn);
@@ -21442,7 +23192,10 @@
       "use strict";
       var $ = require_export();
       var isRegisteredSymbol = require_symbol_is_registered();
-      $({ target: "Symbol", stat: true }, {
+      $({
+        target: "Symbol",
+        stat: true
+      }, {
         isRegisteredSymbol
       });
     }
@@ -21454,7 +23207,11 @@
       "use strict";
       var $ = require_export();
       var isRegisteredSymbol = require_symbol_is_registered();
-      $({ target: "Symbol", stat: true, name: "isRegisteredSymbol" }, {
+      $({
+        target: "Symbol",
+        stat: true,
+        name: "isRegisteredSymbol"
+      }, {
         isRegistered: isRegisteredSymbol
       });
     }
@@ -21478,8 +23235,7 @@
         try {
           symbolKey = symbolKeys[i];
           if (isSymbol(Symbol2[symbolKey])) wellKnownSymbol(symbolKey);
-        } catch (error) {
-        }
+        } catch (error) {}
       }
       var symbolKey;
       var i;
@@ -21492,8 +23248,7 @@
           for (var j = 0, keys = getOwnPropertyNames(WellKnownSymbolsStore), keysLength = keys.length; j < keysLength; j++) {
             if (WellKnownSymbolsStore[keys[j]] == symbol) return true;
           }
-        } catch (error) {
-        }
+        } catch (error) {}
         return false;
       };
     }
@@ -21505,7 +23260,11 @@
       "use strict";
       var $ = require_export();
       var isWellKnownSymbol = require_symbol_is_well_known();
-      $({ target: "Symbol", stat: true, forced: true }, {
+      $({
+        target: "Symbol",
+        stat: true,
+        forced: true
+      }, {
         isWellKnownSymbol
       });
     }
@@ -21517,7 +23276,12 @@
       "use strict";
       var $ = require_export();
       var isWellKnownSymbol = require_symbol_is_well_known();
-      $({ target: "Symbol", stat: true, name: "isWellKnownSymbol", forced: true }, {
+      $({
+        target: "Symbol",
+        stat: true,
+        name: "isWellKnownSymbol",
+        forced: true
+      }, {
         isWellKnown: isWellKnownSymbol
       });
     }
@@ -21593,7 +23357,7 @@
         var argumentsLength = arguments.length;
         var mapfn = argumentsLength > 1 ? arguments[1] : void 0;
         var thisArg = argumentsLength > 2 ? arguments[2] : void 0;
-        return new (getBuiltIn("Promise"))(function(resolve) {
+        return new(getBuiltIn("Promise"))(function(resolve) {
           aConstructor(C);
           resolve(arrayFromAsync(asyncItems, mapfn, thisArg));
         }).then(function(list) {
@@ -21823,7 +23587,12 @@
       var $ = require_export();
       var aWeakMap = require_a_weak_map();
       var remove = require_weak_map_helpers().remove;
-      $({ target: "WeakMap", proto: true, real: true, forced: true }, {
+      $({
+        target: "WeakMap",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         deleteAll: function deleteAll() {
           var collection = aWeakMap(this);
           var allDeleted = true;
@@ -21845,7 +23614,11 @@
       var $ = require_export();
       var WeakMapHelpers = require_weak_map_helpers();
       var createCollectionFrom = require_collection_from();
-      $({ target: "WeakMap", stat: true, forced: true }, {
+      $({
+        target: "WeakMap",
+        stat: true,
+        forced: true
+      }, {
         from: createCollectionFrom(WeakMapHelpers.WeakMap, WeakMapHelpers.set, true)
       });
     }
@@ -21858,7 +23631,11 @@
       var $ = require_export();
       var WeakMapHelpers = require_weak_map_helpers();
       var createCollectionOf = require_collection_of();
-      $({ target: "WeakMap", stat: true, forced: true }, {
+      $({
+        target: "WeakMap",
+        stat: true,
+        forced: true
+      }, {
         of: createCollectionOf(WeakMapHelpers.WeakMap, WeakMapHelpers.set, true)
       });
     }
@@ -21874,7 +23651,12 @@
       var get = WeakMapHelpers.get;
       var has = WeakMapHelpers.has;
       var set = WeakMapHelpers.set;
-      $({ target: "WeakMap", proto: true, real: true, forced: true }, {
+      $({
+        target: "WeakMap",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         emplace: function emplace(key, handler) {
           var map = aWeakMap(this);
           var value, inserted;
@@ -21916,7 +23698,12 @@
       "use strict";
       var $ = require_export();
       var upsert = require_map_upsert();
-      $({ target: "WeakMap", proto: true, real: true, forced: true }, {
+      $({
+        target: "WeakMap",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         upsert
       });
     }
@@ -21957,7 +23744,12 @@
       var $ = require_export();
       var aWeakSet = require_a_weak_set();
       var add = require_weak_set_helpers().add;
-      $({ target: "WeakSet", proto: true, real: true, forced: true }, {
+      $({
+        target: "WeakSet",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         addAll: function addAll() {
           var set = aWeakSet(this);
           for (var k = 0, len = arguments.length; k < len; k++) {
@@ -21976,7 +23768,12 @@
       var $ = require_export();
       var aWeakSet = require_a_weak_set();
       var remove = require_weak_set_helpers().remove;
-      $({ target: "WeakSet", proto: true, real: true, forced: true }, {
+      $({
+        target: "WeakSet",
+        proto: true,
+        real: true,
+        forced: true
+      }, {
         deleteAll: function deleteAll() {
           var collection = aWeakSet(this);
           var allDeleted = true;
@@ -21998,7 +23795,11 @@
       var $ = require_export();
       var WeakSetHelpers = require_weak_set_helpers();
       var createCollectionFrom = require_collection_from();
-      $({ target: "WeakSet", stat: true, forced: true }, {
+      $({
+        target: "WeakSet",
+        stat: true,
+        forced: true
+      }, {
         from: createCollectionFrom(WeakSetHelpers.WeakSet, WeakSetHelpers.add, false)
       });
     }
@@ -22011,7 +23812,11 @@
       var $ = require_export();
       var WeakSetHelpers = require_weak_set_helpers();
       var createCollectionOf = require_collection_of();
-      $({ target: "WeakSet", stat: true, forced: true }, {
+      $({
+        target: "WeakSet",
+        stat: true,
+        forced: true
+      }, {
         of: createCollectionOf(WeakSetHelpers.WeakSet, WeakSetHelpers.add, false)
       });
     }
@@ -22054,7 +23859,12 @@
       });
       var WRONG_ARITY = BASIC && $atob.length !== 1;
       var FORCED = !BASIC || NO_SPACES_IGNORE || NO_ENCODING_CHECK || NO_ARG_RECEIVING_CHECK || WRONG_ARITY;
-      $({ global: true, bind: true, enumerable: true, forced: FORCED }, {
+      $({
+        global: true,
+        bind: true,
+        enumerable: true,
+        forced: FORCED
+      }, {
         atob: function atob(data) {
           validateArgumentsLength(arguments.length, 1);
           if (BASIC && !NO_SPACES_IGNORE && !NO_ENCODING_CHECK) return call($atob, globalThis2, data);
@@ -22068,7 +23878,7 @@
           length = string.length;
           var lenmod = length & 3;
           if (lenmod === 1 || exec(disallowed, string)) {
-            throw new (getBuiltIn("DOMException"))("The string is not correctly encoded", "InvalidCharacterError");
+            throw new(getBuiltIn("DOMException"))("The string is not correctly encoded", "InvalidCharacterError");
           }
           var output = new $Array((length >> 2) * 3 + (lenmod ? lenmod - 1 : 0));
           var outputIndex = 0;
@@ -22111,7 +23921,12 @@
         return $btoa(null) !== "bnVsbA==";
       });
       var WRONG_ARITY = BASIC && $btoa.length !== 1;
-      $({ global: true, bind: true, enumerable: true, forced: !BASIC || NO_ARG_RECEIVING_CHECK || WRONG_ARG_CONVERSION || WRONG_ARITY }, {
+      $({
+        global: true,
+        bind: true,
+        enumerable: true,
+        forced: !BASIC || NO_ARG_RECEIVING_CHECK || WRONG_ARG_CONVERSION || WRONG_ARITY
+      }, {
         btoa: function btoa(data) {
           validateArgumentsLength(arguments.length, 1);
           if (BASIC) return call($btoa, globalThis2, toString(data));
@@ -22124,7 +23939,7 @@
           while (charAt(string, position) || (map = "=", position % 1)) {
             charCode = charCodeAt(string, position += 3 / 4);
             if (charCode > 255) {
-              throw new (getBuiltIn("DOMException"))("The string contains characters outside of the Latin1 range", "InvalidCharacterError");
+              throw new(getBuiltIn("DOMException"))("The string contains characters outside of the Latin1 range", "InvalidCharacterError");
             }
             block = block << 8 | charCode;
             output[outputIndex++] = charAt(map, 63 & block >> 8 - position % 1 * 8);
@@ -22233,13 +24048,14 @@
             CollectionPrototype[ITERATOR] = ArrayValues;
           }
           setToStringTag(CollectionPrototype, COLLECTION_NAME2, true);
-          if (DOMIterables[COLLECTION_NAME2]) for (var METHOD_NAME in ArrayIteratorMethods) {
-            if (CollectionPrototype[METHOD_NAME] !== ArrayIteratorMethods[METHOD_NAME]) try {
-              createNonEnumerableProperty(CollectionPrototype, METHOD_NAME, ArrayIteratorMethods[METHOD_NAME]);
-            } catch (error) {
-              CollectionPrototype[METHOD_NAME] = ArrayIteratorMethods[METHOD_NAME];
+          if (DOMIterables[COLLECTION_NAME2])
+            for (var METHOD_NAME in ArrayIteratorMethods) {
+              if (CollectionPrototype[METHOD_NAME] !== ArrayIteratorMethods[METHOD_NAME]) try {
+                createNonEnumerableProperty(CollectionPrototype, METHOD_NAME, ArrayIteratorMethods[METHOD_NAME]);
+              } catch (error) {
+                CollectionPrototype[METHOD_NAME] = ArrayIteratorMethods[METHOD_NAME];
+              }
             }
-          }
         }
       };
       for (COLLECTION_NAME in DOMIterables) {
@@ -22255,31 +24071,131 @@
     "node_modules/core-js/internals/dom-exception-constants.js"(exports, module) {
       "use strict";
       module.exports = {
-        IndexSizeError: { s: "INDEX_SIZE_ERR", c: 1, m: 1 },
-        DOMStringSizeError: { s: "DOMSTRING_SIZE_ERR", c: 2, m: 0 },
-        HierarchyRequestError: { s: "HIERARCHY_REQUEST_ERR", c: 3, m: 1 },
-        WrongDocumentError: { s: "WRONG_DOCUMENT_ERR", c: 4, m: 1 },
-        InvalidCharacterError: { s: "INVALID_CHARACTER_ERR", c: 5, m: 1 },
-        NoDataAllowedError: { s: "NO_DATA_ALLOWED_ERR", c: 6, m: 0 },
-        NoModificationAllowedError: { s: "NO_MODIFICATION_ALLOWED_ERR", c: 7, m: 1 },
-        NotFoundError: { s: "NOT_FOUND_ERR", c: 8, m: 1 },
-        NotSupportedError: { s: "NOT_SUPPORTED_ERR", c: 9, m: 1 },
-        InUseAttributeError: { s: "INUSE_ATTRIBUTE_ERR", c: 10, m: 1 },
-        InvalidStateError: { s: "INVALID_STATE_ERR", c: 11, m: 1 },
-        SyntaxError: { s: "SYNTAX_ERR", c: 12, m: 1 },
-        InvalidModificationError: { s: "INVALID_MODIFICATION_ERR", c: 13, m: 1 },
-        NamespaceError: { s: "NAMESPACE_ERR", c: 14, m: 1 },
-        InvalidAccessError: { s: "INVALID_ACCESS_ERR", c: 15, m: 1 },
-        ValidationError: { s: "VALIDATION_ERR", c: 16, m: 0 },
-        TypeMismatchError: { s: "TYPE_MISMATCH_ERR", c: 17, m: 1 },
-        SecurityError: { s: "SECURITY_ERR", c: 18, m: 1 },
-        NetworkError: { s: "NETWORK_ERR", c: 19, m: 1 },
-        AbortError: { s: "ABORT_ERR", c: 20, m: 1 },
-        URLMismatchError: { s: "URL_MISMATCH_ERR", c: 21, m: 1 },
-        QuotaExceededError: { s: "QUOTA_EXCEEDED_ERR", c: 22, m: 1 },
-        TimeoutError: { s: "TIMEOUT_ERR", c: 23, m: 1 },
-        InvalidNodeTypeError: { s: "INVALID_NODE_TYPE_ERR", c: 24, m: 1 },
-        DataCloneError: { s: "DATA_CLONE_ERR", c: 25, m: 1 }
+        IndexSizeError: {
+          s: "INDEX_SIZE_ERR",
+          c: 1,
+          m: 1
+        },
+        DOMStringSizeError: {
+          s: "DOMSTRING_SIZE_ERR",
+          c: 2,
+          m: 0
+        },
+        HierarchyRequestError: {
+          s: "HIERARCHY_REQUEST_ERR",
+          c: 3,
+          m: 1
+        },
+        WrongDocumentError: {
+          s: "WRONG_DOCUMENT_ERR",
+          c: 4,
+          m: 1
+        },
+        InvalidCharacterError: {
+          s: "INVALID_CHARACTER_ERR",
+          c: 5,
+          m: 1
+        },
+        NoDataAllowedError: {
+          s: "NO_DATA_ALLOWED_ERR",
+          c: 6,
+          m: 0
+        },
+        NoModificationAllowedError: {
+          s: "NO_MODIFICATION_ALLOWED_ERR",
+          c: 7,
+          m: 1
+        },
+        NotFoundError: {
+          s: "NOT_FOUND_ERR",
+          c: 8,
+          m: 1
+        },
+        NotSupportedError: {
+          s: "NOT_SUPPORTED_ERR",
+          c: 9,
+          m: 1
+        },
+        InUseAttributeError: {
+          s: "INUSE_ATTRIBUTE_ERR",
+          c: 10,
+          m: 1
+        },
+        InvalidStateError: {
+          s: "INVALID_STATE_ERR",
+          c: 11,
+          m: 1
+        },
+        SyntaxError: {
+          s: "SYNTAX_ERR",
+          c: 12,
+          m: 1
+        },
+        InvalidModificationError: {
+          s: "INVALID_MODIFICATION_ERR",
+          c: 13,
+          m: 1
+        },
+        NamespaceError: {
+          s: "NAMESPACE_ERR",
+          c: 14,
+          m: 1
+        },
+        InvalidAccessError: {
+          s: "INVALID_ACCESS_ERR",
+          c: 15,
+          m: 1
+        },
+        ValidationError: {
+          s: "VALIDATION_ERR",
+          c: 16,
+          m: 0
+        },
+        TypeMismatchError: {
+          s: "TYPE_MISMATCH_ERR",
+          c: 17,
+          m: 1
+        },
+        SecurityError: {
+          s: "SECURITY_ERR",
+          c: 18,
+          m: 1
+        },
+        NetworkError: {
+          s: "NETWORK_ERR",
+          c: 19,
+          m: 1
+        },
+        AbortError: {
+          s: "ABORT_ERR",
+          c: 20,
+          m: 1
+        },
+        URLMismatchError: {
+          s: "URL_MISMATCH_ERR",
+          c: 21,
+          m: 1
+        },
+        QuotaExceededError: {
+          s: "QUOTA_EXCEEDED_ERR",
+          c: 22,
+          m: 1
+        },
+        TimeoutError: {
+          s: "TIMEOUT_ERR",
+          c: 23,
+          m: 1
+        },
+        InvalidNodeTypeError: {
+          s: "INVALID_NODE_TYPE_ERR",
+          c: 24,
+          m: 1
+        },
+        DataCloneError: {
+          s: "DATA_CLONE_ERR",
+          c: 25,
+          m: 1
+        }
       };
     }
   });
@@ -22313,7 +24229,7 @@
       var NativeDOMException = getBuiltIn(DOM_EXCEPTION) || (function() {
         try {
           var MessageChannel = getBuiltIn("MessageChannel") || getBuiltInNodeModule("worker_threads").MessageChannel;
-          new MessageChannel().port1.postMessage(/* @__PURE__ */ new WeakMap());
+          new MessageChannel().port1.postMessage( /* @__PURE__ */ new WeakMap());
         } catch (error) {
           if (error.name === DATA_CLONE_ERR && error.code === 25) return error.constructor;
         }
@@ -22351,7 +24267,11 @@
       };
       var DOMExceptionPrototype = $DOMException.prototype = create(ErrorPrototype);
       var createGetterDescriptor = function(get) {
-        return { enumerable: true, configurable: true, get };
+        return {
+          enumerable: true,
+          configurable: true,
+          get
+        };
       };
       var getterFor = function(key2) {
         return createGetterDescriptor(function() {
@@ -22375,7 +24295,11 @@
       });
       var MISSED_CONSTANTS = INCORRECT_CONSTRUCTOR || NativeDOMException[DATA_CLONE_ERR] !== 25 || NativeDOMExceptionPrototype[DATA_CLONE_ERR] !== 25;
       var FORCED_CONSTRUCTOR = IS_PURE ? INCORRECT_TO_STRING || INCORRECT_CODE || MISSED_CONSTANTS : INCORRECT_CONSTRUCTOR;
-      $({ global: true, constructor: true, forced: FORCED_CONSTRUCTOR }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: FORCED_CONSTRUCTOR
+      }, {
         DOMException: FORCED_CONSTRUCTOR ? $DOMException : NativeDOMException
       });
       var PolyfilledDOMException = getBuiltIn(DOM_EXCEPTION);
@@ -22388,17 +24312,18 @@
           return codeFor(anObject(this).name);
         }));
       }
-      for (key in DOMExceptionConstants) if (hasOwn(DOMExceptionConstants, key)) {
-        constant = DOMExceptionConstants[key];
-        constantName = constant.s;
-        descriptor = createPropertyDescriptor(6, constant.c);
-        if (!hasOwn(PolyfilledDOMException, constantName)) {
-          defineProperty(PolyfilledDOMException, constantName, descriptor);
+      for (key in DOMExceptionConstants)
+        if (hasOwn(DOMExceptionConstants, key)) {
+          constant = DOMExceptionConstants[key];
+          constantName = constant.s;
+          descriptor = createPropertyDescriptor(6, constant.c);
+          if (!hasOwn(PolyfilledDOMException, constantName)) {
+            defineProperty(PolyfilledDOMException, constantName, descriptor);
+          }
+          if (!hasOwn(PolyfilledDOMExceptionPrototype, constantName)) {
+            defineProperty(PolyfilledDOMExceptionPrototype, constantName, descriptor);
+          }
         }
-        if (!hasOwn(PolyfilledDOMExceptionPrototype, constantName)) {
-          defineProperty(PolyfilledDOMExceptionPrototype, constantName, descriptor);
-        }
-      }
       var constant;
       var constantName;
       var descriptor;
@@ -22444,7 +24369,11 @@
       var descriptor = NativeDOMException && DESCRIPTORS && Object.getOwnPropertyDescriptor(globalThis2, DOM_EXCEPTION);
       var BUGGY_DESCRIPTOR = !!descriptor && !(descriptor.writable && descriptor.configurable);
       var FORCED_CONSTRUCTOR = ERROR_HAS_STACK && !BUGGY_DESCRIPTOR && !DOM_EXCEPTION_HAS_STACK;
-      $({ global: true, constructor: true, forced: IS_PURE || FORCED_CONSTRUCTOR }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: IS_PURE || FORCED_CONSTRUCTOR
+      }, {
         // TODO: fix export logic
         DOMException: FORCED_CONSTRUCTOR ? $DOMException : NativeDOMException
       });
@@ -22454,13 +24383,14 @@
         if (!IS_PURE) {
           defineProperty(PolyfilledDOMExceptionPrototype, "constructor", createPropertyDescriptor(1, PolyfilledDOMException));
         }
-        for (key in DOMExceptionConstants) if (hasOwn(DOMExceptionConstants, key)) {
-          constant = DOMExceptionConstants[key];
-          constantName = constant.s;
-          if (!hasOwn(PolyfilledDOMException, constantName)) {
-            defineProperty(PolyfilledDOMException, constantName, createPropertyDescriptor(6, constant.c));
+        for (key in DOMExceptionConstants)
+          if (hasOwn(DOMExceptionConstants, key)) {
+            constant = DOMExceptionConstants[key];
+            constantName = constant.s;
+            if (!hasOwn(PolyfilledDOMException, constantName)) {
+              defineProperty(PolyfilledDOMException, constantName, createPropertyDescriptor(6, constant.c));
+            }
           }
-        }
       }
       var constant;
       var constantName;
@@ -22486,7 +24416,12 @@
       var $ = require_export();
       var globalThis2 = require_global_this();
       var clearImmediate = require_task().clear;
-      $({ global: true, bind: true, enumerable: true, forced: globalThis2.clearImmediate !== clearImmediate }, {
+      $({
+        global: true,
+        bind: true,
+        enumerable: true,
+        forced: globalThis2.clearImmediate !== clearImmediate
+      }, {
         clearImmediate
       });
     }
@@ -22532,7 +24467,12 @@
       var setTask = require_task().set;
       var schedulersFix = require_schedulers_fix();
       var setImmediate = globalThis2.setImmediate ? schedulersFix(setTask, false) : setTask;
-      $({ global: true, bind: true, enumerable: true, forced: globalThis2.setImmediate !== setImmediate }, {
+      $({
+        global: true,
+        bind: true,
+        enumerable: true,
+        forced: globalThis2.setImmediate !== setImmediate
+      }, {
         setImmediate
       });
     }
@@ -22561,7 +24501,12 @@
       var WRONG_ARITY = fails(function() {
         return DESCRIPTORS && Object.getOwnPropertyDescriptor(globalThis2, "queueMicrotask").value.length !== 1;
       });
-      $({ global: true, enumerable: true, dontCallGetSet: true, forced: WRONG_ARITY }, {
+      $({
+        global: true,
+        enumerable: true,
+        dontCallGetSet: true,
+        forced: WRONG_ARITY
+      }, {
         queueMicrotask: function queueMicrotask(fn) {
           validateArgumentsLength(arguments.length, 1);
           microtask(aCallable(fn));
@@ -22602,11 +24547,14 @@
               enumerable: true
             });
           }
-        } else $({ global: true, simple: true, forced: INCORRECT_VALUE }, {
+        } else $({
+          global: true,
+          simple: true,
+          forced: INCORRECT_VALUE
+        }, {
           self: globalThis2
         });
-      } catch (error) {
-      }
+      } catch (error) {}
       var descriptor;
     }
   });
@@ -22676,20 +24624,27 @@
       var checkErrorsCloning = function(structuredCloneImplementation, $Error) {
         return !fails(function() {
           var error = new $Error();
-          var test = structuredCloneImplementation({ a: error, b: error });
+          var test = structuredCloneImplementation({
+            a: error,
+            b: error
+          });
           return !(test && test.a === test.b && test.a instanceof $Error && test.a.stack === error.stack);
         });
       };
       var checkNewErrorsCloningSemantic = function(structuredCloneImplementation) {
         return !fails(function() {
-          var test = structuredCloneImplementation(new globalThis2.AggregateError([1], PERFORMANCE_MARK, { cause: 3 }));
+          var test = structuredCloneImplementation(new globalThis2.AggregateError([1], PERFORMANCE_MARK, {
+            cause: 3
+          }));
           return test.name !== "AggregateError" || test.errors[0] !== 1 || test.message !== PERFORMANCE_MARK || test.cause !== 3;
         });
       };
       var nativeStructuredClone = globalThis2.structuredClone;
       var FORCED_REPLACEMENT = IS_PURE || !checkErrorsCloning(nativeStructuredClone, Error2) || !checkErrorsCloning(nativeStructuredClone, DOMException) || !checkNewErrorsCloningSemantic(nativeStructuredClone);
       var structuredCloneFromMark = !nativeStructuredClone && checkBasicSemantic(function(value) {
-        return new PerformanceMark(PERFORMANCE_MARK, { detail: value }).detail;
+        return new PerformanceMark(PERFORMANCE_MARK, {
+          detail: value
+        }).detail;
       });
       var nativeRestrictedStructuredClone = checkBasicSemantic(nativeStructuredClone) || structuredCloneFromMark;
       var throwUncloneable = function(type) {
@@ -22709,8 +24664,7 @@
         } catch (error) {
           try {
             dataTransfer = new globalThis2.ClipboardEvent("").clipboardData;
-          } catch (error2) {
-          }
+          } catch (error2) {}
         }
         return dataTransfer && dataTransfer.items && dataTransfer.files ? dataTransfer : null;
       };
@@ -22729,7 +24683,9 @@
               clone = value.slice(0);
             } else {
               length = value.byteLength;
-              options = "maxByteLength" in value ? { maxByteLength: value.maxByteLength } : void 0;
+              options = "maxByteLength" in value ? {
+                maxByteLength: value.maxByteLength
+              } : void 0;
               clone = new ArrayBuffer(length, options);
               source = new DataView2(value);
               target = new DataView2(clone);
@@ -22777,7 +24733,7 @@
             name = value.name;
             switch (name) {
               case "AggregateError":
-                cloned = new (getBuiltIn(name))([]);
+                cloned = new(getBuiltIn(name))([]);
                 break;
               case "EvalError":
               case "RangeError":
@@ -22786,12 +24742,12 @@
               case "SyntaxError":
               case "TypeError":
               case "URIError":
-                cloned = new (getBuiltIn(name))();
+                cloned = new(getBuiltIn(name))();
                 break;
               case "CompileError":
               case "LinkError":
               case "RuntimeError":
-                cloned = new (getBuiltIn("WebAssembly", name))();
+                cloned = new(getBuiltIn("WebAssembly", name))();
                 break;
               default:
                 cloned = new Error2();
@@ -22836,12 +24792,10 @@
             if (nativeRestrictedStructuredClone) try {
               cloned = nativeRestrictedStructuredClone(value);
               if (classof(cloned) !== type) cloned = void 0;
-            } catch (error) {
-            }
+            } catch (error) {}
             if (!cloned) try {
               cloned = new File([value], value.name, value);
-            } catch (error) {
-            }
+            } catch (error) {}
             if (!cloned) throwUnpolyfillable(type);
             break;
           case "FileList":
@@ -22858,8 +24812,9 @@
               cloned = new ImageData(
                 structuredCloneInternal(value.data, map),
                 value.width,
-                value.height,
-                { colorSpace: value.colorSpace }
+                value.height, {
+                  colorSpace: value.colorSpace
+                }
               );
             } catch (error) {
               cloned = tryNativeRestrictedStructuredClone(value, type);
@@ -22938,7 +24893,7 @@
               case "RTCCertificate":
               case "WebAssembly.Module":
                 throwUnpolyfillable(type);
-              // break omitted
+                // break omitted
               default:
                 throwUncloneable(type);
             }
@@ -22974,7 +24929,7 @@
               cloned.error = structuredCloneInternal(value.error, map);
               cloned.suppressed = structuredCloneInternal(value.suppressed, map);
             }
-          // break omitted
+            // break omitted
           case "DOMException":
             if (ERROR_STACK_INSTALLABLE) {
               createNonEnumerableProperty(cloned, "stack", structuredCloneInternal(value.stack, map));
@@ -23004,7 +24959,9 @@
             continue;
           }
           if (PROPER_STRUCTURED_CLONE_TRANSFER) {
-            transferred = nativeStructuredClone(value, { transfer: [value] });
+            transferred = nativeStructuredClone(value, {
+              transfer: [value]
+            });
           } else switch (type) {
             case "ImageBitmap":
               C = globalThis2.OffscreenCanvas;
@@ -23014,8 +24971,7 @@
                 context = canvas.getContext("bitmaprenderer");
                 context.transferFromImageBitmap(value);
                 transferred = canvas.transferToImageBitmap();
-              } catch (error) {
-              }
+              } catch (error) {}
               break;
             case "AudioData":
             case "VideoFrame":
@@ -23023,8 +24979,7 @@
               try {
                 transferred = value.clone();
                 value.close();
-              } catch (error) {
-              }
+              } catch (error) {}
               break;
             case "MediaSourceHandle":
             case "MessagePort":
@@ -23046,7 +25001,9 @@
       var detachBuffers = function(buffers) {
         setIterate(buffers, function(buffer) {
           if (PROPER_STRUCTURED_CLONE_TRANSFER) {
-            nativeStructuredClone(buffer, { transfer: [buffer] });
+            nativeStructuredClone(buffer, {
+              transfer: [buffer]
+            });
           } else if (isCallable(buffer.transfer)) {
             buffer.transfer();
           } else if (detachTransferable) {
@@ -23056,7 +25013,12 @@
           }
         });
       };
-      $({ global: true, enumerable: true, sham: !PROPER_STRUCTURED_CLONE_TRANSFER, forced: FORCED_REPLACEMENT }, {
+      $({
+        global: true,
+        enumerable: true,
+        sham: !PROPER_STRUCTURED_CLONE_TRANSFER,
+        forced: FORCED_REPLACEMENT
+      }, {
         structuredClone: function structuredClone2(value) {
           var options = validateArgumentsLength(arguments.length, 1) > 1 && !isNullOrUndefined(arguments[1]) ? anObject(arguments[1]) : void 0;
           var transfer = options ? options.transfer : void 0;
@@ -23081,7 +25043,11 @@
       var globalThis2 = require_global_this();
       var schedulersFix = require_schedulers_fix();
       var setInterval = schedulersFix(globalThis2.setInterval, true);
-      $({ global: true, bind: true, forced: globalThis2.setInterval !== setInterval }, {
+      $({
+        global: true,
+        bind: true,
+        forced: globalThis2.setInterval !== setInterval
+      }, {
         setInterval
       });
     }
@@ -23095,7 +25061,11 @@
       var globalThis2 = require_global_this();
       var schedulersFix = require_schedulers_fix();
       var setTimeout2 = schedulersFix(globalThis2.setTimeout, true);
-      $({ global: true, bind: true, forced: globalThis2.setTimeout !== setTimeout2 }, {
+      $({
+        global: true,
+        bind: true,
+        forced: globalThis2.setTimeout !== setTimeout2
+      }, {
         setTimeout: setTimeout2
       });
     }
@@ -23528,11 +25498,19 @@
               entryIterator = getIterator(anObject(step.value));
               entryNext = entryIterator.next;
               if ((first = call(entryNext, entryIterator)).done || (second = call(entryNext, entryIterator)).done || !call(entryNext, entryIterator).done) throw new TypeError2("Expected sequence with length 2");
-              push(entries, { key: $toString(first.value), value: $toString(second.value) });
+              push(entries, {
+                key: $toString(first.value),
+                value: $toString(second.value)
+              });
             }
-          } else for (var key in object) if (hasOwn(object, key)) {
-            push(entries, { key, value: $toString(object[key]) });
-          }
+          } else
+            for (var key in object)
+              if (hasOwn(object, key)) {
+                push(entries, {
+                  key,
+                  value: $toString(object[key])
+                });
+              }
         },
         parseQuery: function(query) {
           if (query) {
@@ -23584,7 +25562,10 @@
         append: function append(name, value) {
           var state = getInternalParamsState(this);
           validateArgumentsLength(arguments.length, 2);
-          push(state.entries, { key: $toString(name), value: $toString(value) });
+          push(state.entries, {
+            key: $toString(name),
+            value: $toString(value)
+          });
           if (!DESCRIPTORS) this.size++;
           state.updateURL();
         },
@@ -23668,7 +25649,10 @@
               }
             }
           }
-          if (!found) push(entries, { key, value: val });
+          if (!found) push(entries, {
+            key,
+            value: val
+          });
           if (!DESCRIPTORS) this.size = entries.length;
           state.updateURL();
         },
@@ -23704,11 +25688,17 @@
         entries: function entries() {
           return new URLSearchParamsIterator(this, "entries");
         }
-      }, { enumerable: true });
-      defineBuiltIn(URLSearchParamsPrototype, ITERATOR, URLSearchParamsPrototype.entries, { name: "entries" });
+      }, {
+        enumerable: true
+      });
+      defineBuiltIn(URLSearchParamsPrototype, ITERATOR, URLSearchParamsPrototype.entries, {
+        name: "entries"
+      });
       defineBuiltIn(URLSearchParamsPrototype, "toString", function toString() {
         return getInternalParamsState(this).serialize();
-      }, { enumerable: true });
+      }, {
+        enumerable: true
+      });
       if (DESCRIPTORS) defineBuiltInAccessor(URLSearchParamsPrototype, "size", {
         get: function size() {
           return getInternalParamsState(this).entries.length;
@@ -23717,7 +25707,11 @@
         enumerable: true
       });
       setToStringTag(URLSearchParamsConstructor, URL_SEARCH_PARAMS);
-      $({ global: true, constructor: true, forced: !USE_NATIVE_URL }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: !USE_NATIVE_URL
+      }, {
         URLSearchParams: URLSearchParamsConstructor
       });
       if (!USE_NATIVE_URL && isCallable(Headers)) {
@@ -23741,7 +25735,12 @@
           return init;
         };
         if (isCallable(nativeFetch)) {
-          $({ global: true, enumerable: true, dontCallGetSet: true, forced: true }, {
+          $({
+            global: true,
+            enumerable: true,
+            dontCallGetSet: true,
+            forced: true
+          }, {
             fetch: function fetch(input) {
               return nativeFetch(input, arguments.length > 1 ? wrapRequestOptions(arguments[1]) : {});
             }
@@ -23754,7 +25753,12 @@
           };
           RequestPrototype.constructor = RequestConstructor;
           RequestConstructor.prototype = RequestPrototype;
-          $({ global: true, constructor: true, dontCallGetSet: true, forced: true }, {
+          $({
+            global: true,
+            constructor: true,
+            dontCallGetSet: true,
+            forced: true
+          }, {
             Request: RequestConstructor
           });
         }
@@ -24772,10 +26776,14 @@
       }
       defineBuiltIn(URLPrototype, "toJSON", function toJSON() {
         return getInternalURLState(this).serialize();
-      }, { enumerable: true });
+      }, {
+        enumerable: true
+      });
       defineBuiltIn(URLPrototype, "toString", function toString() {
         return getInternalURLState(this).serialize();
-      }, { enumerable: true });
+      }, {
+        enumerable: true
+      });
       if (NativeURL) {
         nativeCreateObjectURL = NativeURL.createObjectURL;
         nativeRevokeObjectURL = NativeURL.revokeObjectURL;
@@ -24785,7 +26793,12 @@
       var nativeCreateObjectURL;
       var nativeRevokeObjectURL;
       setToStringTag(URLConstructor, "URL");
-      $({ global: true, constructor: true, forced: !USE_NATIVE_URL, sham: !DESCRIPTORS }, {
+      $({
+        global: true,
+        constructor: true,
+        forced: !USE_NATIVE_URL,
+        sham: !DESCRIPTORS
+      }, {
         URL: URLConstructor
       });
     }
@@ -24816,7 +26829,11 @@
       var WRONG_ARITY = fails(function() {
         return URL2.canParse.length !== 1;
       });
-      $({ target: "URL", stat: true, forced: !THROWS_WITHOUT_ARGUMENTS || WRONG_ARITY }, {
+      $({
+        target: "URL",
+        stat: true,
+        forced: !THROWS_WITHOUT_ARGUMENTS || WRONG_ARITY
+      }, {
         canParse: function canParse(url) {
           var length = validateArgumentsLength(arguments.length, 1);
           var urlString = toString(url);
@@ -24841,7 +26858,11 @@
       var toString = require_to_string();
       var USE_NATIVE_URL = require_url_constructor_detection();
       var URL2 = getBuiltIn("URL");
-      $({ target: "URL", stat: true, forced: !USE_NATIVE_URL }, {
+      $({
+        target: "URL",
+        stat: true,
+        forced: !USE_NATIVE_URL
+      }, {
         parse: function parse(url) {
           var length = validateArgumentsLength(arguments.length, 1);
           var urlString = toString(url);
@@ -24864,7 +26885,11 @@
       var call = require_function_call();
       var getBuiltInPrototypeMethod = require_get_built_in_prototype_method();
       var toString = getBuiltInPrototypeMethod("URL", "toString");
-      $({ target: "URL", proto: true, enumerable: true }, {
+      $({
+        target: "URL",
+        proto: true,
+        enumerable: true
+      }, {
         toJSON: function toJSON() {
           return call(toString, this);
         }
@@ -24904,7 +26929,10 @@
           if (length && $value === void 0) return $delete(this, name);
           var entries = [];
           forEach(this, function(v, k) {
-            push(entries, { key: k, value: v });
+            push(entries, {
+              key: k,
+              value: v
+            });
           });
           validateArgumentsLength(length, 1);
           var key = toString(name);
@@ -24922,7 +26950,10 @@
             entry = entries[index++];
             if (!(entry.key === key && entry.value === value)) append(this, entry.key, entry.value);
           }
-        }, { enumerable: true, unsafe: true });
+        }, {
+          enumerable: true,
+          unsafe: true
+        });
       }
     }
   });
@@ -24953,7 +26984,10 @@
             if (values[index++] === value) return true;
           }
           return false;
-        }, { enumerable: true, unsafe: true });
+        }, {
+          enumerable: true,
+          unsafe: true
+        });
       }
     }
   });
@@ -25547,7 +27581,12 @@
       var $export = require_export();
       var classof = require_classof();
       var isObject = require_is_object();
-      $export({ target: "Error", stat: true, forced: true, sham: true }, {
+      $export({
+        target: "Error",
+        stat: true,
+        forced: true,
+        sham: true
+      }, {
         isError: function isError(value) {
           if (!isObject(value)) return false;
           const tag = classof(value);
