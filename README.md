@@ -39,9 +39,19 @@ This separate build produces `dist/polyfills-jxa.js`. It currently includes:
 - `core-js`
 - [`web-streams-polyfill`](https://www.npmjs.com/package/web-streams-polyfill) 4.3.0
 - [`@web-std/blob`](https://www.npmjs.com/package/@web-std/blob) 3.0.5
-- `TextEncoder` and `TextDecoder` from `@zxing/text-encoding`, required by Blob
+- `TextEncoder` and `TextDecoder` from `@zxing/text-encoding`
+- `fetch`, `Headers`, `Request`, and `Response` from `whatwg-fetch`
+- `FormData` and `File` from `formdata-polyfill`
+- `AbortController` and `AbortSignal` from `abort-controller`
+- `Location` and `location` from the local JXA adapter
+- `Promise.allKeyed` from `promise.allkeyed`
+- `Promise.allSettledKeyed` from `promise.allsettledkeyed`
 
-`web-streams-polyfill/polyfill` installs `ReadableStream`, `WritableStream`, `TransformStream`, their readers and writers, and queuing strategies on `globalThis`. `@web-std/blob` supplies a Web API-compatible global `Blob` backed by `Uint8Array` and Web Streams. The entry point verifies stream constructors and Blob's `size`, `type`, `slice()`, `arrayBuffer()`, `stream()`, and `text()` APIs.
+The build exposes these APIs plus all Web Streams constructors on `globalThis` as writable, enumerable, configurable properties. `globalThis.location` is a Location-compatible object whose URL is the current working directory, such as `file:///path/to/project/`. Startup checks construct streams, Blob, File, FormData, Headers, Request, Response, Location, and AbortController instances.
+
+The es-shims organization contains 168 repositories, including tooling, abstract-operation libraries, obsolete aggregate shims, and individual shims already covered by the complete `core-js` build. Only current Stage 3 APIs absent from `core-js` are added separately, avoiding duplicate shims and global conflicts.
+
+`whatwg-fetch` implements network requests through `XMLHttpRequest`. JXA does not provide `XMLHttpRequest`, so Fetch object constructors work, but calling `fetch()` requires a separate JXA network transport polyfill.
 
 Use `npm run build:polyfills` to build without executing the bundle.
 
@@ -63,8 +73,9 @@ A plain `osascript` process returns immediately when its top-level value is a Pr
 
 Verified with `core-js` 3.50.0:
 
-- All 443 upstream unit test files bundled and executed
-- 780 tests passed
+- All 443 upstream core-js unit test files bundled and executed
+- 2 focused es-shims tests executed
+- 782 tests passed
 - 4 upstream-defined tests skipped
 - 0 failures
 
