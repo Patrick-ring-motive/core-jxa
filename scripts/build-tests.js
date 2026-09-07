@@ -2,7 +2,9 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { execFileSync } = require('node:child_process');
+const {
+  execFileSync
+} = require('node:child_process');
 const esbuild = require('esbuild');
 const pkg = require('core-js/package.json');
 
@@ -11,11 +13,15 @@ const cache = path.join(root, '.cache', `core-js-${pkg.version}`);
 const archive = path.join(root, '.cache', `core-js-${pkg.version}.tar.gz`);
 const testsDir = path.join(cache, 'tests', 'unit-global');
 
-fs.mkdirSync(path.dirname(cache), { recursive: true });
+fs.mkdirSync(path.dirname(cache), {
+  recursive: true
+});
 if (!fs.existsSync(testsDir)) {
   const url = `https://github.com/zloirock/core-js/archive/refs/tags/v${pkg.version}.tar.gz`;
   execFileSync('curl', ['--fail', '--location', '--silent', '--show-error', url, '--output', archive]);
-  fs.mkdirSync(cache, { recursive: true });
+  fs.mkdirSync(cache, {
+    recursive: true
+  });
   execFileSync('tar', ['-xzf', archive, '--strip-components=1', '-C', cache]);
 }
 
@@ -108,7 +114,8 @@ esbuild.buildSync({
   platform: 'browser',
   format: 'iife',
   target: ['esnext'],
-  footer: { js: `
+  footer: {
+    js: `
 ObjC.import('Foundation');
 globalThis.__writeTestResult = function (result) {
   var text = $(JSON.stringify(result));
@@ -117,7 +124,8 @@ globalThis.__writeTestResult = function (result) {
 };
 function run() { globalThis.__runTests(); }
 function idle() { globalThis.__pumpTimers(); return 0.001; }
-` },
+`
+  },
   outfile: path.join(root, 'dist', 'core-js-jxa-tests.js'),
   nodePaths: [path.join(root, 'node_modules')],
   logLevel: 'info',
