@@ -2,18 +2,29 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { execFileSync } = require('node:child_process');
+const {
+  execFileSync
+} = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
 const source = path.join(root, 'dist', 'core-js-jxa-tests.js');
 const app = path.join(root, 'dist', 'core-js-jxa-tests.app');
 const resultFile = path.join(root, 'dist', 'test-result.json');
 
-fs.rmSync(app, { recursive: true, force: true });
-fs.rmSync(resultFile, { force: true });
+fs.rmSync(app, {
+  recursive: true,
+  force: true
+});
+fs.rmSync(resultFile, {
+  force: true
+});
 
-execFileSync('osacompile', ['-l', 'JavaScript', '-s', '-o', app, source], { stdio: 'inherit' });
-execFileSync('open', ['-W', app], { stdio: 'inherit' });
+execFileSync('osacompile', ['-l', 'JavaScript', '-s', '-o', app, source], {
+  stdio: 'inherit'
+});
+execFileSync('open', ['-W', app], {
+  stdio: 'inherit'
+});
 
 if (!fs.existsSync(resultFile)) {
   throw new Error('JXA test app exited without writing a result');
