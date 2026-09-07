@@ -8,7 +8,12 @@ const $export = require('core-js/internals/export');
 const classof = require('core-js/internals/classof');
 const isObject = require('core-js/internals/is-object');
 
-$export({ target: 'Error', stat: true, forced: true, sham: true }, {
+$export({
+  target: 'Error',
+  stat: true,
+  forced: true,
+  sham: true
+}, {
   isError: function isError(value) {
     if (!isObject(value)) return false;
     const tag = classof(value);
