@@ -1,16 +1,28 @@
 import './jxa-compat.js';
 import 'web-streams-polyfill/polyfill';
 
-const { TextEncoder, TextDecoder } = require('@zxing/text-encoding');
-for (const [name, value] of Object.entries({ TextEncoder, TextDecoder })) {
+const {
+  TextEncoder,
+  TextDecoder
+} = require('@zxing/text-encoding');
+for (const [name, value] of Object.entries({
+    TextEncoder,
+    TextDecoder
+  })) {
   if (typeof globalThis[name] !== 'function') {
-    Object.defineProperty(globalThis, name, { value, writable: true, configurable: true });
+    Object.defineProperty(globalThis, name, {
+      value,
+      writable: true,
+      configurable: true
+    });
   }
 }
 
 // The package's browser export assumes Blob already exists, while JXA has no
 // native Blob. Load its packaged implementation directly instead.
-const { Blob: BlobPolyfill } = require('../node_modules/@web-std/blob/dist/src/lib.node.cjs');
+const {
+  Blob: BlobPolyfill
+} = require('../node_modules/@web-std/blob/dist/src/lib.node.cjs');
 if (typeof globalThis.Blob !== 'function') {
   Object.defineProperty(globalThis, 'Blob', {
     value: BlobPolyfill,
@@ -49,8 +61,8 @@ const blob = new Blob(['hello', new Uint8Array([32, 74, 88, 65])], {
   type: 'text/plain',
 });
 if (blob.size !== 9 || blob.type !== 'text/plain' ||
-    typeof blob.arrayBuffer !== 'function' || typeof blob.slice !== 'function' ||
-    typeof blob.stream !== 'function' || typeof blob.text !== 'function') {
+  typeof blob.arrayBuffer !== 'function' || typeof blob.slice !== 'function' ||
+  typeof blob.stream !== 'function' || typeof blob.text !== 'function') {
   throw new Error('Blob polyfill failed to initialize in JXA');
 }
 
